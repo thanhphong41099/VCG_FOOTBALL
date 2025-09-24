@@ -20,20 +20,8 @@ namespace VLeague.src.helper
                 foreach (DataRow dr in DBConfig.playersTeam.Rows)
                 {
                     dataGrid.Rows.Add(dr["STT"], dr["Name"].ToString(), dr["Jersey #"].ToString(), dr["Jersey Name"].ToString(),dr["PLAY"].ToString(), 
-                        dr["Position"].ToString(), dr["Card"].ToString(), dr["IMAGE"].ToString(), dr["PATH"].ToString(), dr["ID"].ToString());
-                    //string text = dr["Play"].ToString();
-                    //switch (text)
-                    //{
-                    //    case "1":
-                    //        dataGrid.Rows.Add(dr["STT"], dr["Name"].ToString(), dr["Jersey #"].ToString(), dr["Jersey Name"].ToString(), dr["Play"].ToString(), dr["Pos"].ToString(), dr["Info"].ToString(), dr["Image1"].ToString(), dr["Image2"].ToString(), dr["ID"].ToString());
-                    //        break;
-                    //    case "2":
-                    //        dataGrid.Rows.Add(dr["STT"], dr["Name"].ToString(), dr["SoAo"].ToString(), dr["TenAo"].ToString(), dr["Play"].ToString(), dr["Pos"].ToString(), dr["Info"].ToString(), dr["Image1"].ToString(), dr["Image2"].ToString(), dr["ID"].ToString());
-                    //        break;
-                    //    default:
-                    //        dataGrid.Rows.Add(dr["STT"], dr["Name"].ToString(), dr["SoAo"].ToString(), dr["TenAo"].ToString(), "3", dr["Pos"].ToString(), dr["Info"].ToString(), dr["Image1"].ToString(), dr["Image2"].ToString(), dr["ID"].ToString());
-                    //        break;
-                    //}
+                        dr["Position"].ToString(), dr["Lineup1"].ToString(), dr["Sub1"].ToString(),
+                        dr["Lineup2"].ToString(), dr["Sub2"].ToString(), dr["Lineup3"].ToString(), dr["Sub3"].ToString());
                 }
             }
             catch( Exception ex)

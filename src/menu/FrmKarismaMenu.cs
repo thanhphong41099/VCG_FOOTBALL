@@ -451,7 +451,8 @@ namespace VLeague
         }
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form[] forms = { FrmSetting, FrmDataImport, FrmPreMatch, FrmTactical, FrmInMatchClock, FrmInMatchStatic, FrmSubstitution, FrmVar, FrmPenalty, FrmLowerThird, FrmSponsor, FrmPostMatch, FrmCupQG, FrmCheckLicenseKey, FrmSettingNews, FrmNews};
+            Form[] forms = { FrmSetting, FrmDataImport, FrmPreMatch, FrmTactical, FrmInMatchClock, FrmInMatchStatic, FrmSubstitution, 
+                FrmVar, FrmPenalty, FrmLowerThird, FrmSponsor, FrmPostMatch, FrmCupQG, FrmCheckLicenseKey};
 
             foreach (Form frm in forms)
             {
@@ -464,7 +465,8 @@ namespace VLeague
         public static void closeTabwithFrmDataImport()
         {
             //Đóng tất cả các form trừ FrmDataImport, FrmTactical
-            Form[] forms = { FrmPreMatch, FrmInMatchClock, FrmInMatchStatic, FrmSubstitution, FrmVar, FrmPenalty, FrmLowerThird, FrmSponsor, FrmPostMatch, FrmCupQG, FrmCheckLicenseKey, FrmSettingNews, FrmNews };
+            Form[] forms = { FrmPreMatch, FrmInMatchClock, FrmInMatchStatic, FrmSubstitution, FrmVar, FrmPenalty, FrmLowerThird, 
+                FrmSponsor, FrmPostMatch, FrmCupQG, FrmCheckLicenseKey };
 
             foreach (Form frm in forms)
             {

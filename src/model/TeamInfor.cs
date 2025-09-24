@@ -21,8 +21,6 @@ namespace VLeague.src.model
         public static string homeIconPlayer { get; set; }
         public static string homeIconGK { get; set; }
         public static Color Player_HomeColor { get; set; }
-        public static Color GK_HomeColor { get; set; }
-
         public static List<Point> homePosition { get; set; } = new List<Point>();
 
 
@@ -39,7 +37,6 @@ namespace VLeague.src.model
         public static string awayIconPlayer { get; set; }
         public static string awayIconGK { get; set; }
         public static Color Player_AwayColor { get; set; }
-        public static Color GK_AwayColor { get; set; }
         public static List<Point> awayPosition { get; set; } = new List<Point>();
 
         public static Player[] PlayersHomeLineup { get; set; }
@@ -51,7 +48,7 @@ namespace VLeague.src.model
         // Phương thức để cập nhật SharedData từ FrmDataImport
         public static void UpdateData(string newhomeCode, string newhomeTactical, string newhomeTenDai, string newhomeTenNgan, string newhomeHLV, string newhomeLogo,
                                                string newawayCode, string newawayTactical, string newawayTenDai, string newawayTenNgan, string newawayHLV, string newawayLogo, Color newHomeColor, Color newAwayColor,
-                                               string newhomeHomeItem, string newhomeAwayItem, string newawayHomeItem, string newawayAwayItem, string newhomeGoalItem, string newawayGoalItem, Color GKHomeColor, Color GKAwayColor)
+                                               string newhomeHomeItem, string newhomeAwayItem, string newawayHomeItem, string newawayAwayItem, string newhomeGoalItem, string newawayGoalItem)
         {
             homeCode = newhomeCode;
             homeTactical = newhomeTactical;
@@ -63,7 +60,6 @@ namespace VLeague.src.model
             homeAwayItem = newhomeAwayItem;
             homeGoalItem = newhomeGoalItem;
             Player_HomeColor = newHomeColor;
-            GK_HomeColor = GKHomeColor;
 
             awayCode = newawayCode;
             awayTactical = newawayTactical;
@@ -75,7 +71,6 @@ namespace VLeague.src.model
             awayAwayItem = newawayAwayItem;
             awayGoalItem = newawayGoalItem;
             Player_AwayColor = newAwayColor;
-            GK_AwayColor = GKAwayColor;
 
         }
     }

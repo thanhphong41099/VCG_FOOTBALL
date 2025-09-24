@@ -256,7 +256,6 @@ namespace VLeague.src.menu
                     break;
                 case 1:
                     playerColor = TeamInfor.Player_HomeColor;
-                    GKColor = TeamInfor.GK_HomeColor;
 
                     FrmKarismaMenu.FrmSetting.loadLineUpSubTac(TeamInfor.homePosition , playerColor, GKColor, TeamInfor.homeTenNgan, TeamInfor.homeHLV, TeamInfor.homeTactical, 
                         TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub); 
@@ -320,7 +319,6 @@ namespace VLeague.src.menu
                     break;
                 case 1:
                     playerColor = TeamInfor.Player_AwayColor;
-                    GKColor = TeamInfor.GK_AwayColor;
 
                     FrmKarismaMenu.FrmSetting.loadLineUpSubTac(TeamInfor.awayPosition, playerColor, GKColor, TeamInfor.awayTenNgan, TeamInfor.awayHLV, 
                         TeamInfor.awayTactical, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);

@@ -184,9 +184,9 @@ namespace VLeague.src.menu
                 { labelName.Text = "Unknown Player"; }
 
                 PictureBox pictureBox = this.Controls.Find($"pic{i + 1}", true).FirstOrDefault() as PictureBox;
-                if (!string.IsNullOrEmpty(TeamInfor.PlayersHomeLineup[i].Image) && File.Exists(TeamInfor.PlayersHomeLineup[i].Image))
+                if (!string.IsNullOrEmpty(TeamInfor.PlayersHomeLineup[i].Sub) && File.Exists(TeamInfor.PlayersHomeLineup[i].Sub))
                 {
-                    pictureBox.Image = Image.FromFile(TeamInfor.PlayersHomeLineup[i].Image);
+                    pictureBox.Image = Image.FromFile(TeamInfor.PlayersHomeLineup[i].Sub);
                 }
                 else
                 { pictureBox.Image = Properties.Resources.Home_Player_Shirt; }
@@ -207,9 +207,9 @@ namespace VLeague.src.menu
                 { labelName.Text = "Unknown Player"; }
 
                 PictureBox pictureBox = this.Controls.Find($"pic{i + 1}", true).FirstOrDefault() as PictureBox;
-                if (!string.IsNullOrEmpty(TeamInfor.PlayersAwayLineup[i].Image) && File.Exists(TeamInfor.PlayersAwayLineup[i].Image))
+                if (!string.IsNullOrEmpty(TeamInfor.PlayersAwayLineup[i].Sub) && File.Exists(TeamInfor.PlayersAwayLineup[i].Sub))
                 {
-                    pictureBox.Image = Image.FromFile(TeamInfor.PlayersAwayLineup[i].Image);
+                    pictureBox.Image = Image.FromFile(TeamInfor.PlayersAwayLineup[i].Sub);
                 }
                 else
                 { pictureBox.Image = Properties.Resources.Home_Player_Shirt; }

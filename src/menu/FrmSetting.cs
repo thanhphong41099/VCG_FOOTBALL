@@ -340,13 +340,13 @@ namespace VLeague
                 string numSub = "sa" + subIndex;
 
                 KAObject = KAScene.GetObject(name);
-                KAObject.SetValue($"{playersLineUp[i].Name} {playersLineUp[i].Position}");
+                KAObject.SetValue($"{playersLineUp[i].Name} {playersLineUp[i].Lineup}");
                 KAObject = KAScene.GetObject(number);
                 KAObject.SetValue(playersLineUp[i].Number.ToString());
                 if (PlayersSub.Length > i)
                 {
                     KAObject = KAScene.GetObject(nameSub);
-                    KAObject.SetValue($"{PlayersSub[i].Name} {PlayersSub[i].Position}");
+                    KAObject.SetValue($"{PlayersSub[i].Name} {PlayersSub[i].Lineup}");
                     KAObject = KAScene.GetObject(numSub);
                     KAObject.SetValue(PlayersSub[i].Number.ToString());
                 }
@@ -388,14 +388,14 @@ namespace VLeague
                 string numSub = "sa" + subIndex;
 
                 KAObject = KAScene.GetObject(name);
-                KAObject.SetValue($"{playersLineUp[i].Name} {playersLineUp[i].Position}");
+                KAObject.SetValue($"{playersLineUp[i].Name} {playersLineUp[i].Lineup}");
                 KAObject = KAScene.GetObject(number);
                 KAObject.SetValue(playersLineUp[i].Number.ToString());
 
                 if (PlayersSub.Length > i)
                 {
                     KAObject = KAScene.GetObject(nameSub);
-                    KAObject.SetValue($"{PlayersSub[i].Name} {PlayersSub[i].Position}");
+                    KAObject.SetValue($"{PlayersSub[i].Name} {PlayersSub[i].Lineup}");
                     KAObject = KAScene.GetObject(numSub);
                     KAObject.SetValue(PlayersSub[i].Number.ToString());
                 }
@@ -408,7 +408,7 @@ namespace VLeague
                 KAObject = KAScene.GetObject(imageAo); 
                 KAObject.SetFaceColor(playerColor.R, playerColor.G, playerColor.B, 255);
                 KAObject = KAScene.GetObject(imagePlayer);
-                KAObject.SetValue(playersLineUp[i].Image.ToString());
+                KAObject.SetValue(playersLineUp[i].Sub.ToString());
             }
             KAObject = KAScene.GetObject("aoct1");
             KAObject.SetFaceColor(GKColor.R, GKColor.G, GKColor.B, 255);

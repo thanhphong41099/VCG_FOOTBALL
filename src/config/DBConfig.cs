@@ -209,30 +209,30 @@ namespace VLeague
         //Update player of team from datagridview
         public static void updatePlayersTeam(int ID, string code, string name, int stt, int soao, string tenao, int play, string pos, string card, string image, string path)
         {
-            try
-            {
-                // Đảm bảo rằng tất cả tên cột có dấu cách được bao quanh bởi dấu ngoặc vuông
-                oledbCommand = new OleDbCommand("Update DANHSACHCAUTHU set Name = @name, STT = @stt, [Jersey #] = @soao, [Jersey Name] = @tenao, [PLAY] = @play, [Position] = @pos, [Card] = @card, [IMAGE] = @image, [PATH] = @path where ID = @ID", oledbConnection);
-                oledbCommand.CommandType = CommandType.Text;
+            //try
+            //{
+            //    // Đảm bảo rằng tất cả tên cột có dấu cách được bao quanh bởi dấu ngoặc vuông
+            //    oledbCommand = new OleDbCommand("Update DANHSACHCAUTHU set Name = @name, STT = @stt, [Jersey #] = @soao, [Jersey Name] = @tenao, [PLAY] = @play, [Position] = @pos, [Card] = @card, [IMAGE] = @image, [PATH] = @path where ID = @ID", oledbConnection);
+            //    oledbCommand.CommandType = CommandType.Text;
 
-                oledbCommand.Parameters.Add("@name", OleDbType.VarWChar).Value = (object)name ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@stt", OleDbType.Integer).Value = (object)stt ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@soao", OleDbType.Integer).Value = (object)soao ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@tenao", OleDbType.VarWChar).Value = (object)tenao ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@play", OleDbType.Integer).Value = (object)play == null || play == 0 ? DBNull.Value : (object)play ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@pos", OleDbType.VarWChar).Value = (object)pos ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@card", OleDbType.VarWChar).Value = (object)card ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@image", OleDbType.VarWChar).Value = (object)image ?? DBNull.Value;
-                oledbCommand.Parameters.Add("@path", OleDbType.VarWChar).Value = (object)path ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@name", OleDbType.VarWChar).Value = (object)name ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@stt", OleDbType.Integer).Value = (object)stt ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@soao", OleDbType.Integer).Value = (object)soao ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@tenao", OleDbType.VarWChar).Value = (object)tenao ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@play", OleDbType.Integer).Value = (object)play == null || play == 0 ? DBNull.Value : (object)play ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@pos", OleDbType.VarWChar).Value = (object)pos ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@card", OleDbType.VarWChar).Value = (object)card ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@image", OleDbType.VarWChar).Value = (object)image ?? DBNull.Value;
+            //    oledbCommand.Parameters.Add("@path", OleDbType.VarWChar).Value = (object)path ?? DBNull.Value;
 
-                oledbCommand.Parameters.Add("@ID", OleDbType.Integer).Value = (object)ID ?? DBNull.Value;
-                oledbCommand.ExecuteNonQuery();
-                oledbCommand.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //    oledbCommand.Parameters.Add("@ID", OleDbType.Integer).Value = (object)ID ?? DBNull.Value;
+            //    oledbCommand.ExecuteNonQuery();
+            //    oledbCommand.Dispose();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
         public static void insertPlayer(int ID, string code, string name, int stt, int soao, string tenao, int play, string pos, string card, string image, string path)
         {

@@ -24,12 +24,12 @@
             set { _number = value; }
         }
 
-        public string Image
+        public string Sub
         {
             get { return _image; }
             set { _image = value; }
         }
-        public string Position
+        public string Lineup
         {
             get { return _pos; }
             set { _pos = value; }

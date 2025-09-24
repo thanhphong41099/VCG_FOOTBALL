@@ -26,6 +26,11 @@ namespace VLeague.src.menu
 
         private static string PATH = AppConfig.ConfigReader.ReadString(key, workingPath);
 
+        string HomeLineup = "Lineup1";
+        string HomeSub = "Sub1";
+        string AwayLineup = "Lineup2";
+        string AwaySub = "Sub2";
+
 
         private int rowIndexFromMouseDown;
         private int rowIndexOfItemUnderMouseToDrop;
@@ -38,7 +43,6 @@ namespace VLeague.src.menu
             InitializeComponent();
             colorDialog = new ColorDialog();
             loadDgvAllTeam();
-            InitializeComboBoxes();
         }
 
         private void FrmDataImport_Load(object sender, EventArgs e)
@@ -48,8 +52,8 @@ namespace VLeague.src.menu
                 DBConfig.Listteams();
                 foreach (DataRow dt in DBConfig.teams.Tables[0].Rows)
                 {
-                    cbbHomeTeam.Items.Add(dt[2].ToString());
-                    cbbAwayTeam.Items.Add(dt[2].ToString());
+                    cbbHomeTeam.Items.Add(dt["TenDai"].ToString());
+                    cbbAwayTeam.Items.Add(dt["TenDai"].ToString());
                 }
                 DBConfig.matchingTacticalCombobox(cbbAwayTactic);
                 DBConfig.matchingTacticalCombobox(cbbHomeTactic);
@@ -64,67 +68,54 @@ namespace VLeague.src.menu
         }
         private void cbbHomeTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TeamInfor.homeTenNgan = homeTenNgan = cbbHomeTeam.Text;
+            // Thay đổi: Lưu TenDai thay vì TenNgan
+            TeamInfor.homeTenDai = homeTenDai = label8.Text = cbbHomeTeam.Text;
             LoadTeamInfoHome();
-            cbbPlayerIcon1.SelectedIndex = 0;
-            Player_HomeColor.BackColor = GetColorFromCbbHome("1");
-            cbbGKIcon1.SelectedIndex = 1;
-            GK_HomeColor.BackColor = GetColorFromCbbHome("2");
-
         }
 
         private void cbbAwayTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TeamInfor.awayTenNgan = awayTenNgan = cbbAwayTeam.Text;
+            // Thay đổi: Lưu TenDai thay vì TenNgan  
+            TeamInfor.awayTenDai = awayTenDai = label9.Text = cbbAwayTeam.Text;
             LoadTeamInfoAway();
-            cbbPlayerIcon2.SelectedIndex = 2;
-            Player_AwayColor.BackColor = GetColorFromCbbAway("3");
-            cbbGKIcon2.SelectedIndex = 3;
-            GK_AwayColor.BackColor = GetColorFromCbbAway("4");
-
         }
+
         private void LoadTeamInfoHome()
         {
-            TeamInfor.homeCode = homeCode = DBConfig.doGetTeamID(TeamInfor.homeTenNgan, "TenNgan", "MaDoi");
+            // Thay đổi: Tìm kiếm theo TenDai thay vì TenNgan
+            TeamInfor.homeCode = homeCode = DBConfig.doGetTeamID(TeamInfor.homeTenDai, "TenDai", "MaDoi");
 
-            homeTenDai = DBConfig.doGetStringTeamID(homeCode, "TenDai");
+            // Lấy TenNgan từ homeCode (nếu cần)
+            TeamInfor.homeTenNgan = homeTenNgan = DBConfig.doGetStringTeamID(homeCode, "TenNgan");
 
-            homeHLV = DBConfig.doGetStringTeamID(homeCode, "HLV");
-
-            homeLogo = DBConfig.doGetStringTeamID(homeCode, "Logo");
+            // Các dòng khác giữ nguyên
+            TeamInfor.homeTenDai = homeTenDai = DBConfig.doGetStringTeamID(homeCode, "TenDai");
+            TeamInfor.homeHLV =homeHLV = DBConfig.doGetStringTeamID(homeCode, "HLV");
+            TeamInfor.homeLogo = homeLogo = DBConfig.doGetStringTeamID(homeCode, "Logo");
             picHomeLogo.Image = Image.FromFile(homeLogo);
-
-            homeHomeItem = DBConfig.doGetStringTeamID(homeCode, "HOME_ITEM");
-            homeAwayItem = DBConfig.doGetStringTeamID(homeCode, "AWAY_ITEM");
-            homeGoalItem = DBConfig.doGetStringTeamID(homeCode, "GOAL_ITEM");
-
+            TeamInfor.homeHomeItem = homeHomeItem = DBConfig.doGetStringTeamID(homeCode, "HOME_ITEM");
+            TeamInfor.homeAwayItem = homeAwayItem = DBConfig.doGetStringTeamID(homeCode, "AWAY_ITEM");
+            TeamInfor.homeGoalItem = homeGoalItem = DBConfig.doGetStringTeamID(homeCode, "GOAL_ITEM");
         }
+
         private void LoadTeamInfoAway()
         {
-            TeamInfor.awayCode = awayCode = DBConfig.doGetTeamID(TeamInfor.awayTenNgan, "TenNgan", "MaDoi");
+            // Thay đổi: Tìm kiếm theo TenDai thay vì TenNgan
+            TeamInfor.awayCode = awayCode = DBConfig.doGetTeamID(TeamInfor.awayTenDai, "TenDai", "MaDoi");
 
-            awayTenDai = DBConfig.doGetStringTeamID(awayCode, "TenDai");
+            // Lấy TenNgan từ awayCode (nếu cần)
+            TeamInfor.awayTenNgan = awayTenNgan = DBConfig.doGetStringTeamID(awayCode, "TenNgan");
 
-            awayHLV = DBConfig.doGetStringTeamID(awayCode, "HLV");
-
-            awayLogo = DBConfig.doGetStringTeamID(awayCode, "Logo");
+            // Các dòng khác giữ nguyên
+            TeamInfor.awayTenDai = awayTenDai = DBConfig.doGetStringTeamID(awayCode, "TenDai");
+            TeamInfor.awayHLV = awayHLV = DBConfig.doGetStringTeamID(awayCode, "HLV");
+            TeamInfor.awayLogo = awayLogo = DBConfig.doGetStringTeamID(awayCode, "Logo");
             picAwayLogo.Image = Image.FromFile(awayLogo);
-
-            awayHomeItem = DBConfig.doGetStringTeamID(awayCode, "HOME_ITEM");
-
-            awayAwayItem = DBConfig.doGetStringTeamID(awayCode, "AWAY_ITEM");
-            awayGoalItem = DBConfig.doGetStringTeamID(awayCode, "GOAL_ITEM");
+            TeamInfor.awayHomeItem = awayHomeItem = DBConfig.doGetStringTeamID(awayCode, "HOME_ITEM");
+            TeamInfor.awayAwayItem = awayAwayItem = DBConfig.doGetStringTeamID(awayCode, "AWAY_ITEM");
+            TeamInfor.awayGoalItem = awayGoalItem = DBConfig.doGetStringTeamID(awayCode, "GOAL_ITEM");
         }
 
-        private void InitializeComboBoxes()
-        {
-            string[] values = { "1", "2", "3", "4", "5", "6" };
-
-            cbbPlayerIcon1.Items.AddRange(values);
-            cbbPlayerIcon2.Items.AddRange(values);
-            cbbGKIcon1.Items.AddRange(values);
-            cbbGKIcon2.Items.AddRange(values);
-        }
 
         private Color ConvertStringToColor(string rgbString)
         {
@@ -147,30 +138,6 @@ namespace VLeague.src.menu
         private void loadDgvAllTeam()
         {
             DBConfig.doGetAllTeams();
-            dgvAllTeam.DataSource = DBConfig.AllTeams;
-        }
-        private void dgvAllTeam_RowValidated()
-        {
-
-            foreach (DataGridViewRow row in dgvAllTeam.Rows)
-            {
-                if (row.IsNewRow) continue; // Bỏ qua hàng mới
-
-                string teamCode = row.Cells["MaDoi"].Value?.ToString();
-                string longName = row.Cells["TenDai"].Value?.ToString();
-                string shortName = row.Cells["TenNgan"].Value?.ToString();
-                string coach = row.Cells["HLV"].Value?.ToString();
-                string logo = row.Cells["Logo"].Value?.ToString();
-                string homeItem = row.Cells["HOME_ITEM"].Value?.ToString();
-                string awayItem = row.Cells["AWAY_ITEM"].Value?.ToString();
-                string goalItem = row.Cells["GOAL_ITEM"].Value?.ToString();
-                string gk_color = row.Cells["Gk_Color"].Value?.ToString();
-                string player_color = row.Cells["Player_Color"].Value?.ToString();
-
-                // Gọi hàm cập nhật cơ sở dữ liệu
-                DBConfig.updateTeamInfo(teamCode, longName, shortName, coach, logo, homeItem, awayItem, goalItem, gk_color, player_color);
-            }
-
         }
 
         private void dgvHomePlayer_CellValueChanged()
@@ -234,22 +201,6 @@ namespace VLeague.src.menu
             }
         }
 
-        private void GK_HomeColor_Click(object sender, EventArgs e)
-        {
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                GK_HomeColor.BackColor = colorDialog.Color;
-            }
-        }
-
-        private void GK_AwayColor_Click(object sender, EventArgs e)
-        {
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                GK_AwayColor.BackColor = colorDialog.Color;
-            }
-        }
-
         private void upMatchID_Click(object sender, EventArgs e)
         {
             DBConfig.doGetInfoTournaments();
@@ -290,67 +241,6 @@ namespace VLeague.src.menu
         {
             loadPlayerHomeLineSub();
             MessageBox.Show("Đã cập nhật dữ liệu Ra sân đội nhà");
-        }
-
-        private void cbbPlayerIcon1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string Value = cbbPlayerIcon1.SelectedItem.ToString();
-                Player_HomeColor.BackColor = GetColorFromCbbHome(Value);
-                //TeamInfor.homeIconPlayer = PATH + $"\\LPBank_TV Graphics\\2_GRAPHICS\\IconTactical\\{TeamInfor.homeTenNgan}\\{Value}.png";
-            }
-            catch { MessageBox.Show("Mã màu không hợp lệ");
-            };
-        }
-        private void cbbGKIcon1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string Value = cbbGKIcon1.SelectedItem.ToString();
-                GK_HomeColor.BackColor = GetColorFromCbbHome(Value);
-                //TeamInfor.homeIconGK = PATH + $"\\LPBank_TV Graphics\\2_GRAPHICS\\IconTactical\\{TeamInfor.homeTenNgan}\\{Value}.png";
-            }
-            catch { MessageBox.Show("Mã màu không hợp lệ");
-            };
-        }
-        private Color GetColorFromCbbHome(string value)
-        {
-            switch (value)
-            {
-                case "1": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.homeCode, "Player_Official"));
-                case "2": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.homeCode, "GK_Official"));
-                case "3": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.homeCode, "Player_1"));
-                case "4": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.homeCode, "GK_1"));
-                case "5": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.homeCode, "Player_2"));
-                case "6": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.homeCode, "GK_2"));
-                default: return Color.White;
-            }
-        }
-        private Color GetColorFromCbbAway(string value)
-        {
-            switch (value)
-            {
-                case "1": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.awayCode, "Player_Official"));
-                case "2": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.awayCode, "GK_Official"));
-                case "3": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.awayCode, "Player_1"));
-                case "4": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.awayCode, "GK_1"));
-                case "5": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.awayCode, "Player_2"));
-                case "6": return ConvertStringToColor(DBConfig.doGetStringRGB(TeamInfor.awayCode, "GK_2"));
-                default: return Color.White;
-            }
-        }
-
-        private void cbbPlayerIcon2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string Value = cbbPlayerIcon2.SelectedItem.ToString();
-                Player_AwayColor.BackColor = GetColorFromCbbAway(Value);
-                //TeamInfor.awayIconPlayer = PATH + $"\\LPBank_TV Graphics\\2_GRAPHICS\\IconTactical\\{TeamInfor.awayTenNgan}\\{Value}.png";
-            }
-            catch { MessageBox.Show("Mã màu không hợp lệ");
-            };
         }
 
         private void btnAddHomePlayer_Click(object sender, EventArgs e)
@@ -532,6 +422,55 @@ namespace VLeague.src.menu
             isDragging = false;
         }
 
+        private void cbbShirtHome_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbbShirtHome.SelectedIndex)
+            {
+                case 0:
+                    HomeLineup = "Lineup1";
+                    HomeSub = "Sub1";
+                    break;
+                case 1:
+                    HomeLineup = "Lineup2";
+                    HomeSub = "Sub2";
+                    break;
+                case 2:
+                    HomeLineup = "Lineup3";
+                    HomeSub = "Sub3";
+                    break;
+                default:
+                    // Xử lý trường hợp không mong đợi
+                    HomeLineup = "Lineup1";
+                    HomeSub = "Sub1";
+                    break;
+            }
+        }
+
+        private void cbbShirtAway_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbbShirtAway.SelectedIndex)
+            {
+                case 0:
+                    AwayLineup = "Lineup1";
+                    AwaySub = "Sub1";
+                    break;
+                case 1:
+                    AwayLineup = "Lineup2";
+                    AwaySub = "Sub2";
+                    break;
+                case 2:
+                    AwayLineup = "Lineup3";
+                    AwaySub = "Sub3";
+                    break;
+                default:
+                    // Xử lý trường hợp không mong đợi
+                    AwayLineup = "Lineup1";
+                    AwaySub = "Sub1";
+                    break;
+            }
+        }
+
+
         private void ResetAllRowColors(DataGridView dataGridView)
         {
             foreach (DataGridViewRow row in dataGridView.Rows)
@@ -569,7 +508,7 @@ namespace VLeague.src.menu
         }
         private void btnSaveHomePlayer_Click(object sender, EventArgs e)
         {
-            dgvHomePlayer_CellValueChanged();
+            //dgvHomePlayer_CellValueChanged();
             loadPlayerHomeLineSub();
             LoadPlayersHome();
 
@@ -578,7 +517,7 @@ namespace VLeague.src.menu
 
         private void btnSaveAwayPlayer_Click(object sender, EventArgs e)
         {
-            dgvAwayPlayer_CellValueChanged();
+            //dgvAwayPlayer_CellValueChanged();
             loadPlayerAwayLineSub();
             LoadPlayersAway();
 
@@ -599,57 +538,6 @@ namespace VLeague.src.menu
             MessageBox.Show("Sắp xếp đội hình ra sân: ĐỘI KHÁCH");
         }
 
-        private void cbbGKIcon2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string Value = cbbGKIcon2.SelectedItem.ToString();
-                GK_AwayColor.BackColor = GetColorFromCbbAway(Value);
-                //TeamInfor.awayIconGK = PATH + $"\\LPBank_TV Graphics\\2_GRAPHICS\\IconTactical\\{TeamInfor.awayTenNgan}\\{Value}.png";
-            }
-            catch { MessageBox.Show("Mã màu không hợp lệ");
-            };
-        }
-
-
-        private void upHomeSub_Click(object sender, EventArgs e)
-        {
-            loadPlayerHomeLineSub();
-            MessageBox.Show("Đã cập nhật dữ liệu Dự bị đội nhà");
-        }
-
-        private void upAwayLineup_Click(object sender, EventArgs e)
-        {
-            loadPlayerAwayLineSub();
-            MessageBox.Show("Đã cập nhật dữ liệu Ra sân đội khách");
-        }
-
-        private void upAwaySub_Click(object sender, EventArgs e)
-        {
-            loadPlayerAwayLineSub();
-            MessageBox.Show("Đã cập nhật dữ liệu Dự bị đội khách");
-        }
-
-        private void UpAllData_Click(object sender, EventArgs e)
-        {
-            loadPlayerHomeLineSub();
-            loadPlayerAwayLineSub();
-            MessageBox.Show("Đã cập nhật toàn bộ dữ liệu");
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dgvHomePlayer_CellValueChanged();
-            dgvAwayPlayer_CellValueChanged();
-            loadPlayerHomeLineSub();
-            loadPlayerAwayLineSub();
-
-            dgvAllTeam_RowValidated();
-
-            MessageBox.Show("Đã lưu dữ liệu bảng");
-        }
-
         private void btnLoadData_Click(object sender, EventArgs e)
         {
             if (cbbHomeTeam.Text.Equals("") || cbbAwayTeam.Text.Equals(""))
@@ -666,11 +554,18 @@ namespace VLeague.src.menu
                 labelStatus.Text = "Chưa chọn đội hình";
                 return;
             }
+            if (cbbShirtHome.Text.Equals("") || cbbShirtAway.Text.Equals(""))
+            {
+                MessageBox.Show("Chưa chọn áo thi đấu");
+                FrmKarismaMenu.FrmSetting.OnLogMessage("Chưa chọn áo thi đấu");
+                labelStatus.Text = "Chưa chọn áo thi đấu";
+                return;
+            }
             LoadTeamInfoHome();
             LoadTeamInfoAway();
             FrmKarismaMenu.closeTabwithFrmDataImport();
-            loadPlayerHomeTeam();
-            loadPlayerAwayTeam();
+            LoadHomePlayerGrid();
+            LoadAwayPlayerGrid();
             loadPlayerHomeLineSub();
             loadPlayerAwayLineSub();
             LoadPlayersHome();
@@ -678,16 +573,14 @@ namespace VLeague.src.menu
             TeamInfor.UpdateData(homeCode, homeTactical, homeTenDai, homeTenNgan, homeHLV, homeLogo,
             awayCode, awayTactical, awayTenDai, awayTenNgan, awayHLV, awayLogo,
          Player_HomeColor.BackColor, Player_AwayColor.BackColor, homeHomeItem, homeAwayItem, awayHomeItem, awayAwayItem,
-         homeGoalItem, awayGoalItem, GK_HomeColor.BackColor, GK_AwayColor.BackColor);
-            Static.AwayNameGoals = new string[10, 3];
-            Static.HomeNameGoals = new string[10, 3];
+         homeGoalItem, awayGoalItem);
 
             labelStatus.Text = "OK!";
             labelTimeUpdated.Text = DateTime.Now.ToString("hh:mm:ss tt");
             MessageBox.Show("Thiết lập thành công!");
         }
 
-        public void loadPlayerHomeTeam()
+        public void LoadHomePlayerGrid()
         {
             // Tạo cột DataGridView trước khi thêm dữ liệu
             if (dgvHomePlayer.Columns.Count == 0)
@@ -698,20 +591,23 @@ namespace VLeague.src.menu
                 dgvHomePlayer.Columns.Add("Jersey Name", "Tên áo");
                 dgvHomePlayer.Columns.Add("PLAY", "Ra sân");
                 dgvHomePlayer.Columns.Add("Position", "Vị trí");
-                dgvHomePlayer.Columns.Add("Card", "Thẻ");
-                dgvHomePlayer.Columns.Add("IMAGE", "Ảnh");
-                dgvHomePlayer.Columns.Add("PATH", "PATH");
-                dgvHomePlayer.Columns.Add("ID", "ID");
+                dgvHomePlayer.Columns.Add("Lineup1", "Ra sân 1");
+                dgvHomePlayer.Columns.Add("Sub1", "Dự bị 1");
+                dgvHomePlayer.Columns.Add("Lineup2", "Ra sân 2");
+                dgvHomePlayer.Columns.Add("Sub2", "Dự bị 2");
+                dgvHomePlayer.Columns.Add("Lineup3", "Ra sân 3");
+                dgvHomePlayer.Columns.Add("Sub3", "Dự bị 3");
+
             }
             dgvHomePlayer.Columns[0].Width = 40;
             dgvHomePlayer.Columns[1].Width = 200;
             dgvHomePlayer.Columns[2].Width = 70;
             dgvHomePlayer.Columns[3].Width = 120;
-            DataGridViewCompare.Load_Players(TeamInfor.homeCode, dgvHomePlayer);
+            DataGridViewCompare.Load_Players(TeamInfor.homeTenNgan, dgvHomePlayer);
             // Sắp xếp DataGridView của đội hình theo cột STT thứ tự tăng dần
             dgvHomePlayer.Sort(dgvHomePlayer.Columns["STT"], ListSortDirection.Ascending);
         }
-        public void loadPlayerAwayTeam()
+        public void LoadAwayPlayerGrid()
         {
             // Tạo cột DataGridView trước khi thêm dữ liệu
             if (dgvAwayPlayer.Columns.Count == 0)
@@ -722,16 +618,18 @@ namespace VLeague.src.menu
                 dgvAwayPlayer.Columns.Add("Jersey Name", "Tên áo");
                 dgvAwayPlayer.Columns.Add("PLAY", "Ra sân");
                 dgvAwayPlayer.Columns.Add("Position", "Vị trí");
-                dgvAwayPlayer.Columns.Add("Card", "Thẻ");
-                dgvAwayPlayer.Columns.Add("IMAGE", "Ảnh");
-                dgvAwayPlayer.Columns.Add("PATH", "PATH");
-                dgvAwayPlayer.Columns.Add("ID", "ID");
+                dgvAwayPlayer.Columns.Add("Lineup1", "Ra sân 1");
+                dgvAwayPlayer.Columns.Add("Sub1", "Dự bị 1");
+                dgvAwayPlayer.Columns.Add("Lineup2", "Ra sân 2");
+                dgvAwayPlayer.Columns.Add("Sub2", "Dự bị 2");
+                dgvAwayPlayer.Columns.Add("Lineup3", "Ra sân 3");
+                dgvAwayPlayer.Columns.Add("Sub3", "Dự bị 3");
             }
             dgvAwayPlayer.Columns[0].Width = 40;
             dgvAwayPlayer.Columns[1].Width = 200;
             dgvAwayPlayer.Columns[2].Width = 70;
             dgvAwayPlayer.Columns[3].Width = 120;
-            DataGridViewCompare.Load_Players(TeamInfor.awayCode, dgvAwayPlayer);
+            DataGridViewCompare.Load_Players(TeamInfor.awayTenNgan, dgvAwayPlayer);
             // Sắp xếp DataGridView của đội hình theo cột STT thứ tự tăng dần
             dgvAwayPlayer.Sort(dgvAwayPlayer.Columns["STT"], ListSortDirection.Ascending);
         }
@@ -749,9 +647,8 @@ namespace VLeague.src.menu
                     ShortName = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
                                 " " + dgvHomePlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
                     Number = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString(),
-                    Position = dgvHomePlayer.Rows[i].Cells["Position"].Value.ToString(),
-                    Image = dgvHomePlayer.Rows[i].Cells["PATH"].Value.ToString() + "\\" +
-                            dgvHomePlayer.Rows[i].Cells["IMAGE"].Value.ToString()
+                    Lineup = dgvHomePlayer.Rows[i].Cells[HomeLineup].Value.ToString(),
+                    Sub = dgvHomePlayer.Rows[i].Cells[HomeSub].Value.ToString(),
                 };
 
                 teamPlayers[i] = player;
@@ -772,9 +669,8 @@ namespace VLeague.src.menu
                     ShortName = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
                                 " " + dgvAwayPlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
                     Number = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString(),
-                    Position = dgvAwayPlayer.Rows[i].Cells["Position"].Value.ToString(),
-                    Image = dgvAwayPlayer.Rows[i].Cells["PATH"].Value.ToString() + "\\" +
-                            dgvAwayPlayer.Rows[i].Cells["IMAGE"].Value.ToString()
+                    Lineup = dgvHomePlayer.Rows[i].Cells[AwayLineup].Value.ToString(),
+                    Sub = dgvHomePlayer.Rows[i].Cells[AwaySub].Value.ToString(),
                 };
 
                 teamPlayers[i] = player;
@@ -793,8 +689,8 @@ namespace VLeague.src.menu
                 player.ShortName = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
                     " " + dgvHomePlayer.Rows[i].Cells["Jersey Name"].Value.ToString();
                 player.Number = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString();
-                player.Position = dgvHomePlayer.Rows[i].Cells["Position"].Value.ToString();
-                player.Image = dgvHomePlayer.Rows[i].Cells["PATH"].Value.ToString() + "\\" + dgvHomePlayer.Rows[i].Cells["IMAGE"].Value.ToString();
+                player.Lineup = dgvHomePlayer.Rows[i].Cells[HomeLineup].Value.ToString();
+                player.Sub = dgvHomePlayer.Rows[i].Cells[HomeSub].Value.ToString();
                 playersLineup[i] = player;
             }
             for (int i = 11; i < 21; i++)
@@ -804,8 +700,8 @@ namespace VLeague.src.menu
                 player.ShortName = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
                     " " + dgvHomePlayer.Rows[i].Cells["Jersey Name"].Value.ToString();
                 player.Number = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString();
-                player.Position = dgvHomePlayer.Rows[i].Cells["Position"].Value.ToString();
-                player.Image = dgvHomePlayer.Rows[i].Cells["PATH"].Value.ToString() + "\\"+ dgvHomePlayer.Rows[i].Cells["IMAGE"].Value.ToString();
+                player.Lineup = dgvHomePlayer.Rows[i].Cells[HomeLineup].Value.ToString();
+                player.Sub = dgvHomePlayer.Rows[i].Cells[HomeSub].Value.ToString();
                 playersSub[i - 11] = player;
             }
             TeamInfor.PlayersHomeLineup = playersLineup;
@@ -823,8 +719,8 @@ namespace VLeague.src.menu
                 player.ShortName = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
                     " " + dgvAwayPlayer.Rows[i].Cells["Jersey Name"].Value.ToString();
                 player.Number = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString();
-                player.Position = dgvAwayPlayer.Rows[i].Cells["Position"].Value.ToString();
-                player.Image = dgvAwayPlayer.Rows[i].Cells["PATH"].Value.ToString() + "\\" + dgvAwayPlayer.Rows[i].Cells["IMAGE"].Value.ToString();
+                player.Lineup = dgvAwayPlayer.Rows[i].Cells[AwayLineup].Value.ToString();
+                player.Sub = dgvAwayPlayer.Rows[i].Cells[AwaySub].Value.ToString();
                 playersLineup[i] = player;
             }
             for (int i = 11; i < 21; i++)
@@ -834,30 +730,12 @@ namespace VLeague.src.menu
                 player.ShortName = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
                     " " + dgvAwayPlayer.Rows[i].Cells["Jersey Name"].Value.ToString();
                 player.Number = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString();
-                player.Position = dgvAwayPlayer.Rows[i].Cells["Position"].Value.ToString();
-                player.Image = dgvAwayPlayer.Rows[i].Cells["PATH"].Value.ToString() + "\\" + dgvAwayPlayer.Rows[i].Cells["IMAGE"].Value.ToString();
+                player.Lineup = dgvAwayPlayer.Rows[i].Cells[AwayLineup].Value.ToString();
+                player.Sub = dgvAwayPlayer.Rows[i].Cells[AwaySub].Value.ToString();
                 playersSub[i - 11] = player;
             }
             TeamInfor.PlayersAwayLineup = playersLineup;
             TeamInfor.PlayersAwaySub = playersSub;
-        }
-        private Color AdjustColor(Color color, double darkenFactor, double lightenFactor)
-        {
-            double red = color.R;
-            double green = color.G;
-            double blue = color.B;
-
-            // Tăng độ nhạt
-            red = red + (255 - red) * lightenFactor;
-            green = green + (255 - green) * lightenFactor;
-            blue = blue + (255 - blue) * lightenFactor;
-
-            // Giảm độ sáng
-            red = red * (1 - darkenFactor);
-            green = green * (1 - darkenFactor);
-            blue = blue * (1 - darkenFactor);
-
-            return Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
         }
 
         private void cbbHomeTactic_SelectedIndexChanged(object sender, EventArgs e)
