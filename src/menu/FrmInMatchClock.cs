@@ -540,11 +540,11 @@ namespace VLeague.src.menu
                 case 1:
                     if (!string.IsNullOrEmpty(inforHomePlayer.Text))
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, inforHomePlayer.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, inforHomePlayer.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, TeamInfor.homeTenDai, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, TeamInfor.homeTenDai, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                     }
                     break;
             }
@@ -577,11 +577,11 @@ namespace VLeague.src.menu
                 case 1:
                     if (!string.IsNullOrEmpty(inforAwayPlayer.Text))
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, inforAwayPlayer.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, inforAwayPlayer.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, TeamInfor.awayTenDai, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, TeamInfor.awayTenDai, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                     }
                     break;
             }
@@ -679,11 +679,11 @@ namespace VLeague.src.menu
                     }
                     if (!checkPenHome.Checked)
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbHomeGoal.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut, GoalTimeHome.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbHomeGoal.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, GoalTimeHome.Text);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbHomeGoal.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut, GoalTimeHome.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbHomeGoal.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, GoalTimeHome.Text);
                     }
                     break;
             }
@@ -718,11 +718,11 @@ namespace VLeague.src.menu
                     }
                     if (checkPenAway.Checked)
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbAwayGoal.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut, GoalTimeAway.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbAwayGoal.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, GoalTimeAway.Text);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbAwayGoal.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut, GoalTimeAway.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbAwayGoal.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, GoalTimeAway.Text);
                     }
                     break;
             }
@@ -744,7 +744,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                     break;
             }
         }
@@ -765,7 +765,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbAwayCard.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbAwayCard.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                     break;
             }
         }
@@ -784,7 +784,7 @@ namespace VLeague.src.menu
             //        FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
             //        break;
             //    case 1:
-            //        FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+            //        FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
             //        break;
             //}
         }
@@ -803,7 +803,7 @@ namespace VLeague.src.menu
             //        FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
             //        break;
             //    case 1:
-            //        FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+            //        FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
             //        break;
             //}
         }
@@ -824,7 +824,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbHomeCard.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                     break;
             }
         }
@@ -845,7 +845,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbAwayCard.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbAwayCard.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                     break;
             }
         }
@@ -866,7 +866,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbHomeCard.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                     break;
             }
         }
@@ -887,7 +887,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbAwayCard.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbAwayCard.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                     break;
             }
         }
@@ -959,7 +959,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.homeHLV, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.homeHLV, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                     break;
             }
         }
@@ -983,7 +983,7 @@ namespace VLeague.src.menu
                     break;
                 case 1:
                     
-                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.awayHLV, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.awayHLV, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                     break;
             }
         }
@@ -1011,7 +1011,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbHomeGoal.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut, GoalTimeHome.Text);
+                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbHomeGoal.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, GoalTimeHome.Text);
                     if (checkSaveHomeGoal.Checked) // Kiểm tra checkbox trước khi lưu
                     {
                         SaveHomeNameOG();
@@ -1040,7 +1040,7 @@ namespace VLeague.src.menu
                     {
                         SaveAwayNameOG();
                     }
-                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbAwayGoal.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut, GoalTimeAway.Text);
+                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbAwayGoal.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, GoalTimeAway.Text);
                     break;
             }
         }

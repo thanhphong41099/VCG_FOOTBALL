@@ -14,9 +14,9 @@ namespace VLeague.src.menu
 {
     public partial class FrmDataImport : Form
     {
-        public static string homeCode, homeTactical, homeTenDai, homeTenNgan, homeHLV, homeLogo, homeLogoIn, homeLogoOut;
+        public static string homeCode, homeTactical, homeTenDai, homeTenNgan, homeHLV, homeLogo, homeHomeItem, homeAwayItem, homeGoalItem;
 
-        public static string awayCode, awayTactical, awayTenDai, awayTenNgan, awayHLV, awayLogo, awayLogoIn, awayLogoOut;
+        public static string awayCode, awayTactical, awayTenDai, awayTenNgan, awayHLV, awayLogo, awayHomeItem, awayAwayItem, awayGoalItem;
 
         private ColorDialog colorDialog;
 
@@ -94,8 +94,9 @@ namespace VLeague.src.menu
             homeLogo = DBConfig.doGetStringTeamID(homeCode, "Logo");
             picHomeLogo.Image = Image.FromFile(homeLogo);
 
-            homeLogoIn = DBConfig.doGetStringTeamID(homeCode, "LOGOIN");
-            homeLogoOut = DBConfig.doGetStringTeamID(homeCode, "LOGOOUT");
+            homeHomeItem = DBConfig.doGetStringTeamID(homeCode, "HOME_ITEM");
+            homeAwayItem = DBConfig.doGetStringTeamID(homeCode, "AWAY_ITEM");
+            homeGoalItem = DBConfig.doGetStringTeamID(homeCode, "GOAL_ITEM");
 
         }
         private void LoadTeamInfoAway()
@@ -109,10 +110,10 @@ namespace VLeague.src.menu
             awayLogo = DBConfig.doGetStringTeamID(awayCode, "Logo");
             picAwayLogo.Image = Image.FromFile(awayLogo);
 
-            awayLogoIn = DBConfig.doGetStringTeamID(awayCode, "LOGOIN");
+            awayHomeItem = DBConfig.doGetStringTeamID(awayCode, "HOME_ITEM");
 
-            awayLogoOut = DBConfig.doGetStringTeamID(awayCode, "LOGOOUT");
-            awayLogoOut = DBConfig.doGetStringTeamID(awayCode, "LOGOOUT");
+            awayAwayItem = DBConfig.doGetStringTeamID(awayCode, "AWAY_ITEM");
+            awayGoalItem = DBConfig.doGetStringTeamID(awayCode, "GOAL_ITEM");
         }
 
         private void InitializeComboBoxes()
@@ -160,11 +161,14 @@ namespace VLeague.src.menu
                 string shortName = row.Cells["TenNgan"].Value?.ToString();
                 string coach = row.Cells["HLV"].Value?.ToString();
                 string logo = row.Cells["Logo"].Value?.ToString();
+                string homeItem = row.Cells["HOME_ITEM"].Value?.ToString();
+                string awayItem = row.Cells["AWAY_ITEM"].Value?.ToString();
+                string goalItem = row.Cells["GOAL_ITEM"].Value?.ToString();
                 string gk_color = row.Cells["Gk_Color"].Value?.ToString();
                 string player_color = row.Cells["Player_Color"].Value?.ToString();
 
                 // Gọi hàm cập nhật cơ sở dữ liệu
-                DBConfig.updateTeamInfo(teamCode, longName, shortName, coach, logo, gk_color, player_color);
+                DBConfig.updateTeamInfo(teamCode, longName, shortName, coach, logo, homeItem, awayItem, goalItem, gk_color, player_color);
             }
 
         }
@@ -673,8 +677,8 @@ namespace VLeague.src.menu
             LoadPlayersAway();
             TeamInfor.UpdateData(homeCode, homeTactical, homeTenDai, homeTenNgan, homeHLV, homeLogo,
             awayCode, awayTactical, awayTenDai, awayTenNgan, awayHLV, awayLogo,
-         Player_HomeColor.BackColor, Player_AwayColor.BackColor, homeLogoIn, homeLogoOut, awayLogoIn, awayLogoOut,
-         GK_HomeColor.BackColor, GK_AwayColor.BackColor);
+         Player_HomeColor.BackColor, Player_AwayColor.BackColor, homeHomeItem, homeAwayItem, awayHomeItem, awayAwayItem,
+         homeGoalItem, awayGoalItem, GK_HomeColor.BackColor, GK_AwayColor.BackColor);
             Static.AwayNameGoals = new string[10, 3];
             Static.HomeNameGoals = new string[10, 3];
 

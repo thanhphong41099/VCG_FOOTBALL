@@ -160,7 +160,7 @@ namespace VLeague.src.menu
                         //fillAllcbb();
 
                         FrmKarismaMenu.FrmSetting.swapOnePlayer(cbbHomeLineUp1.Text,
-                        cbbHomeSub1.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                        cbbHomeSub1.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                         break;
                     case 2:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
@@ -203,7 +203,7 @@ namespace VLeague.src.menu
                         //fillAllcbb();
 
                         FrmKarismaMenu.FrmSetting.swapTwoPlayer(cbbHomeLineUp1.Text, cbbHomeSub1.Text, 
-                            cbbHomeLineUp2.Text, cbbHomeSub2.Text, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                            cbbHomeLineUp2.Text, cbbHomeSub2.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                         break;
                     case 2:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
@@ -249,7 +249,7 @@ namespace VLeague.src.menu
 
                         FrmKarismaMenu.FrmSetting.swapThreePlayer(cbbHomeLineUp1.Text, cbbHomeSub1.Text, 
                             cbbHomeLineUp2.Text, cbbHomeSub2.Text, cbbHomeLineUp3.Text, cbbHomeSub3.Text, 
-                        TeamInfor.homeLogoIn, TeamInfor.homeLogoOut);
+                        TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
                         break;
                     case 2:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
@@ -291,7 +291,7 @@ namespace VLeague.src.menu
                         //fillAllcbb();
 
                         FrmKarismaMenu.FrmSetting.swapOnePlayer(cbbAwayLineUp1.Text,
-                        cbbAwaySub1.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                        cbbAwaySub1.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                         break;
                     case 2:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
@@ -334,7 +334,7 @@ namespace VLeague.src.menu
                         //fillAllcbb();
 
                         FrmKarismaMenu.FrmSetting.swapTwoPlayer(cbbAwayLineUp1.Text, cbbAwaySub1.Text,
-                            cbbAwayLineUp2.Text, cbbAwaySub2.Text, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                            cbbAwayLineUp2.Text, cbbAwaySub2.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                         break;
                     case 2:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
@@ -380,7 +380,7 @@ namespace VLeague.src.menu
 
                         FrmKarismaMenu.FrmSetting.swapThreePlayer(cbbAwayLineUp1.Text, cbbAwaySub1.Text,
                             cbbAwayLineUp2.Text, cbbAwaySub2.Text, cbbAwayLineUp3.Text, cbbAwaySub3.Text,
-                            TeamInfor.awayLogoIn, TeamInfor.awayLogoOut);
+                            TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
                         break;
                     case 2:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
