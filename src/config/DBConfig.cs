@@ -290,17 +290,20 @@ namespace VLeague
             }
         }
         //Update team info when setup homeTeam or awayTeam
-        public static void updateTeamInfo(string teamCode, string longName ,
-            string shortName , string coach , string logo, string gk_color , string player_color) 
+        public static void updateTeamInfo(string teamCode, string longName,
+            string shortName, string coach, string logo, string homeItem, string awayItem, string goalItem, string gk_color, string player_color)
         {
             try
             {
-                oledbCommand = new OleDbCommand("Update TEAM_ID set TenDai = @tendai, TenNgan = @tenngan, HLV = @hlv, Logo = @logo where MaDoi = @madoi", oledbConnection);
+                oledbCommand = new OleDbCommand("Update TEAM_ID set TenDai = @tendai, TenNgan = @tenngan, HLV = @hlv, Logo = @logo, HOME_ITEM = @homeItem, AWAY_ITEM = @awayItem, GOAL_ITEM = @goalItem where MaDoi = @madoi", oledbConnection);
                 oledbCommand.CommandType = CommandType.Text;
                 oledbCommand.Parameters.Add("@tendai", OleDbType.VarWChar).Value = longName;
                 oledbCommand.Parameters.Add("@tenngan", OleDbType.VarWChar).Value = shortName;
                 oledbCommand.Parameters.Add("@hlv", OleDbType.VarWChar).Value = coach;
                 oledbCommand.Parameters.Add("@logo", OleDbType.VarWChar).Value = logo;
+                oledbCommand.Parameters.Add("@homeItem", OleDbType.VarWChar).Value = (object)homeItem ?? DBNull.Value;
+                oledbCommand.Parameters.Add("@awayItem", OleDbType.VarWChar).Value = (object)awayItem ?? DBNull.Value;
+                oledbCommand.Parameters.Add("@goalItem", OleDbType.VarWChar).Value = (object)goalItem ?? DBNull.Value;
 
                 oledbCommand.Parameters.Add("@madoi", OleDbType.VarWChar).Value = teamCode;
                 oledbCommand.ExecuteNonQuery();

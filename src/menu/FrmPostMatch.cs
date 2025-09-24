@@ -89,7 +89,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPostMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadAllStatistic(cbbMatch.Text, TeamInfor.homeLogoIn, TeamInfor.awayLogoIn, TeamInfor.homeLogoOut, TeamInfor.awayLogoOut,
+                    FrmKarismaMenu.FrmSetting.loadAllStatistic(cbbMatch.Text, TeamInfor.homeHomeItem, TeamInfor.awayHomeItem, TeamInfor.homeAwayItem, TeamInfor.awayAwayItem,
                         Static.numberHomeScore, Static.numberAwayScore, TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
                     break;
             }
@@ -113,7 +113,7 @@ namespace VLeague.src.menu
                     break;
                 case 1:
                     string text = $"PENALTY: {Static.numberHomePen} - {Static.numberAwayPen}";
-                    FrmKarismaMenu.FrmSetting.loadAllStatistic(text, TeamInfor.homeLogoIn, TeamInfor.awayLogoIn, TeamInfor.homeLogoOut, TeamInfor.awayLogoOut,
+                    FrmKarismaMenu.FrmSetting.loadAllStatistic(text, TeamInfor.homeHomeItem, TeamInfor.awayHomeItem, TeamInfor.homeAwayItem, TeamInfor.awayAwayItem,
                         Static.numberHomeScore, Static.numberAwayScore, TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
                     break;
             }

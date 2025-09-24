@@ -15,8 +15,9 @@ namespace VLeague.src.model
         public static string homeTenNgan { get; set; }
         public static string homeHLV { get; set; }
         public static string homeLogo { get; set; }
-        public static string homeLogoIn { get; set; }
-        public static string homeLogoOut { get; set; }
+        public static string homeHomeItem { get; set; }
+        public static string homeAwayItem { get; set; }
+        public static string homeGoalItem { get; set; }
         public static string homeIconPlayer { get; set; }
         public static string homeIconGK { get; set; }
         public static Color Player_HomeColor { get; set; }
@@ -32,8 +33,9 @@ namespace VLeague.src.model
         public static string awayTenNgan { get; set; }
         public static string awayHLV { get; set; }
         public static string awayLogo { get; set; }
-        public static string awayLogoIn { get; set; }
-        public static string awayLogoOut { get; set; }
+        public static string awayHomeItem { get; set; }
+        public static string awayAwayItem { get; set; }
+        public static string awayGoalItem { get; set; }
         public static string awayIconPlayer { get; set; }
         public static string awayIconGK { get; set; }
         public static Color Player_AwayColor { get; set; }
@@ -49,7 +51,7 @@ namespace VLeague.src.model
         // Phương thức để cập nhật SharedData từ FrmDataImport
         public static void UpdateData(string newhomeCode, string newhomeTactical, string newhomeTenDai, string newhomeTenNgan, string newhomeHLV, string newhomeLogo,
                                                string newawayCode, string newawayTactical, string newawayTenDai, string newawayTenNgan, string newawayHLV, string newawayLogo, Color newHomeColor, Color newAwayColor,
-                                               string newhomeLogoIn, string newhomeLogoOut, string newawayLogoIn, string newawayLogoOut, Color GKHomeColor, Color GKAwayColor)
+                                               string newhomeHomeItem, string newhomeAwayItem, string newawayHomeItem, string newawayAwayItem, string newhomeGoalItem, string newawayGoalItem, Color GKHomeColor, Color GKAwayColor)
         {
             homeCode = newhomeCode;
             homeTactical = newhomeTactical;
@@ -57,8 +59,9 @@ namespace VLeague.src.model
             homeTenNgan = newhomeTenNgan;
             homeHLV = newhomeHLV;
             homeLogo = newhomeLogo;
-            homeLogoIn = newhomeLogoIn;
-            homeLogoOut = newhomeLogoOut;
+            homeHomeItem = newhomeHomeItem;
+            homeAwayItem = newhomeAwayItem;
+            homeGoalItem = newhomeGoalItem;
             Player_HomeColor = newHomeColor;
             GK_HomeColor = GKHomeColor;
 
@@ -68,8 +71,9 @@ namespace VLeague.src.model
             awayTenNgan = newawayTenNgan;
             awayHLV = newawayHLV;
             awayLogo = newawayLogo;
-            awayLogoIn = newawayLogoIn;
-            awayLogoOut = newawayLogoOut;
+            awayHomeItem = newawayHomeItem;
+            awayAwayItem = newawayAwayItem;
+            awayGoalItem = newawayGoalItem;
             Player_AwayColor = newAwayColor;
             GK_AwayColor = GKAwayColor;
 

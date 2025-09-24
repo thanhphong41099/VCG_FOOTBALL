@@ -118,7 +118,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadMatchID(TeamInfor.homeLogoIn, TeamInfor.awayLogoIn, TeamInfor.homeLogoOut, TeamInfor.awayLogoOut, 
+                    FrmKarismaMenu.FrmSetting.loadMatchID(TeamInfor.homeHomeItem, TeamInfor.awayHomeItem, TeamInfor.homeAwayItem, TeamInfor.awayAwayItem, 
                         TeamInfor.homeTenNgan, TeamInfor.awayTenNgan,round, date, location);
                     break;
             }
@@ -224,7 +224,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadLineUpSub(TeamInfor.homeTenNgan, TeamInfor.homeHLV, TeamInfor.homeLogoIn, TeamInfor.homeLogoOut, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub);
+                    FrmKarismaMenu.FrmSetting.loadLineUpSub(TeamInfor.homeTenNgan, TeamInfor.homeHLV, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub);
                     break;
             }           
         }
@@ -259,7 +259,7 @@ namespace VLeague.src.menu
                     GKColor = TeamInfor.GK_HomeColor;
 
                     FrmKarismaMenu.FrmSetting.loadLineUpSubTac(TeamInfor.homePosition , playerColor, GKColor, TeamInfor.homeTenNgan, TeamInfor.homeHLV, TeamInfor.homeTactical, 
-                        TeamInfor.homeLogoIn, TeamInfor.homeLogoOut, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub); 
+                        TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub); 
                     break;
                 case 2:
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
@@ -284,7 +284,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadLineUpSub(TeamInfor.awayTenNgan, TeamInfor.awayHLV, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);
+                    FrmKarismaMenu.FrmSetting.loadLineUpSub(TeamInfor.awayTenNgan, TeamInfor.awayHLV, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);
                     break;
             }
         }
@@ -323,7 +323,7 @@ namespace VLeague.src.menu
                     GKColor = TeamInfor.GK_AwayColor;
 
                     FrmKarismaMenu.FrmSetting.loadLineUpSubTac(TeamInfor.awayPosition, playerColor, GKColor, TeamInfor.awayTenNgan, TeamInfor.awayHLV, 
-                        TeamInfor.awayTactical, TeamInfor.awayLogoIn, TeamInfor.awayLogoOut, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);
+                        TeamInfor.awayTactical, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);
                     break;
                 case 2:
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
