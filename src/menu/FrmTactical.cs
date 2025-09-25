@@ -16,7 +16,7 @@ namespace VLeague.src.menu
         public static Dictionary<string, Point> groupBoxPositions = new Dictionary<string, Point>();
 
         private Dictionary<string, Point[]> tacticalFormations;
-
+        
         private List<Point> playerHomePositions = new List<Point>();
         private List<Point> playerAwayPositions = new List<Point>();
 
@@ -36,9 +36,6 @@ namespace VLeague.src.menu
             try
             {
                 ControlDraggable();
-
-                homeNgan.Text = TeamInfor.homeCode;
-                awayNgan.Text = TeamInfor.awayCode;
 
                 DBConfig.matchingTacticalCombobox(cbbTacticalAway);
                 cbbTacticalAway.Text = TeamInfor.awayTactical;
@@ -143,16 +140,16 @@ namespace VLeague.src.menu
         }
         private void ControlDraggable()
         {
-            // Danh sách các GroupBox
-            System.Windows.Forms.GroupBox[] groupBoxes = { groupBox1, groupBox2, groupBox3, groupBox4, groupBox5,
-                               groupBox6, groupBox7, groupBox8, groupBox9, groupBox10,
-                               groupBox11 };
+            //// Danh sách các GroupBox
+            //System.Windows.Forms.GroupBox[] groupBoxes = { groupBox1, groupBox2, groupBox3, groupBox4, groupBox5,
+            //                   groupBox6, groupBox7, groupBox8, groupBox9, groupBox10,
+            //                   groupBox11 };
 
-            // Lặp qua từng GroupBox và gọi hàm Draggable
-            foreach (var groupBox in groupBoxes)
-            {
-                ControlExtension.Draggable(groupBox, true);
-            }
+            //// Lặp qua từng GroupBox và gọi hàm Draggable
+            //foreach (var groupBox in groupBoxes)
+            //{
+            //    ControlExtension.Draggable(groupBox, true);
+            //}
         }
         private void LoadOriginalPositions(List<Point> originalPositions)
         {
