@@ -30,8 +30,7 @@ namespace VLeague.src.menu
         {
             Button[] buttons = new Button[]
             {
-        btnWeather, btnMatchID, btnGroupSTD, btnHomeLineUp, btnAwayLineUp,
-        btnHomeAllLineUp, btnAwayAllLineUp, btnReferee, btnVar
+        btnWeather, btnMatchID, btnGroupSTD, btnReferee, btnVar
             };
             ButtonHelper.ClearTagButton(buttons);
         }
@@ -39,8 +38,7 @@ namespace VLeague.src.menu
         {
             Button[] buttons = new Button[]
             {
-        btnWeather, btnMatchID, btnGroupSTD, btnHomeLineUp, btnAwayLineUp,
-        btnHomeAllLineUp, btnAwayAllLineUp, btnReferee, btnVar
+        btnWeather, btnMatchID, btnGroupSTD, btnReferee, btnVar
             };
             ButtonHelper.ClearTagButtonEx(buttons, clickedButton);
         }
@@ -53,38 +51,11 @@ namespace VLeague.src.menu
         {
             try
             {
-                homeTeamName.Text = TeamInfor.homeTenNgan;
-                awayTeamName.Text = TeamInfor.awayTenNgan;
-                groupHome.BackColor = TeamInfor.Player_HomeColor;
-                groupAway.BackColor = TeamInfor.Player_AwayColor;
+                homeTeamName.Text = TeamInfor.homeTenDai;
+                awayTeamName.Text = TeamInfor.awayTenDai;
+                labelHomeTac.Text = TeamInfor.homeTactical;
+                labelAwayTac.Text = TeamInfor.awayTactical;
 
-                // Xác định màu chữ dựa trên độ sáng
-                Color homeTextColor = GetContrastColor(TeamInfor.Player_HomeColor);
-                Color awayTextColor = GetContrastColor(TeamInfor.Player_AwayColor);
-
-                // Áp dụng màu chữ cho GroupBox và control con trong groupHome
-                groupHome.ForeColor = homeTextColor; // Đổi màu chữ tiêu đề GroupBox
-                foreach (Control ctrl in groupHome.Controls)
-                {
-                    if (ctrl is Label || ctrl is TextBox)
-                    {
-                        ctrl.ForeColor = homeTextColor;
-                    }
-                }
-
-                // Áp dụng màu chữ cho GroupBox và control con trong groupAway
-                groupAway.ForeColor = awayTextColor; // Đổi màu chữ tiêu đề GroupBox
-                foreach (Control ctrl in groupAway.Controls)
-                {
-                    if (ctrl is Label || ctrl is TextBox)
-                    {
-                        ctrl.ForeColor = awayTextColor;
-                    }
-                }
-
-                // Đảm bảo homeTeamName và awayTeamName có màu đúng
-                homeTeamName.ForeColor = homeTextColor;
-                awayTeamName.ForeColor = awayTextColor;
             }
             catch
             {
@@ -92,15 +63,6 @@ namespace VLeague.src.menu
             }
         }
 
-        // Hàm tính độ sáng và trả về màu chữ phù hợp
-        private Color GetContrastColor(Color backgroundColor)
-        {
-            // Tính độ sáng (luminance)
-            double luminance = 0.299 * backgroundColor.R + 0.587 * backgroundColor.G + 0.114 * backgroundColor.B;
-
-            // Nếu màu nền sáng (L > 128), dùng chữ đen; nếu tối, dùng chữ trắng
-            return luminance > 128 ? Color.Black : Color.White;
-        }
 
         private void btnMatchID_Click(object sender, EventArgs e)
         {
@@ -118,8 +80,9 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadMatchID(TeamInfor.homeHomeItem, TeamInfor.awayHomeItem, TeamInfor.homeAwayItem, TeamInfor.awayAwayItem, 
-                        TeamInfor.homeTenNgan, TeamInfor.awayTenNgan,round, date, location);
+                    FrmKarismaMenu.FrmSetting.loadMatchID(TeamInfor.homeLogo, TeamInfor.awayLogo, 
+                        TeamInfor.homeHomeItem, TeamInfor.awayAwayItem, 
+                        TeamInfor.homeTenDai, TeamInfor.awayTenDai,round, date, location);
                     break;
             }
         }
@@ -148,7 +111,8 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadWeather(Icons, ThoiTiet, DoAm, SucGio, NhietDo);
+                    FrmKarismaMenu.FrmSetting.loadWeather(Icons, ThoiTiet, DoAm, SucGio, NhietDo,
+                        TeamInfor.homeTenDai, TeamInfor.awayTenDai, TeamInfor.homeLogo, TeamInfor.awayLogo);
                     break;
             }
         }
@@ -213,127 +177,6 @@ namespace VLeague.src.menu
             FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
         }
 
-        private void btnHomeLineUp_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonEx(clickedButton);
-            UpdateButtonState(sender as Button, 1);
-            switch (btnHomeLineUp.Tag)
-            {
-                case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
-                    break;
-                case 1:
-                    FrmKarismaMenu.FrmSetting.loadLineUpSub(TeamInfor.homeTenNgan, TeamInfor.homeHLV, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub);
-                    break;
-            }           
-        }
-
-        private void StopHomeLineUp_Click(object sender, EventArgs e)
-        {
-            clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
-        }
-
-        private void btnHomeSub_Click(object sender, EventArgs e)
-        {
-        }
-        private void StopHomeSub_Click(object sender, EventArgs e)
-        {
-            clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
-        }
-
-        private void btnHomeAllLineUp_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonEx(clickedButton);
-            UpdateButtonState(sender as Button, 0);
-            switch (btnHomeAllLineUp.Tag)
-            {
-                case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
-                    break;
-                case 1:
-                    playerColor = TeamInfor.Player_HomeColor;
-
-                    FrmKarismaMenu.FrmSetting.loadLineUpSubTac(TeamInfor.homePosition , playerColor, GKColor, TeamInfor.homeTenNgan, TeamInfor.homeHLV, TeamInfor.homeTactical, 
-                        TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, TeamInfor.PlayersHomeLineup, TeamInfor.PlayersHomeSub); 
-                    break;
-                case 2:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
-                    break;
-            }           
-        }
-
-        private void StopHomeAllLineUp_Click(object sender, EventArgs e)
-        {
-            clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
-        }
-
-        private void btnAwayLineUp_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonEx(clickedButton);
-            UpdateButtonState(sender as Button, 1);
-            switch (btnAwayLineUp.Tag)
-            {
-                case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
-                    break;
-                case 1:
-                    FrmKarismaMenu.FrmSetting.loadLineUpSub(TeamInfor.awayTenNgan, TeamInfor.awayHLV, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);
-                    break;
-            }
-        }
-
-        private void StopAwayLineUp_Click(object sender, EventArgs e)
-        {
-            clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
-        }
-
-        private void btnAwaySub_Click(object sender, EventArgs e)
-        {
-
-            FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            checkAutoResume(FrmOption.TimeOff);
-        }
-
-        private void StopAwaySub_Click(object sender, EventArgs e)
-        {
-            FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-
-        }
-
-        private void btnAwayAllLineUp_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonEx(clickedButton);
-            UpdateButtonState(sender as Button, 0);
-            switch (btnAwayAllLineUp.Tag)
-            {
-                case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
-                    break;
-                case 1:
-                    playerColor = TeamInfor.Player_AwayColor;
-
-                    FrmKarismaMenu.FrmSetting.loadLineUpSubTac(TeamInfor.awayPosition, playerColor, GKColor, TeamInfor.awayTenNgan, TeamInfor.awayHLV, 
-                        TeamInfor.awayTactical, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, TeamInfor.PlayersAwayLineup, TeamInfor.PlayersAwaySub);
-                    break;
-                case 2:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
-                    break;
-            }
-        }
-
-        private void StopAwayAllLineUp_Click(object sender, EventArgs e)
-        {
-            clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
-        }
 
         private void SetBackground_Click(object sender, EventArgs e)
         {
@@ -402,84 +245,46 @@ namespace VLeague.src.menu
             FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
         }
 
-
-        private void btnTransID_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonEx(clickedButton);
-            string scene = "\\transition.t2s";
-            FrmKarismaMenu.FrmSetting.loadScene(scene);
-        }
-
-        private void btnStopTrans_Click(object sender, EventArgs e)
-        {
-            FrmKarismaMenu.FrmSetting.StopEff(FrmSetting.layerTSL);
-        }
-
         private void stopAll_Click(object sender, EventArgs e)
         {
             clearTagButton();
             FrmKarismaMenu.FrmSetting.StopAll();
         }
 
+        private void btnPlayHomeLinup_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.loadSceneLineup(TeamInfor.homeTactical,
+                TeamInfor.homeLogo, TeamInfor.homeHLV, TeamInfor.PlayersHome);
 
-        private void btnCountDown_Click(object sender, EventArgs e)
-        {
-            //int startTime = (int)(minute.Value * 60 + second.Value);
-            //int endTime = 0;
-            //FrmKarismaMenu.FrmSetting.loadCountDown(TeamInfor.homeLogo, TeamInfor.awayLogo, startTime, endTime);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
 
-        private void stopCountDown_Click(object sender, EventArgs e)
+        private void btnResumeHomeLineup_Click(object sender, EventArgs e)
         {
-            FrmKarismaMenu.FrmSetting.StopEff(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
         }
-        public async static void checkAutoResume(int Time)
-        {
-            if (FrmOption.AutoOffScene)
-            {
-                await Task.Delay(Time);
-                FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            }
-        }
-        public async static void checkAutoStopEff(int Time)
-        {
-            if (FrmOption.AutoOffScene)
-            {
-                await Task.Delay(Time);
-                FrmKarismaMenu.FrmSetting.StopEff(FrmSetting.layerTSL);
-            }
 
-        }
-        public async static void checkAutoStop2()
+        private void btnStopHome_Click_1(object sender, EventArgs e)
         {
-            if (FrmOption.AutoOffScene)
-            {
-                await Task.Delay(FrmOption.TimeTrans);
-                FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-                await Task.Delay(FrmOption.TimeOff);
-                FrmKarismaMenu.FrmSetting.StopEff(FrmSetting.layerTSL);
-            }
-            else
-            {
-                await Task.Delay(FrmOption.TimeTrans);
-                FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            }
+            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
         }
-        public async static void checkAutoResume2()
+
+        private void btnPlayAwayLineup_Click(object sender, EventArgs e)
         {
-            if (FrmOption.AutoOffScene)
-            {
-                await Task.Delay(FrmOption.TimeTrans);
-                FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-                await Task.Delay(FrmOption.TimeOff);
-                FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            }
-            else
-            {
-                await Task.Delay(FrmOption.TimeTrans);
-                FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            }
+            FrmKarismaMenu.FrmSetting.loadSceneLineup(TeamInfor.awayTactical,
+                TeamInfor.awayLogo, TeamInfor.awayHLV, TeamInfor.PlayersAway);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
+
+        private void btnResumeAway_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPreMatch);
+        }
+
+        private void btnStopAway_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+        }
+
     }
 }

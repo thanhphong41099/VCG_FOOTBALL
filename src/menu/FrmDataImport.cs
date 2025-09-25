@@ -717,8 +717,8 @@ namespace VLeague.src.menu
                     Name = dgvAwayPlayer.Rows[i].Cells["Name"].Value.ToString(),
                     ShortName = dgvAwayPlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
                     Number = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString(),
-                    Lineup = dgvHomePlayer.Rows[i].Cells[AwayLineup].Value.ToString(),
-                    Sub = dgvHomePlayer.Rows[i].Cells[AwaySub].Value.ToString(),
+                    Lineup = dgvAwayPlayer.Rows[i].Cells[AwayLineup].Value.ToString(),
+                    Sub = dgvAwayPlayer.Rows[i].Cells[AwaySub].Value.ToString(),
                 };
 
                 teamPlayers[i] = player;
