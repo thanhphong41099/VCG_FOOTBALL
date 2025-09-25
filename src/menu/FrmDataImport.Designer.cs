@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSaveTeam = new System.Windows.Forms.Button();
             this.labelTimeUpdated = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvAwayPlayer = new System.Windows.Forms.DataGridView();
-            this.label24 = new System.Windows.Forms.Label();
             this.btnAddHomePlayer = new System.Windows.Forms.Button();
             this.btnAddAwayPlayer = new System.Windows.Forms.Button();
             this.btnSaveAwayPlayer = new System.Windows.Forms.Button();
@@ -84,18 +84,34 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSaveTeam);
             this.groupBox1.Controls.Add(this.labelTimeUpdated);
             this.groupBox1.Controls.Add(this.labelStatus);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnLoadData);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(65, 62);
+            this.groupBox1.Location = new System.Drawing.Point(66, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(178, 142);
+            this.groupBox1.Size = new System.Drawing.Size(178, 191);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATA SOURCE";
+            // 
+            // btnSaveTeam
+            // 
+            this.btnSaveTeam.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnSaveTeam.FlatAppearance.BorderSize = 0;
+            this.btnSaveTeam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveTeam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSaveTeam.ForeColor = System.Drawing.Color.White;
+            this.btnSaveTeam.Location = new System.Drawing.Point(16, 138);
+            this.btnSaveTeam.Name = "btnSaveTeam";
+            this.btnSaveTeam.Size = new System.Drawing.Size(147, 32);
+            this.btnSaveTeam.TabIndex = 5;
+            this.btnSaveTeam.Text = "SAVE";
+            this.btnSaveTeam.UseVisualStyleBackColor = false;
+            this.btnSaveTeam.Click += new System.EventHandler(this.btnSaveTeam_Click);
             // 
             // labelTimeUpdated
             // 
@@ -173,7 +189,7 @@
             this.groupBox2.Controls.Add(this.picHomeLogo);
             this.groupBox2.Controls.Add(this.cbbHomeTactic);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(260, 67);
+            this.groupBox2.Location = new System.Drawing.Point(261, 41);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1059, 215);
             this.groupBox2.TabIndex = 2;
@@ -384,9 +400,9 @@
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.dgvHomePlayer);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(66, 290);
+            this.groupBox4.Location = new System.Drawing.Point(66, 262);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(680, 569);
+            this.groupBox4.Size = new System.Drawing.Size(680, 597);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             // 
@@ -429,7 +445,7 @@
             this.dgvHomePlayer.Name = "dgvHomePlayer";
             this.dgvHomePlayer.RowHeadersWidth = 51;
             this.dgvHomePlayer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHomePlayer.Size = new System.Drawing.Size(655, 507);
+            this.dgvHomePlayer.Size = new System.Drawing.Size(655, 535);
             this.dgvHomePlayer.TabIndex = 5;
             this.dgvHomePlayer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvHomePlayer_MouseDown);
             this.dgvHomePlayer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvHomePlayer_MouseMove);
@@ -440,9 +456,9 @@
             this.groupBox5.Controls.Add(this.label7);
             this.groupBox5.Controls.Add(this.dgvAwayPlayer);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F);
-            this.groupBox5.Location = new System.Drawing.Point(756, 290);
+            this.groupBox5.Location = new System.Drawing.Point(756, 262);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(680, 569);
+            this.groupBox5.Size = new System.Drawing.Size(680, 597);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             // 
@@ -485,21 +501,11 @@
             this.dgvAwayPlayer.Name = "dgvAwayPlayer";
             this.dgvAwayPlayer.RowHeadersWidth = 51;
             this.dgvAwayPlayer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAwayPlayer.Size = new System.Drawing.Size(655, 507);
+            this.dgvAwayPlayer.Size = new System.Drawing.Size(655, 535);
             this.dgvAwayPlayer.TabIndex = 5;
             this.dgvAwayPlayer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvAwayPlayer_MouseDown);
             this.dgvAwayPlayer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvAwayPlayer_MouseMove);
             this.dgvAwayPlayer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dgvAwayPlayer_MouseUp);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.label24.Location = new System.Drawing.Point(42, 21);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(139, 25);
-            this.label24.TabIndex = 330;
-            this.label24.Text = "DATA IMPORT";
             // 
             // btnAddHomePlayer
             // 
@@ -603,7 +609,6 @@
             this.Controls.Add(this.btnSaveAwayPlayer);
             this.Controls.Add(this.btnAddAwayPlayer);
             this.Controls.Add(this.btnAddHomePlayer);
-            this.Controls.Add(this.label24);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -627,7 +632,6 @@
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAwayPlayer)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -653,7 +657,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.PictureBox picHomeLogo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -671,5 +674,6 @@
         private System.Windows.Forms.ComboBox cbbShirtAway;
         private System.Windows.Forms.ComboBox cbbShirtHome;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnSaveTeam;
     }
 }

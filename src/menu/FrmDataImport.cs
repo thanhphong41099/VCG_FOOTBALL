@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -57,14 +58,24 @@ namespace VLeague.src.menu
                 }
                 DBConfig.matchingTacticalCombobox(cbbAwayTactic);
                 DBConfig.matchingTacticalCombobox(cbbHomeTactic);
-                cbbHomeTactic.SelectedIndex = 0;
-                cbbAwayTactic.SelectedIndex = 0;
+
+                ComboboxDefault();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi xảy ra khi load dữ liệu: " + ex.Message + ", kiểm tra đường dẫn Setup", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void ComboboxDefault()
+        {
+            cbbHomeTeam.SelectedIndex = 0;
+            cbbAwayTeam.SelectedIndex = 1;
+            cbbHomeTactic.SelectedIndex = 1;
+            cbbAwayTactic.SelectedIndex = 1;
+            cbbShirtHome.SelectedIndex = 0;
+            cbbShirtAway.SelectedIndex = 1;
+
         }
         private void cbbHomeTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -239,7 +250,7 @@ namespace VLeague.src.menu
 
         private void upHomeLineup_Click(object sender, EventArgs e)
         {
-            loadPlayerHomeLineSub();
+            savePlayerHomeLineSub();
             MessageBox.Show("Đã cập nhật dữ liệu Ra sân đội nhà");
         }
 
@@ -470,6 +481,45 @@ namespace VLeague.src.menu
             }
         }
 
+        private void btnSaveTeam_Click(object sender, EventArgs e)
+        {
+            if (cbbHomeTeam.Text.Equals("") || cbbAwayTeam.Text.Equals(""))
+            {
+                MessageBox.Show("Chưa chọn đội bóng");
+                FrmKarismaMenu.FrmSetting.OnLogMessage("Chưa chọn đội");
+                labelStatus.Text = "Chưa chọn đội bóng";
+                return;
+            }
+            if (cbbHomeTactic.Text.Equals("") || cbbAwayTactic.Text.Equals(""))
+            {
+                MessageBox.Show("Chưa chọn đội hình");
+                FrmKarismaMenu.FrmSetting.OnLogMessage("Chưa chọn đội hình");
+                labelStatus.Text = "Chưa chọn đội hình";
+                return;
+            }
+            if (cbbShirtHome.Text.Equals("") || cbbShirtAway.Text.Equals(""))
+            {
+                MessageBox.Show("Chưa chọn áo thi đấu");
+                FrmKarismaMenu.FrmSetting.OnLogMessage("Chưa chọn áo thi đấu");
+                labelStatus.Text = "Chưa chọn áo thi đấu";
+                return;
+            }
+            LoadTeamInfoHome();
+            LoadTeamInfoAway();
+            FrmKarismaMenu.closeTabwithFrmDataImport();
+            savePlayerHomeLineSub();
+            savePlayerAwayLineSub();
+            savePlayersHome();
+            savePlayersAway();
+            TeamInfor.UpdateData(homeCode, homeTactical, homeTenDai, homeTenNgan, homeHLV, homeLogo,
+            awayCode, awayTactical, awayTenDai, awayTenNgan, awayHLV, awayLogo,
+         Player_HomeColor.BackColor, Player_AwayColor.BackColor, homeHomeItem, homeAwayItem, awayHomeItem, awayAwayItem,
+         homeGoalItem, awayGoalItem);
+
+            labelStatus.Text = "OK!";
+            labelTimeUpdated.Text = DateTime.Now.ToString("hh:mm:ss tt");
+            MessageBox.Show("Thiết lập thành công!");
+        }
 
         private void ResetAllRowColors(DataGridView dataGridView)
         {
@@ -509,8 +559,8 @@ namespace VLeague.src.menu
         private void btnSaveHomePlayer_Click(object sender, EventArgs e)
         {
             //dgvHomePlayer_CellValueChanged();
-            loadPlayerHomeLineSub();
-            LoadPlayersHome();
+            savePlayerHomeLineSub();
+            savePlayersHome();
 
             MessageBox.Show("Đã lưu danh sách cầu thủ: ĐỘI NHÀ");
         }
@@ -518,8 +568,8 @@ namespace VLeague.src.menu
         private void btnSaveAwayPlayer_Click(object sender, EventArgs e)
         {
             //dgvAwayPlayer_CellValueChanged();
-            loadPlayerAwayLineSub();
-            LoadPlayersAway();
+            savePlayerAwayLineSub();
+            savePlayersAway();
 
             MessageBox.Show("Đã lưu danh sách cầu thủ: ĐỘI KHÁCH");
         }
@@ -566,10 +616,10 @@ namespace VLeague.src.menu
             FrmKarismaMenu.closeTabwithFrmDataImport();
             LoadHomePlayerGrid();
             LoadAwayPlayerGrid();
-            loadPlayerHomeLineSub();
-            loadPlayerAwayLineSub();
-            LoadPlayersHome();
-            LoadPlayersAway();
+            savePlayerHomeLineSub();
+            savePlayerAwayLineSub();
+            savePlayersHome();
+            savePlayersAway();
             TeamInfor.UpdateData(homeCode, homeTactical, homeTenDai, homeTenNgan, homeHLV, homeLogo,
             awayCode, awayTactical, awayTenDai, awayTenNgan, awayHLV, awayLogo,
          Player_HomeColor.BackColor, Player_AwayColor.BackColor, homeHomeItem, homeAwayItem, awayHomeItem, awayAwayItem,
@@ -633,7 +683,7 @@ namespace VLeague.src.menu
             // Sắp xếp DataGridView của đội hình theo cột STT thứ tự tăng dần
             dgvAwayPlayer.Sort(dgvAwayPlayer.Columns["STT"], ListSortDirection.Ascending);
         }
-        public void LoadPlayersHome()
+        public void savePlayersHome()
         {
             Player[] teamPlayers = new Player[21]; // Khởi tạo mảng 21 phần tử
 
@@ -644,8 +694,7 @@ namespace VLeague.src.menu
                 Player player = new Player
                 {
                     Name = dgvHomePlayer.Rows[i].Cells["Name"].Value.ToString(),
-                    ShortName = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
-                                " " + dgvHomePlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
+                    ShortName = dgvHomePlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
                     Number = dgvHomePlayer.Rows[i].Cells["Jersey #"].Value.ToString(),
                     Lineup = dgvHomePlayer.Rows[i].Cells[HomeLineup].Value.ToString(),
                     Sub = dgvHomePlayer.Rows[i].Cells[HomeSub].Value.ToString(),
@@ -655,7 +704,7 @@ namespace VLeague.src.menu
             }
             TeamInfor.PlayersHome = teamPlayers;
         }
-        public void LoadPlayersAway()
+        public void savePlayersAway()
         {
             Player[] teamPlayers = new Player[21]; // Khởi tạo mảng 21 phần tử
 
@@ -666,8 +715,7 @@ namespace VLeague.src.menu
                 Player player = new Player
                 {
                     Name = dgvAwayPlayer.Rows[i].Cells["Name"].Value.ToString(),
-                    ShortName = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString() +
-                                " " + dgvAwayPlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
+                    ShortName = dgvAwayPlayer.Rows[i].Cells["Jersey Name"].Value.ToString(),
                     Number = dgvAwayPlayer.Rows[i].Cells["Jersey #"].Value.ToString(),
                     Lineup = dgvHomePlayer.Rows[i].Cells[AwayLineup].Value.ToString(),
                     Sub = dgvHomePlayer.Rows[i].Cells[AwaySub].Value.ToString(),
@@ -678,7 +726,7 @@ namespace VLeague.src.menu
             TeamInfor.PlayersAway = teamPlayers;
         }
         //Load DS thi đấu và dự bị đội nhà
-        public void loadPlayerHomeLineSub()
+        public void savePlayerHomeLineSub()
         {
             Player[] playersLineup = new Player[11];
             Player[] playersSub = new Player[10];
@@ -708,7 +756,7 @@ namespace VLeague.src.menu
             TeamInfor.PlayersHomeSub = playersSub;
         }
         //Load DS thi đấu và dự bị đội khách
-        public void loadPlayerAwayLineSub()
+        public void savePlayerAwayLineSub()
         {
             Player[] playersLineup = new Player[11];
             Player[] playersSub = new Player[10];
