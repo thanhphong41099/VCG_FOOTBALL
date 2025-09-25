@@ -24,13 +24,13 @@ namespace VLeague.src.menu
         private void clearTagButton()
         {
             Button[] buttons = new Button[]
-            {showStatic, showStaticPenalty, showPostGST};
+            {showStatic, showPostGST};
             ButtonHelper.ClearTagButton(buttons);
         }
         private void clearTagButtonEx(Button clickedButton)
         {
             Button[] buttons = new Button[]
-            {showStatic, showStaticPenalty, showPostGST};
+            {showStatic, showPostGST};
             ButtonHelper.ClearTagButtonEx(buttons, clickedButton);
         }
         private void UpdateButtonState(Button btn, int x)
@@ -61,7 +61,8 @@ namespace VLeague.src.menu
             dgvBXH.Rows.Clear();
             foreach (DataRow dr in DBConfig.ranking.Rows)
             {
-                dgvBXH.Rows.Add(dr["STT"], dr["MaDoi"].ToString(), dr["TenDoi"].ToString(), dr["Diem"].ToString(), dr["Tran"].ToString(), dr["T"].ToString(), dr["B"].ToString(), dr["H"].ToString(), dr["HS"].ToString());
+                dgvBXH.Rows.Add(dr["STT"], dr["TenDoi"].ToString(), dr["Tran"].ToString(), dr["T"].ToString(), 
+                    dr["H"].ToString(), dr["B"].ToString(), dr["HS"].ToString(), dr["Diem"].ToString());
             }
 
             dgvBXH.Sort(dgvBXH.Columns[0], ListSortDirection.Ascending);
@@ -89,37 +90,13 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPostMatch);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadAllStatistic(cbbMatch.Text, TeamInfor.homeHomeItem, TeamInfor.awayHomeItem, TeamInfor.homeAwayItem, TeamInfor.awayAwayItem,
-                        Static.numberHomeScore, Static.numberAwayScore, TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
+                    FrmKarismaMenu.FrmSetting.loadAllStatistic(cbbMatch.Text, TeamInfor.homeLogo, TeamInfor.awayLogo,
+                        Static.numberHomeScore, Static.numberAwayScore, TeamInfor.homeTenDai, TeamInfor.awayTenDai);
                     break;
             }
         }
 
         private void stopStatic_Click(object sender, EventArgs e)
-        {
-            clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPostMatch);
-        }
-
-        private void showStaticPenalty_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonEx(clickedButton);
-            UpdateButtonState(sender as Button, 1);
-            switch (showStaticPenalty.Tag)
-            {
-                case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerPostMatch);
-                    break;
-                case 1:
-                    string text = $"PENALTY: {Static.numberHomePen} - {Static.numberAwayPen}";
-                    FrmKarismaMenu.FrmSetting.loadAllStatistic(text, TeamInfor.homeHomeItem, TeamInfor.awayHomeItem, TeamInfor.homeAwayItem, TeamInfor.awayAwayItem,
-                        Static.numberHomeScore, Static.numberAwayScore, TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
-                    break;
-            }
-        }
-
-        private void stopStaticPen_Click(object sender, EventArgs e)
         {
             clearTagButton();
             FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPostMatch);
@@ -207,7 +184,6 @@ namespace VLeague.src.menu
                 if (row.IsNewRow) continue; 
 
                 int stt = Convert.ToInt32(row.Cells["STT"].Value);
-                string maDoi = row.Cells["MaDoi"].Value.ToString();
                 string tenDoi = row.Cells["TenDoi"].Value.ToString();
                 int diem = Convert.ToInt32(row.Cells["Diem"].Value);
                 int tran = Convert.ToInt32(row.Cells["Tran"].Value);
@@ -216,7 +192,7 @@ namespace VLeague.src.menu
                 int h = Convert.ToInt32(row.Cells["H"].Value);
                 string hs = row.Cells["HS"].Value.ToString();
 
-                DBConfig.updateBXH(stt, maDoi, tenDoi, diem, tran, t, b, h, hs);
+                DBConfig.updateBXH(stt, tenDoi, tran, t, h, b, hs, diem);
             }
         }
         private void dgvStatistic_RowValidated()

@@ -525,13 +525,12 @@ namespace VLeague
                 Handler.handlerError("doGetSoccerRanking", ex);
             }
         }
-        public static void updateBXH(int stt, string maDoi, string tenDoi, int diem, int tran, int t, int b, int h, string hs)
+        public static void updateBXH(int stt, string tenDoi, int tran, int t, int h, int b, string hs, int diem)
         {
             try
             {
-                oledbCommand = new OleDbCommand("UPDATE BANGXEPHANG SET [STT] = @stt, TenDoi = @tenDoi, Diem = @diem, Tran = @tran, T = @t, B = @b, H = @h, HS = @hs WHERE MaDoi = @maDoi", oledbConnection);
+                oledbCommand = new OleDbCommand("UPDATE BANGXEPHANG SET TenDoi = @tenDoi, Diem = @diem, Tran = @tran, T = @t, B = @b, H = @h, HS = @hs WHERE  [STT] = @stt", oledbConnection);
                 oledbCommand.CommandType = CommandType.Text;
-                oledbCommand.Parameters.Add("@stt", OleDbType.Integer).Value = stt;
                 oledbCommand.Parameters.Add("@tenDoi", OleDbType.VarWChar).Value = tenDoi;
                 oledbCommand.Parameters.Add("@diem", OleDbType.Integer).Value = diem;
                 oledbCommand.Parameters.Add("@tran", OleDbType.Integer).Value = tran;
@@ -539,7 +538,7 @@ namespace VLeague
                 oledbCommand.Parameters.Add("@b", OleDbType.Integer).Value = b;
                 oledbCommand.Parameters.Add("@h", OleDbType.Integer).Value = h;
                 oledbCommand.Parameters.Add("@hs", OleDbType.VarWChar).Value = hs;
-                oledbCommand.Parameters.Add("@maDoi", OleDbType.VarWChar).Value = maDoi;
+                oledbCommand.Parameters.Add("@stt", OleDbType.Integer).Value = stt;
 
 
                 oledbCommand.ExecuteNonQuery();
@@ -550,6 +549,7 @@ namespace VLeague
                 MessageBox.Show($"Lỗi cập nhật dữ liệu: {ex.Message}");
             }
         }
+
         //Hàm cập nhật ChiSo1 và ChiSo2 trong bảng THONGKE theo giá trị cột Tieude
         public static void UpdateStatisticByTitle(string title, string chiso1, string chiso2)
         {

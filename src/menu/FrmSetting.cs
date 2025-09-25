@@ -1526,15 +1526,13 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
         }
-        public void loadAllStatistic(string match, string homeHomeItem, string awayHomeItem, string homeAwayItem, string awayAwayItem, string homeScore,
+        public void loadAllStatistic(string match, string homelogo, string awaylogo, string homeScore,
             string awayScore, string homeName, string awayName)
         {
             DBConfig.goGetMatchInfoDetail();
             int index = 0;
-            string scene = "\\thongke.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            string scene = Sthongke;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
             Thread.Sleep(10);
             KAEngine.BeginTransaction();
             foreach (DataRow dt in DBConfig.matchDetail.Tables[0].Rows)
@@ -1557,21 +1555,15 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAObject = KAScene.GetObject("hiepdau");
             KAObject.SetValue(match);
             KAObject = KAScene.GetObject("logo1");
-            KAObject.SetValue(homeHomeItem);
+            KAObject.SetValue(homelogo);
             KAObject = KAScene.GetObject("logo2");
-            KAObject.SetValue(awayHomeItem);
-            KAObject = KAScene.GetObject("logo1out");
-            KAObject.SetValue(homeAwayItem);
-            KAObject = KAScene.GetObject("logo2out");
-            KAObject.SetValue(awayAwayItem);
+            KAObject.SetValue(awaylogo);
             KAObject = KAScene.GetObject("tiso");
             KAObject.SetValue(homeScore + " - " + awayScore);
             KAObject = KAScene.GetObject("homename");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("awayname");
             KAObject.SetValue(awayName);
-            KAObject = KAScene.GetObject("penaltycg");
-            KAObject.SetVisible(0);
 
             KAEngine.EndTransaction();
             KAScenePlayer.Prepare(layerPostMatch, KAScene);
@@ -1700,36 +1692,6 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAScenePlayer.Prepare(layerPostMatch, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerPostMatch);
-        }
-
-        public void loadGrStanding(string[] hang, string[] team, string[] diem)
-        {
-            string scene = "standingfull.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
-            Thread.Sleep(50);
-            KAEngine.BeginTransaction();
-
-            // Arrays of prefixes and data arrays to iterate over
-            string[] prefixes = { "hang", "team", "t0" };
-            string[][] data = { hang, team, diem };
-
-            // Loop through each prefix and corresponding data array
-            for (int i = 0; i < prefixes.Length; i++)
-            {
-                for (int j = 0; j < 14; j++)
-                {
-                    KAObject = KAScene.GetObject($"{prefixes[i]}{j + 1}");
-                    KAObject.SetValue(data[i][j]);
-                }
-            }
-
-            KAEngine.EndTransaction();
-            Thread.Sleep(10);
-            KAScenePlayer.Prepare(layerTSL, KAScene);
-            Thread.Sleep(10);
-            KAScenePlayer.Play(layerTSL);
         }
 
         public void loadMatchID(string homeLogo, string awayLogo, string homeItem, string awayItem, 
