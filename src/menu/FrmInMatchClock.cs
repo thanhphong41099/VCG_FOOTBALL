@@ -45,10 +45,9 @@ namespace VLeague.src.menu
         {
             Button[] buttons = new Button[]
             {
-                btnKickOff, btnTransID, WipeTrans, showHomeCoach, showAwayCoach, showBXHMini,
+                btnKickOff, btnInfor, showHomeCoach, showAwayCoach, 
                 LTHomePlayer, LTAwayPlayer, ShowGoalHomePlayer, ShowGoalAwayPlayer, homePlayerOG, awayPlayerOG, 
-                HomeYellow, AwayYellow, Home2Yellow, Away2Yellow, HomeRed, AwayRed, HomeCancelYellow, AwayCancelYellow
-            };
+                HomeYellow, AwayYellow, Home2Yellow, Away2Yellow, HomeRed, AwayRed,  };
             ButtonHelper.ClearTagButtonEx(buttons, clickedButton);
         }
         private void clearTagButtonTSN()
@@ -143,7 +142,7 @@ namespace VLeague.src.menu
             // Lặp qua mảng players và thêm ShortName của mỗi player vào ComboBox
             foreach (Player player in players)
             {
-                comboBox.Items.Add(player.ShortName);
+                comboBox.Items.Add(player.Number + " " + player.ShortName);
             }
         }
         private void FillCbbPlayerInMatchClock()
@@ -325,7 +324,7 @@ namespace VLeague.src.menu
                 switch (ShowAddTime.Tag)
                 {
                     case 0:
-                        FrmKarismaMenu.FrmSetting.StopEff(FrmSetting.layerBuGio);
+                        FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerBuGio);
                         break;
                     case 1:
                         FrmKarismaMenu.FrmSetting.loadDisplayAddtime(txtAddTime.Text);
@@ -440,10 +439,10 @@ namespace VLeague.src.menu
                     clearTagButtonAddTime();
 
                     StartTime = StartTime - 1;
-                    FrmKarismaMenu.FrmSetting.loadTSNOut(TeamInfor.homeCode, TeamInfor.awayCode, Static.numberHomeScore, Static.numberAwayScore, StartTime, EndTime);
+                    FrmKarismaMenu.FrmSetting.loadTSNOut(TeamInfor.homeTenNgan, TeamInfor.awayTenNgan, Static.numberHomeScore, Static.numberAwayScore, StartTime, EndTime);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadTSN(TeamInfor.homeCode, TeamInfor.awayCode, Static.numberHomeScore, Static.numberAwayScore, StartTime, EndTime);
+                    FrmKarismaMenu.FrmSetting.loadTSN(TeamInfor.homeTenNgan, TeamInfor.awayTenNgan, Static.numberHomeScore, Static.numberAwayScore, StartTime, EndTime);
                     break;
             }
         }
@@ -470,12 +469,14 @@ namespace VLeague.src.menu
             {
                 case 0:
                     int Time2 = StartTime - 1;
-                    FrmKarismaMenu.FrmSetting.loadKickOffTimeOut(TeamInfor.homeTenNgan, TeamInfor.awayTenNgan, Static.numberHomeScore, Static.numberAwayScore,
+                    FrmKarismaMenu.FrmSetting.loadKickOffTimeOut(TeamInfor.homeTenDai, TeamInfor.awayTenDai, 
+                        Static.numberHomeScore, Static.numberAwayScore,
                         TeamInfor.homeLogo, TeamInfor.awayLogo, Time2, EndTime);
 
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadKickOffTime(TeamInfor.homeTenNgan, TeamInfor.awayTenNgan, Static.numberHomeScore, Static.numberAwayScore,
+                    FrmKarismaMenu.FrmSetting.loadKickOffTime(TeamInfor.homeTenDai, TeamInfor.awayTenDai, 
+                        Static.numberHomeScore, Static.numberAwayScore,
                         TeamInfor.homeLogo, TeamInfor.awayLogo, StartTime, EndTime);
                     break;
             }
@@ -540,11 +541,11 @@ namespace VLeague.src.menu
                 case 1:
                     if (!string.IsNullOrEmpty(inforHomePlayer.Text))
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, inforHomePlayer.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, inforHomePlayer.Text);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, TeamInfor.homeTenDai, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbHomePlayer.Text, TeamInfor.homeTenDai);
                     }
                     break;
             }
@@ -577,11 +578,11 @@ namespace VLeague.src.menu
                 case 1:
                     if (!string.IsNullOrEmpty(inforAwayPlayer.Text))
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, inforAwayPlayer.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, inforAwayPlayer.Text);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, TeamInfor.awayTenDai, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
+                        FrmKarismaMenu.FrmSetting.loadTitleScene(cbbAwayPlayer.Text, TeamInfor.awayTenDai);
                     }
                     break;
             }
@@ -679,11 +680,11 @@ namespace VLeague.src.menu
                     }
                     if (!checkPenHome.Checked)
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbHomeGoal.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, GoalTimeHome.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbHomeGoal.Text, TeamInfor.homeLogo, GoalTimeHome.Text);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbHomeGoal.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, GoalTimeHome.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbHomeGoal.Text, TeamInfor.homeLogo, GoalTimeHome.Text);
                     }
                     break;
             }
@@ -718,11 +719,11 @@ namespace VLeague.src.menu
                     }
                     if (checkPenAway.Checked)
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbAwayGoal.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, GoalTimeAway.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalPenInfo(cbbAwayGoal.Text, TeamInfor.awayLogo, GoalTimeAway.Text);
                     }
                     else
                     {
-                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbAwayGoal.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, GoalTimeAway.Text);
+                        FrmKarismaMenu.FrmSetting.loadGoalInfo(cbbAwayGoal.Text, TeamInfor.awayLogo, GoalTimeAway.Text);
                     }
                     break;
             }
@@ -744,7 +745,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeLogo);
                     break;
             }
         }
@@ -765,47 +766,9 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbAwayCard.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadYellowCard(cbbAwayCard.Text, TeamInfor.awayLogo);
                     break;
             }
-        }
-
-        private void HomeCancelYellow_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(cbbHomeCard.Text))
-            {
-                MessageBox.Show("Chưa chọn cầu thủ");
-                return;
-            }
-            //UpdateButtonState(sender as Button, 1);
-            //switch (HomeCancelYellow.Tag)
-            //{
-            //    case 0:
-            //        FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            //        break;
-            //    case 1:
-            //        FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
-            //        break;
-            //}
-        }
-
-        private void AwayCancelYellow_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(cbbAwayCard.Text))
-            {
-                MessageBox.Show("Chưa chọn cầu thủ");
-                return;
-            }
-            //UpdateButtonState(sender as Button, 1);
-            //switch (HomeYellow.Tag)
-            //{
-            //    case 0:
-            //        FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
-            //        break;
-            //    case 1:
-            //        FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
-            //        break;
-            //}
         }
 
         private void Home2Yellow_Click(object sender, EventArgs e)
@@ -824,7 +787,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbHomeCard.Text, TeamInfor.homeLogo);
                     break;
             }
         }
@@ -845,7 +808,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbAwayCard.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbAwayCard.Text, TeamInfor.awayLogo);
                     break;
             }
         }
@@ -866,7 +829,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbHomeCard.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbHomeCard.Text, TeamInfor.homeLogo);
                     break;
             }
         }
@@ -887,7 +850,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbAwayCard.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadRedCard(cbbAwayCard.Text, TeamInfor.homeLogo);
                     break;
             }
         }
@@ -900,20 +863,6 @@ namespace VLeague.src.menu
         }
 
         private void StopAwayYellow_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
-        }
-
-        private void StopHomeCancelYellow_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
-        }
-
-        private void StopAwayCancelYellow_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
@@ -959,7 +908,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.homeHLV, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.homeHLV, TeamInfor.homeLogo);
                     break;
             }
         }
@@ -983,7 +932,7 @@ namespace VLeague.src.menu
                     break;
                 case 1:
                     
-                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.awayHLV, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem);
+                    FrmKarismaMenu.FrmSetting.loadCoachName(TeamInfor.awayHLV, TeamInfor.awayLogo);
                     break;
             }
         }
@@ -1011,7 +960,7 @@ namespace VLeague.src.menu
                     FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
                     break;
                 case 1:
-                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbHomeGoal.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem, GoalTimeHome.Text);
+                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbHomeGoal.Text, TeamInfor.homeLogo, GoalTimeHome.Text);
                     if (checkSaveHomeGoal.Checked) // Kiểm tra checkbox trước khi lưu
                     {
                         SaveHomeNameOG();
@@ -1040,12 +989,12 @@ namespace VLeague.src.menu
                     {
                         SaveAwayNameOG();
                     }
-                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbAwayGoal.Text, TeamInfor.awayHomeItem, TeamInfor.awayAwayItem, GoalTimeAway.Text);
+                    FrmKarismaMenu.FrmSetting.loadOGInfo(cbbAwayGoal.Text, TeamInfor.awayLogo, GoalTimeAway.Text);
                     break;
             }
         }
 
-        private void btnTransID_Click(object sender, EventArgs e)
+        private void btnInfor_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtName.Text))
             {
@@ -1060,7 +1009,7 @@ namespace VLeague.src.menu
             else
             {
                 UpdateButtonState(sender as Button, 1);
-                switch (btnTransID.Tag)
+                switch (btnInfor.Tag)
                 {
                     case 0:
                         FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
@@ -1070,49 +1019,6 @@ namespace VLeague.src.menu
                         break;
                 }
             }
-        }
-
-        private void showBXHMini_Click(object sender, EventArgs e)
-        {
-            //DBConfig.doGetSoccerRanking();
-            //ShowMiniRanking(0, 14);
-        }
-
-        private void ShowMiniRanking(int start, int count)
-        {
-            string[] hang = new string[count];
-            string[] team = new string[count];
-            string[] diem = new string[count];
-
-            for (int i = 0; i < count && (start + i) < DBConfig.ranking.Rows.Count; i++)
-            {
-                DataRow row = DBConfig.ranking.Rows[start + i];
-                hang[i] = row["STT"].ToString();
-                team[i] = row["TenDoi"].ToString();
-                diem[i] = row["Diem"].ToString();
-            }
-
-            FrmKarismaMenu.FrmSetting.loadGrStanding(hang, team, diem);
-        }
-
-        private void stopBXHMini_Click(object sender, EventArgs e)
-        {
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
-            Button clickedButton = sender as Button;
-            clearTagButtonTSL(clickedButton);
-        }
-
-        private void WipeTrans_Click(object sender, EventArgs e)
-        {
-            string scene = "\\transition.t2s";
-            FrmKarismaMenu.FrmSetting.loadScene(scene);
-        }
-        
-        private void stopWipeTrans_Click(object sender, EventArgs e)
-        {
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
-            Button clickedButton = sender as Button;
-            clearTagButtonTSL(clickedButton);
         }
 
         private void stopALL_Click(object sender, EventArgs e)
@@ -1134,6 +1040,7 @@ namespace VLeague.src.menu
             string tiso1 = Static.numberHomeScore;
             string tiso2 = Static.numberAwayScore;
             FrmKarismaMenu.FrmSetting.updatePermClock(tiso1, tiso2);
+            FrmKarismaMenu.FrmSetting.PlayGoalClock(TeamInfor.homeTenNgan, TeamInfor.homeGoalItem,FrmSetting.layerGoalItem);
         }
         private void awayGoalEffect_Click(object sender, EventArgs e)
         {
@@ -1141,6 +1048,7 @@ namespace VLeague.src.menu
             string tiso1 = Static.numberHomeScore;
             string tiso2 = Static.numberAwayScore;
             FrmKarismaMenu.FrmSetting.updatePermClock(tiso1, tiso2);
+            FrmKarismaMenu.FrmSetting.PlayGoalClock(TeamInfor.awayTenNgan, TeamInfor.awayGoalItem, FrmSetting.layerGoalItem);
         }
         private void btnStopTrans_Click(object sender, EventArgs e)
         {
