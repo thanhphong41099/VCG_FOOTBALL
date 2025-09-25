@@ -751,82 +751,122 @@ namespace VLeague
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
         }
-        public void swapOnePlayer(string playerOut,
-    string playerIn, string homeItem, string awayItem)
+        public void swapOnePlayer(string lineName,string subName, string lineNum, string subNum,
+                string lineIMG, string subIMG, string logo)
         {
-            string scene = "\\sub1.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            string scene = SSub1;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
             Thread.Sleep(10);
+
             KAEngine.BeginTransaction();
-            Thread.Sleep(10);
-            KAObject = KAScene.GetObject("vaosan1");
-            KAObject.SetValue(playerIn);
-            KAObject = KAScene.GetObject("rasan1");
-            KAObject.SetValue(playerOut);
+            KAObject = KAScene.GetObject("nameout1");
+            KAObject.SetValue(lineName);
+            KAObject = KAScene.GetObject("namein1");
+            KAObject.SetValue(subName);
+            KAObject = KAScene.GetObject("numout1");
+            KAObject.SetValue(lineNum);
+            KAObject = KAScene.GetObject("numin1");
+            KAObject.SetValue(subNum);
+            KAObject = KAScene.GetObject("picout1");
+            KAObject.SetValue(lineIMG);
+            KAObject = KAScene.GetObject("picin1");
+            KAObject.SetValue(subIMG);
             KAObject = KAScene.GetObject("logo");
-            KAObject.SetValue(homeItem);
-            KAObject = KAScene.GetObject("logoout");
-            KAObject.SetValue(awayItem);
+            KAObject.SetValue(logo);
             KAEngine.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
         }
-        public void swapTwoPlayer(string playerOut, string playerIn, string playerOut2, string playerIn2,
-            string homeItem, string awayItem)
+
+        //write swap two player
+        public void swapTwoPlayer(string lineName, string subName, string lineNum, string subNum,
+            string lineIMG, string subIMG, string lineName2, string subName2, string lineNum2, string subNum2,
+            string lineIMG2, string subIMG2, string logo)
         {
-            string scene = "\\sub2.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            string scene = SSub2;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
             Thread.Sleep(10);
             KAEngine.BeginTransaction();
-            Thread.Sleep(10);
-            KAObject = KAScene.GetObject("vaosan1");
-            KAObject.SetValue(playerIn);
-            KAObject = KAScene.GetObject("rasan1");
-            KAObject.SetValue(playerOut);
-            KAObject = KAScene.GetObject("vaosan2");
-            KAObject.SetValue(playerIn2);
-            KAObject = KAScene.GetObject("rasan2");
-            KAObject.SetValue(playerOut2);
+            KAObject = KAScene.GetObject("nameout1");
+            KAObject.SetValue(lineName);
+            KAObject = KAScene.GetObject("namein1");
+            KAObject.SetValue(subName);
+            KAObject = KAScene.GetObject("numout1");
+            KAObject.SetValue(lineNum);
+            KAObject = KAScene.GetObject("numin1");
+            KAObject.SetValue(subNum);
+            KAObject = KAScene.GetObject("picout1");
+            KAObject.SetValue(lineIMG);
+            KAObject = KAScene.GetObject("picin1");
+            KAObject.SetValue(subIMG);
+            KAObject = KAScene.GetObject("nameout2");
+            KAObject.SetValue(lineName2);
+            KAObject = KAScene.GetObject("namein2");
+            KAObject.SetValue(subName2);
+            KAObject = KAScene.GetObject("numout2");
+            KAObject.SetValue(lineNum2);
+            KAObject = KAScene.GetObject("numin2");
+            KAObject.SetValue(subNum2);
+            KAObject = KAScene.GetObject("picout2");
+            KAObject.SetValue(lineIMG2);
+            KAObject = KAScene.GetObject("picin2");
+            KAObject.SetValue(subIMG2);
             KAObject = KAScene.GetObject("logo");
-            KAObject.SetValue(homeItem);
-            KAObject = KAScene.GetObject("logoout");
-            KAObject.SetValue(awayItem);
+            KAObject.SetValue(logo);
             KAEngine.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
         }
-        public void swapThreePlayer(string playerOut, string playerIn, string playerOut2, string playerIn2,
-            string playerOut3, string playerIn3, string homeItem, string awayItem)
+        //write swap three player
+        public void swapThreePlayer(string lineName, string subName, string lineNum, string subNum,
+            string lineIMG, string subIMG, string lineName2, string subName2, string lineNum2, string subNum2,
+            string lineIMG2, string subIMG2, string lineName3, string subName3, string lineNum3, string subNum3,
+            string lineIMG3, string subIMG3, string logo)
         {
-            string scene = "\\sub3.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            string scene = SSub3;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
             Thread.Sleep(10);
             KAEngine.BeginTransaction();
-            Thread.Sleep(10);
-            KAObject = KAScene.GetObject("vaosan1");
-            KAObject.SetValue(playerIn);
-            KAObject = KAScene.GetObject("rasan1");
-            KAObject.SetValue(playerOut);
-            KAObject = KAScene.GetObject("vaosan2");
-            KAObject.SetValue(playerIn2);
-            KAObject = KAScene.GetObject("rasan2");
-            KAObject.SetValue(playerOut2);
-            KAObject = KAScene.GetObject("vaosan3");
-            KAObject.SetValue(playerIn3);
-            KAObject = KAScene.GetObject("rasan3");
-            KAObject.SetValue(playerOut3);
+            KAObject = KAScene.GetObject("nameout1");
+            KAObject.SetValue(lineName);
+            KAObject = KAScene.GetObject("namein1");
+            KAObject.SetValue(subName);
+            KAObject = KAScene.GetObject("numout1");
+            KAObject.SetValue(lineNum);
+            KAObject = KAScene.GetObject("numin1");
+            KAObject.SetValue(subNum);
+            KAObject = KAScene.GetObject("picout1");
+            KAObject.SetValue(lineIMG);
+            KAObject = KAScene.GetObject("picin1");
+            KAObject.SetValue(subIMG);
+            KAObject = KAScene.GetObject("nameout2");
+            KAObject.SetValue(lineName2);
+            KAObject = KAScene.GetObject("namein2");
+            KAObject.SetValue(subName2);
+            KAObject = KAScene.GetObject("numout2");
+            KAObject.SetValue(lineNum2);
+            KAObject = KAScene.GetObject("numin2");
+            KAObject.SetValue(subNum2);
+            KAObject = KAScene.GetObject("picout2");
+            KAObject.SetValue(lineIMG2);
+            KAObject = KAScene.GetObject("picin2");
+            KAObject.SetValue(subIMG2);
+            KAObject = KAScene.GetObject("nameout3");
+            KAObject.SetValue(lineName3);
+            KAObject = KAScene.GetObject("namein3");
+            KAObject.SetValue(subName3);
+            KAObject = KAScene.GetObject("numout3");
+            KAObject.SetValue(lineNum3);
+            KAObject = KAScene.GetObject("numin3");
+            KAObject.SetValue(subNum3);
+            KAObject = KAScene.GetObject("picout3");
+            KAObject.SetValue(lineIMG3);
+            KAObject = KAScene.GetObject("picin3");
+            KAObject.SetValue(subIMG3);
             KAObject = KAScene.GetObject("logo");
-            KAObject.SetValue(homeItem);
-            KAObject = KAScene.GetObject("logoout");
-            KAObject.SetValue(awayItem);
+            KAObject.SetValue(logo);
             KAEngine.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);

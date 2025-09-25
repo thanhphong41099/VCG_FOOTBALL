@@ -210,7 +210,7 @@
             this.bóngĐáToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bóngĐáToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.bóngĐáToolStripMenuItem.Name = "bóngĐáToolStripMenuItem";
-            this.bóngĐáToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bóngĐáToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.bóngĐáToolStripMenuItem.Text = "Bóng Đá";
             this.bóngĐáToolStripMenuItem.Click += new System.EventHandler(this.bóngĐáToolStripMenuItem_Click);
             // 
@@ -354,7 +354,7 @@
             this.btnInMatchClock.Name = "btnInMatchClock";
             this.btnInMatchClock.Size = new System.Drawing.Size(198, 45);
             this.btnInMatchClock.TabIndex = 3;
-            this.btnInMatchClock.Text = "  In Match Clock";
+            this.btnInMatchClock.Text = "  IN MATCH";
             this.btnInMatchClock.UseVisualStyleBackColor = true;
             this.btnInMatchClock.Click += new System.EventHandler(this.btnInMatchClock_Click);
             // 
@@ -396,7 +396,7 @@
             this.btnSubstitution.Name = "btnSubstitution";
             this.btnSubstitution.Size = new System.Drawing.Size(198, 45);
             this.btnSubstitution.TabIndex = 7;
-            this.btnSubstitution.Text = "Substitution";
+            this.btnSubstitution.Text = "       Subs + Static + Var";
             this.btnSubstitution.UseVisualStyleBackColor = true;
             this.btnSubstitution.Click += new System.EventHandler(this.btnSubstitution_Click);
             // 

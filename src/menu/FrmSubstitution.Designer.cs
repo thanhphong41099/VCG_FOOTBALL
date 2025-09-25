@@ -51,12 +51,12 @@
             this.numHomeLine1 = new System.Windows.Forms.TextBox();
             this.cbbHomeLineUp1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.btnAwayIn3 = new System.Windows.Forms.Button();
+            this.btnAwayOut3 = new System.Windows.Forms.Button();
+            this.btnAwayIn2 = new System.Windows.Forms.Button();
+            this.btnAwayOut2 = new System.Windows.Forms.Button();
+            this.btnAwayIn1 = new System.Windows.Forms.Button();
+            this.btnAwayOut1 = new System.Windows.Forms.Button();
             this.numAwaySub3 = new System.Windows.Forms.TextBox();
             this.cbbAwaySub3 = new System.Windows.Forms.ComboBox();
             this.numAwaySub2 = new System.Windows.Forms.TextBox();
@@ -74,8 +74,26 @@
             this.label16 = new System.Windows.Forms.Label();
             this.stopAll = new System.Windows.Forms.Button();
             this.clearCbb = new System.Windows.Forms.Button();
+            this.groupStatic = new System.Windows.Forms.GroupBox();
+            this.away1 = new System.Windows.Forms.TextBox();
+            this.cbbStatic1 = new System.Windows.Forms.ComboBox();
+            this.home1 = new System.Windows.Forms.TextBox();
+            this.home2 = new System.Windows.Forms.TextBox();
+            this.away2 = new System.Windows.Forms.TextBox();
+            this.cbbStatic2 = new System.Windows.Forms.ComboBox();
+            this.home3 = new System.Windows.Forms.TextBox();
+            this.away3 = new System.Windows.Forms.TextBox();
+            this.cbbStatic3 = new System.Windows.Forms.ComboBox();
+            this.btnStats1 = new System.Windows.Forms.Button();
+            this.statsOut1 = new System.Windows.Forms.Button();
+            this.btnStats2 = new System.Windows.Forms.Button();
+            this.statsOut2 = new System.Windows.Forms.Button();
+            this.btnStats3 = new System.Windows.Forms.Button();
+            this.statsOut3 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.homeName.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupStatic.SuspendLayout();
             this.SuspendLayout();
             // 
             // homeName
@@ -119,6 +137,7 @@
             this.btnHomeIn3.TabIndex = 319;
             this.btnHomeIn3.Text = "IN 3";
             this.btnHomeIn3.UseVisualStyleBackColor = false;
+            this.btnHomeIn3.Click += new System.EventHandler(this.btnHomeIn3_Click);
             // 
             // btnHomeOut3
             // 
@@ -144,6 +163,7 @@
             this.btnHomeIn2.TabIndex = 317;
             this.btnHomeIn2.Text = "IN 2";
             this.btnHomeIn2.UseVisualStyleBackColor = false;
+            this.btnHomeIn2.Click += new System.EventHandler(this.btnHomeIn2_Click);
             // 
             // btnHomeOut2
             // 
@@ -169,6 +189,7 @@
             this.btnHomeIn1.TabIndex = 315;
             this.btnHomeIn1.Text = "IN 1";
             this.btnHomeIn1.UseVisualStyleBackColor = false;
+            this.btnHomeIn1.Click += new System.EventHandler(this.btnHomeIn1_Click);
             // 
             // btnHomeOut1
             // 
@@ -325,12 +346,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Controls.Add(this.button9);
-            this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Controls.Add(this.button11);
+            this.groupBox1.Controls.Add(this.btnAwayIn3);
+            this.groupBox1.Controls.Add(this.btnAwayOut3);
+            this.groupBox1.Controls.Add(this.btnAwayIn2);
+            this.groupBox1.Controls.Add(this.btnAwayOut2);
+            this.groupBox1.Controls.Add(this.btnAwayIn1);
+            this.groupBox1.Controls.Add(this.btnAwayOut1);
             this.groupBox1.Controls.Add(this.numAwaySub3);
             this.groupBox1.Controls.Add(this.cbbAwaySub3);
             this.groupBox1.Controls.Add(this.numAwaySub2);
@@ -353,77 +374,83 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AWAY Substitution";
             // 
-            // button6
+            // btnAwayIn3
             // 
-            this.button6.BackColor = System.Drawing.Color.Green;
-            this.button6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(463, 147);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(111, 33);
-            this.button6.TabIndex = 325;
-            this.button6.Text = "IN 3";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnAwayIn3.BackColor = System.Drawing.Color.Green;
+            this.btnAwayIn3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAwayIn3.ForeColor = System.Drawing.Color.White;
+            this.btnAwayIn3.Location = new System.Drawing.Point(463, 147);
+            this.btnAwayIn3.Name = "btnAwayIn3";
+            this.btnAwayIn3.Size = new System.Drawing.Size(111, 33);
+            this.btnAwayIn3.TabIndex = 325;
+            this.btnAwayIn3.Text = "IN 3";
+            this.btnAwayIn3.UseVisualStyleBackColor = false;
+            this.btnAwayIn3.Click += new System.EventHandler(this.btnAwayIn3_Click);
             // 
-            // button7
+            // btnAwayOut3
             // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(349, 147);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(111, 33);
-            this.button7.TabIndex = 324;
-            this.button7.Text = "OUT 3";
-            this.button7.UseVisualStyleBackColor = false;
+            this.btnAwayOut3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAwayOut3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAwayOut3.ForeColor = System.Drawing.Color.White;
+            this.btnAwayOut3.Location = new System.Drawing.Point(349, 147);
+            this.btnAwayOut3.Name = "btnAwayOut3";
+            this.btnAwayOut3.Size = new System.Drawing.Size(111, 33);
+            this.btnAwayOut3.TabIndex = 324;
+            this.btnAwayOut3.Text = "OUT 3";
+            this.btnAwayOut3.UseVisualStyleBackColor = false;
+            this.btnAwayOut3.Click += new System.EventHandler(this.btnAwayOut3_Click);
             // 
-            // button8
+            // btnAwayIn2
             // 
-            this.button8.BackColor = System.Drawing.Color.Green;
-            this.button8.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(463, 104);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(111, 33);
-            this.button8.TabIndex = 323;
-            this.button8.Text = "IN 2";
-            this.button8.UseVisualStyleBackColor = false;
+            this.btnAwayIn2.BackColor = System.Drawing.Color.Green;
+            this.btnAwayIn2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAwayIn2.ForeColor = System.Drawing.Color.White;
+            this.btnAwayIn2.Location = new System.Drawing.Point(463, 104);
+            this.btnAwayIn2.Name = "btnAwayIn2";
+            this.btnAwayIn2.Size = new System.Drawing.Size(111, 33);
+            this.btnAwayIn2.TabIndex = 323;
+            this.btnAwayIn2.Text = "IN 2";
+            this.btnAwayIn2.UseVisualStyleBackColor = false;
+            this.btnAwayIn2.Click += new System.EventHandler(this.btnAwayIn2_Click);
             // 
-            // button9
+            // btnAwayOut2
             // 
-            this.button9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button9.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(349, 104);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(111, 33);
-            this.button9.TabIndex = 322;
-            this.button9.Text = "OUT 2";
-            this.button9.UseVisualStyleBackColor = false;
+            this.btnAwayOut2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAwayOut2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAwayOut2.ForeColor = System.Drawing.Color.White;
+            this.btnAwayOut2.Location = new System.Drawing.Point(349, 104);
+            this.btnAwayOut2.Name = "btnAwayOut2";
+            this.btnAwayOut2.Size = new System.Drawing.Size(111, 33);
+            this.btnAwayOut2.TabIndex = 322;
+            this.btnAwayOut2.Text = "OUT 2";
+            this.btnAwayOut2.UseVisualStyleBackColor = false;
+            this.btnAwayOut2.Click += new System.EventHandler(this.btnAwayOut2_Click);
             // 
-            // button10
+            // btnAwayIn1
             // 
-            this.button10.BackColor = System.Drawing.Color.Green;
-            this.button10.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.button10.ForeColor = System.Drawing.Color.White;
-            this.button10.Location = new System.Drawing.Point(463, 62);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(111, 33);
-            this.button10.TabIndex = 321;
-            this.button10.Text = "IN 1";
-            this.button10.UseVisualStyleBackColor = false;
+            this.btnAwayIn1.BackColor = System.Drawing.Color.Green;
+            this.btnAwayIn1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAwayIn1.ForeColor = System.Drawing.Color.White;
+            this.btnAwayIn1.Location = new System.Drawing.Point(463, 62);
+            this.btnAwayIn1.Name = "btnAwayIn1";
+            this.btnAwayIn1.Size = new System.Drawing.Size(111, 33);
+            this.btnAwayIn1.TabIndex = 321;
+            this.btnAwayIn1.Text = "IN 1";
+            this.btnAwayIn1.UseVisualStyleBackColor = false;
+            this.btnAwayIn1.Click += new System.EventHandler(this.btnAwayIn1_Click);
             // 
-            // button11
+            // btnAwayOut1
             // 
-            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button11.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.button11.ForeColor = System.Drawing.Color.White;
-            this.button11.Location = new System.Drawing.Point(349, 62);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(111, 33);
-            this.button11.TabIndex = 320;
-            this.button11.Text = "OUT 1";
-            this.button11.UseVisualStyleBackColor = false;
+            this.btnAwayOut1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnAwayOut1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnAwayOut1.ForeColor = System.Drawing.Color.White;
+            this.btnAwayOut1.Location = new System.Drawing.Point(349, 62);
+            this.btnAwayOut1.Name = "btnAwayOut1";
+            this.btnAwayOut1.Size = new System.Drawing.Size(111, 33);
+            this.btnAwayOut1.TabIndex = 320;
+            this.btnAwayOut1.Text = "OUT 1";
+            this.btnAwayOut1.UseVisualStyleBackColor = false;
+            this.btnAwayOut1.Click += new System.EventHandler(this.btnAwayOut1_Click);
             // 
             // numAwaySub3
             // 
@@ -569,7 +596,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label16.Location = new System.Drawing.Point(1568, 9);
+            this.label16.Location = new System.Drawing.Point(1489, 41);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(80, 21);
             this.label16.TabIndex = 299;
@@ -578,7 +605,7 @@
             // stopAll
             // 
             this.stopAll.Image = ((System.Drawing.Image)(resources.GetObject("stopAll.Image")));
-            this.stopAll.Location = new System.Drawing.Point(1571, 35);
+            this.stopAll.Location = new System.Drawing.Point(1575, 19);
             this.stopAll.Name = "stopAll";
             this.stopAll.Size = new System.Drawing.Size(73, 68);
             this.stopAll.TabIndex = 298;
@@ -592,13 +619,206 @@
             this.clearCbb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearCbb.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.clearCbb.ForeColor = System.Drawing.Color.White;
-            this.clearCbb.Location = new System.Drawing.Point(462, 32);
+            this.clearCbb.Location = new System.Drawing.Point(1309, 19);
             this.clearCbb.Name = "clearCbb";
-            this.clearCbb.Size = new System.Drawing.Size(155, 53);
+            this.clearCbb.Size = new System.Drawing.Size(118, 34);
             this.clearCbb.TabIndex = 301;
             this.clearCbb.Text = "CLEAR";
             this.clearCbb.UseVisualStyleBackColor = false;
+            this.clearCbb.Visible = false;
             this.clearCbb.Click += new System.EventHandler(this.clearCbb_Click);
+            // 
+            // groupStatic
+            // 
+            this.groupStatic.Controls.Add(this.btnStats3);
+            this.groupStatic.Controls.Add(this.statsOut3);
+            this.groupStatic.Controls.Add(this.btnStats2);
+            this.groupStatic.Controls.Add(this.statsOut2);
+            this.groupStatic.Controls.Add(this.btnStats1);
+            this.groupStatic.Controls.Add(this.statsOut1);
+            this.groupStatic.Controls.Add(this.home3);
+            this.groupStatic.Controls.Add(this.away3);
+            this.groupStatic.Controls.Add(this.cbbStatic3);
+            this.groupStatic.Controls.Add(this.home2);
+            this.groupStatic.Controls.Add(this.away2);
+            this.groupStatic.Controls.Add(this.cbbStatic2);
+            this.groupStatic.Controls.Add(this.home1);
+            this.groupStatic.Controls.Add(this.away1);
+            this.groupStatic.Controls.Add(this.cbbStatic1);
+            this.groupStatic.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupStatic.Location = new System.Drawing.Point(999, 91);
+            this.groupStatic.Name = "groupStatic";
+            this.groupStatic.Size = new System.Drawing.Size(649, 196);
+            this.groupStatic.TabIndex = 321;
+            this.groupStatic.TabStop = false;
+            this.groupStatic.Text = "STATSTIC";
+            // 
+            // away1
+            // 
+            this.away1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.away1.Location = new System.Drawing.Point(349, 42);
+            this.away1.Name = "away1";
+            this.away1.Size = new System.Drawing.Size(58, 29);
+            this.away1.TabIndex = 5;
+            this.away1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cbbStatic1
+            // 
+            this.cbbStatic1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbStatic1.FormattingEnabled = true;
+            this.cbbStatic1.Location = new System.Drawing.Point(101, 42);
+            this.cbbStatic1.Name = "cbbStatic1";
+            this.cbbStatic1.Size = new System.Drawing.Size(236, 29);
+            this.cbbStatic1.TabIndex = 4;
+            this.cbbStatic1.SelectedIndexChanged += new System.EventHandler(this.cbbStatic1_SelectedIndexChanged);
+            // 
+            // home1
+            // 
+            this.home1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.home1.Location = new System.Drawing.Point(31, 42);
+            this.home1.Name = "home1";
+            this.home1.Size = new System.Drawing.Size(58, 29);
+            this.home1.TabIndex = 6;
+            this.home1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // home2
+            // 
+            this.home2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.home2.Location = new System.Drawing.Point(31, 89);
+            this.home2.Name = "home2";
+            this.home2.Size = new System.Drawing.Size(58, 29);
+            this.home2.TabIndex = 9;
+            this.home2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // away2
+            // 
+            this.away2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.away2.Location = new System.Drawing.Point(349, 89);
+            this.away2.Name = "away2";
+            this.away2.Size = new System.Drawing.Size(58, 29);
+            this.away2.TabIndex = 8;
+            this.away2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cbbStatic2
+            // 
+            this.cbbStatic2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbStatic2.FormattingEnabled = true;
+            this.cbbStatic2.Location = new System.Drawing.Point(101, 89);
+            this.cbbStatic2.Name = "cbbStatic2";
+            this.cbbStatic2.Size = new System.Drawing.Size(236, 29);
+            this.cbbStatic2.TabIndex = 7;
+            this.cbbStatic2.SelectedIndexChanged += new System.EventHandler(this.cbbStatic2_SelectedIndexChanged);
+            // 
+            // home3
+            // 
+            this.home3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.home3.Location = new System.Drawing.Point(31, 138);
+            this.home3.Name = "home3";
+            this.home3.Size = new System.Drawing.Size(58, 29);
+            this.home3.TabIndex = 12;
+            this.home3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // away3
+            // 
+            this.away3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.away3.Location = new System.Drawing.Point(349, 138);
+            this.away3.Name = "away3";
+            this.away3.Size = new System.Drawing.Size(58, 29);
+            this.away3.TabIndex = 11;
+            this.away3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cbbStatic3
+            // 
+            this.cbbStatic3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbStatic3.FormattingEnabled = true;
+            this.cbbStatic3.Location = new System.Drawing.Point(101, 138);
+            this.cbbStatic3.Name = "cbbStatic3";
+            this.cbbStatic3.Size = new System.Drawing.Size(236, 29);
+            this.cbbStatic3.TabIndex = 10;
+            this.cbbStatic3.SelectedIndexChanged += new System.EventHandler(this.cbbStatic3_SelectedIndexChanged);
+            // 
+            // btnStats1
+            // 
+            this.btnStats1.BackColor = System.Drawing.Color.Green;
+            this.btnStats1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnStats1.ForeColor = System.Drawing.Color.White;
+            this.btnStats1.Location = new System.Drawing.Point(428, 40);
+            this.btnStats1.Name = "btnStats1";
+            this.btnStats1.Size = new System.Drawing.Size(99, 33);
+            this.btnStats1.TabIndex = 323;
+            this.btnStats1.Text = "STATS 1";
+            this.btnStats1.UseVisualStyleBackColor = false;
+            this.btnStats1.Click += new System.EventHandler(this.btnStats1_Click);
+            // 
+            // statsOut1
+            // 
+            this.statsOut1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.statsOut1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.statsOut1.ForeColor = System.Drawing.Color.White;
+            this.statsOut1.Location = new System.Drawing.Point(534, 40);
+            this.statsOut1.Name = "statsOut1";
+            this.statsOut1.Size = new System.Drawing.Size(99, 33);
+            this.statsOut1.TabIndex = 322;
+            this.statsOut1.Text = "OUT";
+            this.statsOut1.UseVisualStyleBackColor = false;
+            // 
+            // btnStats2
+            // 
+            this.btnStats2.BackColor = System.Drawing.Color.Green;
+            this.btnStats2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnStats2.ForeColor = System.Drawing.Color.White;
+            this.btnStats2.Location = new System.Drawing.Point(428, 87);
+            this.btnStats2.Name = "btnStats2";
+            this.btnStats2.Size = new System.Drawing.Size(99, 33);
+            this.btnStats2.TabIndex = 325;
+            this.btnStats2.Text = "STATS 2";
+            this.btnStats2.UseVisualStyleBackColor = false;
+            // 
+            // statsOut2
+            // 
+            this.statsOut2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.statsOut2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.statsOut2.ForeColor = System.Drawing.Color.White;
+            this.statsOut2.Location = new System.Drawing.Point(534, 87);
+            this.statsOut2.Name = "statsOut2";
+            this.statsOut2.Size = new System.Drawing.Size(99, 33);
+            this.statsOut2.TabIndex = 324;
+            this.statsOut2.Text = "OUT";
+            this.statsOut2.UseVisualStyleBackColor = false;
+            // 
+            // btnStats3
+            // 
+            this.btnStats3.BackColor = System.Drawing.Color.Green;
+            this.btnStats3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnStats3.ForeColor = System.Drawing.Color.White;
+            this.btnStats3.Location = new System.Drawing.Point(428, 136);
+            this.btnStats3.Name = "btnStats3";
+            this.btnStats3.Size = new System.Drawing.Size(99, 33);
+            this.btnStats3.TabIndex = 327;
+            this.btnStats3.Text = "STATS 3";
+            this.btnStats3.UseVisualStyleBackColor = false;
+            // 
+            // statsOut3
+            // 
+            this.statsOut3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.statsOut3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.statsOut3.ForeColor = System.Drawing.Color.White;
+            this.statsOut3.Location = new System.Drawing.Point(534, 136);
+            this.statsOut3.Name = "statsOut3";
+            this.statsOut3.Size = new System.Drawing.Size(99, 33);
+            this.statsOut3.TabIndex = 326;
+            this.statsOut3.Text = "OUT";
+            this.statsOut3.UseVisualStyleBackColor = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.Location = new System.Drawing.Point(39, 539);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1609, 382);
+            this.groupBox2.TabIndex = 327;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "CHECK VAR";
             // 
             // FrmSubstitution
             // 
@@ -606,6 +826,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1670, 950);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupStatic);
             this.Controls.Add(this.clearCbb);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.stopAll);
@@ -619,6 +841,8 @@
             this.homeName.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupStatic.ResumeLayout(false);
+            this.groupStatic.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -664,11 +888,28 @@
         private System.Windows.Forms.Button btnHomeOut3;
         private System.Windows.Forms.Button btnHomeIn2;
         private System.Windows.Forms.Button btnHomeOut2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btnAwayIn3;
+        private System.Windows.Forms.Button btnAwayOut3;
+        private System.Windows.Forms.Button btnAwayIn2;
+        private System.Windows.Forms.Button btnAwayOut2;
+        private System.Windows.Forms.Button btnAwayIn1;
+        private System.Windows.Forms.Button btnAwayOut1;
+        private System.Windows.Forms.GroupBox groupStatic;
+        private System.Windows.Forms.Button btnStats1;
+        private System.Windows.Forms.Button statsOut1;
+        private System.Windows.Forms.TextBox home3;
+        private System.Windows.Forms.TextBox away3;
+        private System.Windows.Forms.ComboBox cbbStatic3;
+        private System.Windows.Forms.TextBox home2;
+        private System.Windows.Forms.TextBox away2;
+        private System.Windows.Forms.ComboBox cbbStatic2;
+        private System.Windows.Forms.TextBox home1;
+        private System.Windows.Forms.TextBox away1;
+        private System.Windows.Forms.ComboBox cbbStatic1;
+        private System.Windows.Forms.Button btnStats3;
+        private System.Windows.Forms.Button statsOut3;
+        private System.Windows.Forms.Button btnStats2;
+        private System.Windows.Forms.Button statsOut2;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

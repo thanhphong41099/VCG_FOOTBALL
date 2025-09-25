@@ -25,6 +25,10 @@ namespace VLeague.src.menu
         {
             try
             {
+
+                // Gọi hàm để lấy dữ liệu từ bảng THONGKE
+                DBConfig.doGetAllStatistics();
+
                 fillAllcbb();
             }
             catch
@@ -121,6 +125,14 @@ namespace VLeague.src.menu
             FrmInMatchClock.FillCbbPlayer(cbbAwaySub1, TeamInfor.PlayersAway);
             FrmInMatchClock.FillCbbPlayer(cbbAwaySub2, TeamInfor.PlayersAway);
             FrmInMatchClock.FillCbbPlayer(cbbAwaySub3, TeamInfor.PlayersAway);
+            //Fill combobox Static
+            DBConfig.matchingMatchDetailCombobox(cbbStatic1);
+            DBConfig.matchingMatchDetailCombobox(cbbStatic2);
+            DBConfig.matchingMatchDetailCombobox(cbbStatic3);
+
+            cbbStatic1.SelectedIndex = 0;
+            cbbStatic2.SelectedIndex = 1;
+            cbbStatic3.SelectedIndex = 2;
         }
 
         private void ClearAllInputs(Control control)
@@ -266,37 +278,202 @@ namespace VLeague.src.menu
             string lineNum = (cbbHomeLineUp1.Tag as Player)?.Number;
             string subNum = (cbbHomeSub1.Tag as Player)?.Number;
             string lineIMG = (cbbHomeLineUp1.Tag as Player)?.Sub;
-            string subIMG = (cbbHomeSub1.Tag as Player)?.Lineup;
+            string subIMG = (cbbHomeSub1.Tag as Player)?.Sub;
 
-            FrmKarismaMenu.FrmSetting.swapOnePlayer(cbbHomeLineUp1.Text,cbbHomeSub1.Text, 
-                TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+            FrmKarismaMenu.FrmSetting.swapOnePlayer(lineName, subName, lineNum, subNum,
+                lineIMG, subIMG, TeamInfor.homeLogo);
         }
 
         private void btnHomeOut2_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cbbHomeLineUp1.Text) || string.IsNullOrWhiteSpace(cbbHomeSub1.Text) ||
-    string.IsNullOrWhiteSpace(cbbHomeLineUp2.Text) || string.IsNullOrWhiteSpace(cbbHomeSub2.Text))
+            if (!ValidatePlayerSelection(cbbHomeLineUp1, cbbHomeSub1, cbbHomeLineUp2, cbbHomeSub2))
             {
                 MessageBox.Show("Chưa chọn đủ cầu thủ ra - vào sân");
                 return;
             }
+            string lineName = (cbbHomeLineUp1.Tag as Player)?.ShortName;
+            string subName = (cbbHomeSub1.Tag as Player)?.ShortName;
+            string lineNum = (cbbHomeLineUp1.Tag as Player)?.Number;
+            string subNum = (cbbHomeSub1.Tag as Player)?.Number;
+            string lineIMG = (cbbHomeLineUp1.Tag as Player)?.Sub;
+            string subIMG = (cbbHomeSub1.Tag as Player)?.Sub;
+            string lineName2 = (cbbHomeLineUp2.Tag as Player)?.ShortName;
+            string subName2 = (cbbHomeSub2.Tag as Player)?.ShortName;
+            string lineNum2 = (cbbHomeLineUp2.Tag as Player)?.Number;
+            string subNum2 = (cbbHomeSub2.Tag as Player)?.Number;
+            string lineIMG2 = (cbbHomeLineUp2.Tag as Player)?.Sub;
+            string subIMG2 = (cbbHomeSub2.Tag as Player)?.Sub;
+            FrmKarismaMenu.FrmSetting.swapTwoPlayer(lineName, subName, lineNum, subNum,
+                lineIMG, subIMG, lineName2, subName2, lineNum2, subNum2,
+                lineIMG2, subIMG2, TeamInfor.homeLogo);
 
-            FrmKarismaMenu.FrmSetting.swapTwoPlayer(cbbHomeLineUp1.Text, cbbHomeSub1.Text,
-                cbbHomeLineUp2.Text, cbbHomeSub2.Text, TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
         }
 
         private void btnHomeOut3_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(cbbHomeLineUp1.Text) || string.IsNullOrWhiteSpace(cbbHomeSub1.Text) ||
-    string.IsNullOrWhiteSpace(cbbHomeLineUp2.Text) || string.IsNullOrWhiteSpace(cbbHomeSub2.Text) ||
-    string.IsNullOrWhiteSpace(cbbHomeLineUp3.Text) || string.IsNullOrWhiteSpace(cbbHomeSub3.Text))
+                string.IsNullOrWhiteSpace(cbbHomeLineUp2.Text) || string.IsNullOrWhiteSpace(cbbHomeSub2.Text) ||
+                string.IsNullOrWhiteSpace(cbbHomeLineUp3.Text) || string.IsNullOrWhiteSpace(cbbHomeSub3.Text))
             {
                 MessageBox.Show("Chưa chọn đủ cầu thủ ra - vào sân");
                 return;
             }
-            FrmKarismaMenu.FrmSetting.swapThreePlayer(cbbHomeLineUp1.Text, cbbHomeSub1.Text,
-    cbbHomeLineUp2.Text, cbbHomeSub2.Text, cbbHomeLineUp3.Text, cbbHomeSub3.Text,
-TeamInfor.homeHomeItem, TeamInfor.homeAwayItem);
+            string lineName = (cbbHomeLineUp1.Tag as Player)?.ShortName;
+            string subName = (cbbHomeSub1.Tag as Player)?.ShortName;
+            string lineNum = (cbbHomeLineUp1.Tag as Player)?.Number;
+            string subNum = (cbbHomeSub1.Tag as Player)?.Number;
+            string lineIMG = (cbbHomeLineUp1.Tag as Player)?.Sub;
+            string subIMG = (cbbHomeSub1.Tag as Player)?.Sub;
+            string lineName2 = (cbbHomeLineUp2.Tag as Player)?.ShortName;
+            string subName2 = (cbbHomeSub2.Tag as Player)?.ShortName;
+            string lineNum2 = (cbbHomeLineUp2.Tag as Player)?.Number;
+            string subNum2 = (cbbHomeSub2.Tag as Player)?.Number;
+            string lineIMG2 = (cbbHomeLineUp2.Tag as Player)?.Sub;
+            string subIMG2 = (cbbHomeSub2.Tag as Player)?.Sub;
+            string lineName3 = (cbbHomeLineUp3.Tag as Player)?.ShortName;
+            string subName3 = (cbbHomeSub3.Tag as Player)?.ShortName;
+            string lineNum3 = (cbbHomeLineUp3.Tag as Player)?.Number;
+            string subNum3 = (cbbHomeSub3.Tag as Player)?.Number;
+            string lineIMG3 = (cbbHomeLineUp3.Tag as Player)?.Sub;
+            string subIMG3 = (cbbHomeSub3.Tag as Player)?.Sub;
+            FrmKarismaMenu.FrmSetting.swapThreePlayer(lineName, subName, lineNum, subNum,
+                lineIMG, subIMG, lineName2, subName2, lineNum2, subNum2,
+                lineIMG2, subIMG2, lineName3, subName3, lineNum3, subNum3,
+                lineIMG3, subIMG3, TeamInfor.homeLogo);
         }
-    }
+
+        private void btnHomeIn1_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void btnHomeIn2_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void btnHomeIn3_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void btnAwayOut1_Click(object sender, EventArgs e)
+        {
+            //write code here
+            if (!ValidatePlayerSelection(cbbAwayLineUp1, cbbAwaySub1))
+            {
+                MessageBox.Show("Chưa chọn đủ cầu thủ ra - vào sân");
+                return;
+            }
+            string lineName = (cbbAwayLineUp1.Tag as Player)?.ShortName;
+            string subName = (cbbAwaySub1.Tag as Player)?.ShortName;
+            string lineNum = (cbbAwayLineUp1.Tag as Player)?.Number;
+            string subNum = (cbbAwaySub1.Tag as Player)?.Number;
+            string lineIMG = (cbbAwayLineUp1.Tag as Player)?.Sub;
+            string subIMG = (cbbAwaySub1.Tag as Player)?.Sub;
+            FrmKarismaMenu.FrmSetting.swapOnePlayer(lineName, subName, lineNum, subNum,
+                lineIMG, subIMG, TeamInfor.awayLogo);
+        }
+
+        private void btnAwayOut2_Click(object sender, EventArgs e)
+        {
+            if (!ValidatePlayerSelection(cbbAwayLineUp1, cbbAwaySub1, cbbAwayLineUp2, cbbAwaySub2))
+            {
+                MessageBox.Show("Chưa chọn đủ cầu thủ ra - vào sân");
+                return;
+            }
+            string lineName = (cbbAwayLineUp1.Tag as Player)?.ShortName;
+            string subName = (cbbAwaySub1.Tag as Player)?.ShortName;
+            string lineNum = (cbbAwayLineUp1.Tag as Player)?.Number;
+            string subNum = (cbbAwaySub1.Tag as Player)?.Number;
+            string lineIMG = (cbbAwayLineUp1.Tag as Player)?.Sub;
+            string subIMG = (cbbAwaySub1.Tag as Player)?.Sub;
+            string lineName2 = (cbbAwayLineUp2.Tag as Player)?.ShortName;
+            string subName2 = (cbbAwaySub2.Tag as Player)?.ShortName;
+            string lineNum2 = (cbbAwayLineUp2.Tag as Player)?.Number;
+            string subNum2 = (cbbAwaySub2.Tag as Player)?.Number;
+            string lineIMG2 = (cbbAwayLineUp2.Tag as Player)?.Sub;
+            string subIMG2 = (cbbAwaySub2.Tag as Player)?.Sub;
+            FrmKarismaMenu.FrmSetting.swapTwoPlayer(lineName, subName, lineNum, subNum,
+                lineIMG, subIMG, lineName2, subName2, lineNum2, subNum2,
+                lineIMG2, subIMG2, TeamInfor.awayLogo);
+        }
+        private void btnAwayOut3_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cbbAwayLineUp1.Text) || string.IsNullOrWhiteSpace(cbbAwaySub1.Text) ||
+                string.IsNullOrWhiteSpace(cbbAwayLineUp2.Text) || string.IsNullOrWhiteSpace(cbbAwaySub2.Text) ||
+                string.IsNullOrWhiteSpace(cbbAwayLineUp3.Text) || string.IsNullOrWhiteSpace(cbbAwaySub3.Text))
+            {
+                MessageBox.Show("Chưa chọn đủ cầu thủ ra - vào sân");
+                return;
+            }
+            string lineName = (cbbAwayLineUp1.Tag as Player)?.ShortName;
+            string subName = (cbbAwaySub1.Tag as Player)?.ShortName;
+            string lineNum = (cbbAwayLineUp1.Tag as Player)?.Number;
+            string subNum = (cbbAwaySub1.Tag as Player)?.Number;
+            string lineIMG = (cbbAwayLineUp1.Tag as Player)?.Sub;
+            string subIMG = (cbbAwaySub1.Tag as Player)?.Sub;
+            string lineName2 = (cbbAwayLineUp2.Tag as Player)?.ShortName;
+            string subName2 = (cbbAwaySub2.Tag as Player)?.ShortName;
+            string lineNum2 = (cbbAwayLineUp2.Tag as Player)?.Number;
+            string subNum2 = (cbbAwaySub2.Tag as Player)?.Number;
+            string lineIMG2 = (cbbAwayLineUp2.Tag as Player)?.Sub;
+            string subIMG2 = (cbbAwaySub2.Tag as Player)?.Sub;
+            string lineName3 = (cbbAwayLineUp3.Tag as Player)?.ShortName;
+            string subName3 = (cbbAwaySub3.Tag as Player)?.ShortName;
+            string lineNum3 = (cbbAwayLineUp3.Tag as Player)?.Number;
+            string subNum3 = (cbbAwaySub3.Tag as Player)?.Number;
+            string lineIMG3 = (cbbAwayLineUp3.Tag as Player)?.Sub;
+            string subIMG3 = (cbbAwaySub3.Tag as Player)?.Sub;
+            FrmKarismaMenu.FrmSetting.swapThreePlayer(lineName, subName, lineNum, subNum,
+                lineIMG, subIMG, lineName2, subName2, lineNum2, subNum2,
+                lineIMG2, subIMG2, lineName3, subName3, lineNum3, subNum3,
+                lineIMG3, subIMG3, TeamInfor.awayLogo);
+        }
+        private void btnAwayIn1_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+        private void btnAwayIn2_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+        private void btnAwayIn3_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void btnStats1_Click(object sender, EventArgs e)
+        {
+            //FrmKarismaMenu.FrmSetting.loadStatistic
+        }
+
+        private void UpdateTextBoxFromComboBox(ComboBox comboBox, TextBox homeTextBox, TextBox awayTextBox)
+        {
+            foreach (DataRow row in DBConfig.statistics.Rows)
+            {
+                if (row["Tieude"].ToString() == comboBox.Text)
+                {
+                    homeTextBox.Text = row["ChiSo1"].ToString();
+                    awayTextBox.Text = row["ChiSo2"].ToString();
+                    break; // Dừng vòng lặp khi tìm thấy kết quả
+                }
+            }
+        }
+
+        private void cbbStatic1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTextBoxFromComboBox(cbbStatic1, home1, away1);
+        }
+
+        private void cbbStatic2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTextBoxFromComboBox(cbbStatic2, home2, away2);
+        }
+
+        private void cbbStatic3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTextBoxFromComboBox(cbbStatic3, home3, away3);
+        }
+    } 
 }
