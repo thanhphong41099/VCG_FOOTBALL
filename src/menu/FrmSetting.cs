@@ -426,7 +426,7 @@ namespace VLeague
 
         public void loadSceneLineup(string tactical, string logo, string hlv, Player[] playersHome)
         {
-            string scene = "D:\\CG-FOOTBALL\\VLEAGUE2025-26\\Scenes\\4 - 4 - 2.t2s";
+            string scene = Stactical + tactical + ".t2s";
             KAScene KAScene = KAEngine.LoadScene(scene, scene);
 
             Thread.Sleep(10);

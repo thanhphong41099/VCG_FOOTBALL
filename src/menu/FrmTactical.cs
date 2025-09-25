@@ -105,6 +105,15 @@ namespace VLeague.src.menu
             new Point(407, 136),
             new Point(600, 45),  new Point(220, 49)
         }},
+            { "4 - 3 - 2 - 1", new Point[]
+            {
+                new Point(406, 553),
+                new Point(110, 410), new Point(290, 410), new Point(510, 410), new Point(700, 410), 
+                new Point(220, 275), new Point(410, 275), new Point(600, 275),                      
+                new Point(280, 140), new Point(530, 140),                                          
+                new Point(406, 30)                                                                  
+            }},
+
             { "4 - 4 - 1 - 1", new Point[] {
             new Point(406, 553),
             new Point(119, 410), new Point(309, 410), new Point(507, 410), new Point(700, 410),
