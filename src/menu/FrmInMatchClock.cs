@@ -88,6 +88,10 @@ namespace VLeague.src.menu
                 groupHome1.BackColor = groupHome2.BackColor = groupHome3.BackColor = groupHome4.BackColor = TeamInfor.Player_HomeColor;
                 groupAway1.BackColor = groupAway2.BackColor = groupAway3.BackColor = groupAway4.BackColor = TeamInfor.Player_AwayColor;
 
+                string[] values = { "HẾT HIỆP 1", "HẾT HIỆP 2", "HẾT HIỆP 1 ET", "HẾT HIỆP 2 ET", "HẾT TRẬN" };
+                cbbMatch.Items.AddRange(values);
+                cbbMatch.SelectedIndex = 0;
+
                 // Xác định màu chữ dựa trên độ sáng
                 Color homeTextColor = GetContrastColor(TeamInfor.Player_HomeColor);
                 Color awayTextColor = GetContrastColor(TeamInfor.Player_AwayColor);
@@ -658,6 +662,7 @@ namespace VLeague.src.menu
             }
         }
 
+
         private void ShowGoalHomePlayer_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbbHomeGoal.Text))
@@ -1126,6 +1131,26 @@ namespace VLeague.src.menu
             {
                 SelectPlayerByNumber(cbbAwayCard, numAwayCard);
             }
+        }
+
+        private void btnKickOff1Line_Click(object sender, EventArgs e)
+        {
+            string hiepdau = cbbMatch.Text;
+            FrmKarismaMenu.FrmSetting.PlayKickOff1Line(TeamInfor.homeTenDai, TeamInfor.awayTenDai, Static.numberHomeScore, Static.numberAwayScore,
+                TeamInfor.homeLogo, TeamInfor.awayLogo, hiepdau, txtLine1Home.Text, txtLine1Away.Text);
+        }
+
+        private void btnKickOff2Lines_Click(object sender, EventArgs e)
+        {
+
+            string hiepdau = cbbMatch.Text;
+            FrmKarismaMenu.FrmSetting.PlayKickOff2Lines(TeamInfor.homeTenDai, TeamInfor.awayTenDai, Static.numberHomeScore, Static.numberAwayScore,
+                TeamInfor.homeLogo, TeamInfor.awayLogo, hiepdau, txtLine1Home.Text, txtLine2Home.Text, txtLine1Away.Text, txtLine2Away.Text);
+        }
+
+        private void btnFinalOut_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
         }
     }
 }

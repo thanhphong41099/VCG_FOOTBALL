@@ -39,9 +39,6 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verticalButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horizontalButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bóngĐáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,12 +54,7 @@
             this.btnPreMatch = new System.Windows.Forms.Button();
             this.btnInMatchClock = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.btnInMatchStatic = new System.Windows.Forms.Button();
             this.btnSubstitution = new System.Windows.Forms.Button();
-            this.btnVar = new System.Windows.Forms.Button();
-            this.btnPenalty = new System.Windows.Forms.Button();
-            this.btnLowerThird = new System.Windows.Forms.Button();
-            this.btnSponsor = new System.Windows.Forms.Button();
             this.btnPostMatch = new System.Windows.Forms.Button();
             this.btnTactical = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -92,7 +84,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem,
             this.layoutToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -120,27 +111,27 @@
             // 
             this.importToolStripMenuItem.Enabled = false;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importToolStripMenuItem.Text = "Import";
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Enabled = false;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // closeProjectToolStripMenuItem
             // 
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
-            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeProjectToolStripMenuItem.Text = "Close All Projects";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -159,40 +150,15 @@
             // 
             this.connectionToolStripMenuItem.Enabled = false;
             this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
-            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.connectionToolStripMenuItem.Text = "Connection";
             // 
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.Enabled = false;
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingToolStripMenuItem.Text = "Setting";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.verticalButtonsToolStripMenuItem,
-            this.horizontalButtonsToolStripMenuItem});
-            this.viewToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // verticalButtonsToolStripMenuItem
-            // 
-            this.verticalButtonsToolStripMenuItem.Name = "verticalButtonsToolStripMenuItem";
-            this.verticalButtonsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.verticalButtonsToolStripMenuItem.Text = "Vertical Buttons";
-            this.verticalButtonsToolStripMenuItem.Click += new System.EventHandler(this.verticalButtonsToolStripMenuItem_Click);
-            // 
-            // horizontalButtonsToolStripMenuItem
-            // 
-            this.horizontalButtonsToolStripMenuItem.Name = "horizontalButtonsToolStripMenuItem";
-            this.horizontalButtonsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.horizontalButtonsToolStripMenuItem.Text = "Horizontal Buttons";
-            this.horizontalButtonsToolStripMenuItem.Click += new System.EventHandler(this.horizontalButtonsToolStripMenuItem_Click);
             // 
             // layoutToolStripMenuItem
             // 
@@ -210,7 +176,7 @@
             this.bóngĐáToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bóngĐáToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.bóngĐáToolStripMenuItem.Name = "bóngĐáToolStripMenuItem";
-            this.bóngĐáToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.bóngĐáToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bóngĐáToolStripMenuItem.Text = "Bóng Đá";
             this.bóngĐáToolStripMenuItem.Click += new System.EventHandler(this.bóngĐáToolStripMenuItem_Click);
             // 
@@ -228,7 +194,7 @@
             // 
             this.optionsToolStripMenuItem.Enabled = false;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Option";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -271,9 +237,9 @@
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(320, 496);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(507, 37);
+            this.label1.Size = new System.Drawing.Size(373, 37);
             this.label1.TabIndex = 16;
-            this.label1.Text = "UPTOPCG CONTROLLER APPLICATION";
+            this.label1.Text = "CG FOOTBALL CONTROLLER";
             // 
             // pictureBox1
             // 
@@ -354,7 +320,7 @@
             this.btnInMatchClock.Name = "btnInMatchClock";
             this.btnInMatchClock.Size = new System.Drawing.Size(198, 45);
             this.btnInMatchClock.TabIndex = 3;
-            this.btnInMatchClock.Text = "  IN MATCH";
+            this.btnInMatchClock.Text = "  In Match Clock";
             this.btnInMatchClock.UseVisualStyleBackColor = true;
             this.btnInMatchClock.Click += new System.EventHandler(this.btnInMatchClock_Click);
             // 
@@ -368,22 +334,6 @@
             this.pictureBox5.TabIndex = 5;
             this.pictureBox5.TabStop = false;
             // 
-            // btnInMatchStatic
-            // 
-            this.btnInMatchStatic.FlatAppearance.BorderSize = 0;
-            this.btnInMatchStatic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInMatchStatic.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInMatchStatic.ForeColor = System.Drawing.Color.White;
-            this.btnInMatchStatic.Image = ((System.Drawing.Image)(resources.GetObject("btnInMatchStatic.Image")));
-            this.btnInMatchStatic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInMatchStatic.Location = new System.Drawing.Point(0, 328);
-            this.btnInMatchStatic.Name = "btnInMatchStatic";
-            this.btnInMatchStatic.Size = new System.Drawing.Size(198, 45);
-            this.btnInMatchStatic.TabIndex = 6;
-            this.btnInMatchStatic.Text = "   In Match Static";
-            this.btnInMatchStatic.UseVisualStyleBackColor = true;
-            this.btnInMatchStatic.Click += new System.EventHandler(this.btnInMatchStatic_Click);
-            // 
             // btnSubstitution
             // 
             this.btnSubstitution.FlatAppearance.BorderSize = 0;
@@ -392,77 +342,13 @@
             this.btnSubstitution.ForeColor = System.Drawing.Color.White;
             this.btnSubstitution.Image = ((System.Drawing.Image)(resources.GetObject("btnSubstitution.Image")));
             this.btnSubstitution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubstitution.Location = new System.Drawing.Point(0, 379);
+            this.btnSubstitution.Location = new System.Drawing.Point(0, 328);
             this.btnSubstitution.Name = "btnSubstitution";
             this.btnSubstitution.Size = new System.Drawing.Size(198, 45);
             this.btnSubstitution.TabIndex = 7;
             this.btnSubstitution.Text = "       Subs + Static + Var";
             this.btnSubstitution.UseVisualStyleBackColor = true;
             this.btnSubstitution.Click += new System.EventHandler(this.btnSubstitution_Click);
-            // 
-            // btnVar
-            // 
-            this.btnVar.FlatAppearance.BorderSize = 0;
-            this.btnVar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVar.ForeColor = System.Drawing.Color.White;
-            this.btnVar.Image = ((System.Drawing.Image)(resources.GetObject("btnVar.Image")));
-            this.btnVar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVar.Location = new System.Drawing.Point(0, 430);
-            this.btnVar.Name = "btnVar";
-            this.btnVar.Size = new System.Drawing.Size(198, 45);
-            this.btnVar.TabIndex = 8;
-            this.btnVar.Text = "Var";
-            this.btnVar.UseVisualStyleBackColor = true;
-            this.btnVar.Click += new System.EventHandler(this.btnVar_Click);
-            // 
-            // btnPenalty
-            // 
-            this.btnPenalty.FlatAppearance.BorderSize = 0;
-            this.btnPenalty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPenalty.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPenalty.ForeColor = System.Drawing.Color.White;
-            this.btnPenalty.Image = ((System.Drawing.Image)(resources.GetObject("btnPenalty.Image")));
-            this.btnPenalty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPenalty.Location = new System.Drawing.Point(0, 481);
-            this.btnPenalty.Name = "btnPenalty";
-            this.btnPenalty.Size = new System.Drawing.Size(198, 45);
-            this.btnPenalty.TabIndex = 9;
-            this.btnPenalty.Text = "Penalty";
-            this.btnPenalty.UseVisualStyleBackColor = true;
-            this.btnPenalty.Click += new System.EventHandler(this.btnPenalty_Click);
-            // 
-            // btnLowerThird
-            // 
-            this.btnLowerThird.FlatAppearance.BorderSize = 0;
-            this.btnLowerThird.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLowerThird.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLowerThird.ForeColor = System.Drawing.Color.White;
-            this.btnLowerThird.Image = ((System.Drawing.Image)(resources.GetObject("btnLowerThird.Image")));
-            this.btnLowerThird.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLowerThird.Location = new System.Drawing.Point(0, 532);
-            this.btnLowerThird.Name = "btnLowerThird";
-            this.btnLowerThird.Size = new System.Drawing.Size(198, 45);
-            this.btnLowerThird.TabIndex = 10;
-            this.btnLowerThird.Text = "Lower Third";
-            this.btnLowerThird.UseVisualStyleBackColor = true;
-            this.btnLowerThird.Click += new System.EventHandler(this.btnLowerThird_Click);
-            // 
-            // btnSponsor
-            // 
-            this.btnSponsor.FlatAppearance.BorderSize = 0;
-            this.btnSponsor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSponsor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSponsor.ForeColor = System.Drawing.Color.White;
-            this.btnSponsor.Image = ((System.Drawing.Image)(resources.GetObject("btnSponsor.Image")));
-            this.btnSponsor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSponsor.Location = new System.Drawing.Point(0, 583);
-            this.btnSponsor.Name = "btnSponsor";
-            this.btnSponsor.Size = new System.Drawing.Size(198, 45);
-            this.btnSponsor.TabIndex = 11;
-            this.btnSponsor.Text = "Sponsor";
-            this.btnSponsor.UseVisualStyleBackColor = true;
-            this.btnSponsor.Click += new System.EventHandler(this.btnSponsor_Click);
             // 
             // btnPostMatch
             // 
@@ -472,7 +358,7 @@
             this.btnPostMatch.ForeColor = System.Drawing.Color.White;
             this.btnPostMatch.Image = ((System.Drawing.Image)(resources.GetObject("btnPostMatch.Image")));
             this.btnPostMatch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPostMatch.Location = new System.Drawing.Point(0, 634);
+            this.btnPostMatch.Location = new System.Drawing.Point(1, 379);
             this.btnPostMatch.Name = "btnPostMatch";
             this.btnPostMatch.Size = new System.Drawing.Size(198, 45);
             this.btnPostMatch.TabIndex = 12;
@@ -501,12 +387,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.panel1.Controls.Add(this.btnTactical);
             this.panel1.Controls.Add(this.btnPostMatch);
-            this.panel1.Controls.Add(this.btnSponsor);
-            this.panel1.Controls.Add(this.btnLowerThird);
-            this.panel1.Controls.Add(this.btnPenalty);
-            this.panel1.Controls.Add(this.btnVar);
             this.panel1.Controls.Add(this.btnSubstitution);
-            this.panel1.Controls.Add(this.btnInMatchStatic);
             this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.btnInMatchClock);
             this.panel1.Controls.Add(this.btnPreMatch);
@@ -534,7 +415,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmKarismaMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UpTopCG Controller";
+            this.Text = "CG FOOTBALL 2025-2026";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmKarismaMenu_Load);
             this.panel2.ResumeLayout(false);
@@ -555,15 +436,12 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem layoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bóngĐáToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verticalButtonsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem horizontalButtonsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
@@ -579,12 +457,7 @@
         private System.Windows.Forms.Button btnPreMatch;
         private System.Windows.Forms.Button btnInMatchClock;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Button btnInMatchStatic;
         private System.Windows.Forms.Button btnSubstitution;
-        private System.Windows.Forms.Button btnVar;
-        private System.Windows.Forms.Button btnPenalty;
-        private System.Windows.Forms.Button btnLowerThird;
-        private System.Windows.Forms.Button btnSponsor;
         private System.Windows.Forms.Button btnPostMatch;
         private System.Windows.Forms.Button btnTactical;
         private System.Windows.Forms.Panel panel1;

@@ -67,7 +67,7 @@ namespace VLeague
 
         public static string SpermClock, SpermClockOut, SaddTime, SredClock, SkickoffTime, SkickoffTimeOut, SkickOff, SkickOff2;
 
-        public static string Stitle, SBar, SGhiBan, SGoalClock, SYellowCard, SSecondYellowCard, SRedCard, SThongke1, SThongke2;
+        public static string Stitle, SBar, SGhiBan, SGoalClock, SYellowCard, SSecondYellowCard, SRedCard, SThongke1, SThongke2, SThongke3;
 
         public static string SSub1, SSub2, SSub3, SVarGrid, SBarVar, SUpdateVar, SDecisionVar, SPenalty;
 
@@ -156,6 +156,7 @@ namespace VLeague
             SRedCard = AppConfig.ConfigReader.ReadString(keyCG, "RedCard");
             SThongke1 = AppConfig.ConfigReader.ReadString(keyCG, "Thongke1");
             SThongke2 = AppConfig.ConfigReader.ReadString(keyCG, "Thongke2");
+            SThongke3 = AppConfig.ConfigReader.ReadString(keyCG, "Thongke3");
             SSub1 = AppConfig.ConfigReader.ReadString(keyCG, "Sub1");
             SSub2 = AppConfig.ConfigReader.ReadString(keyCG, "Sub2");
             SSub3 = AppConfig.ConfigReader.ReadString(keyCG, "Sub3");
@@ -913,10 +914,8 @@ namespace VLeague
         }
         public void varChecking(string text)
         {
-            string scene = "\\barvar.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            string scene = SBarVar;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
             Thread.Sleep(10);
             KAEngine.BeginTransaction();
             KAObject = KAScene.GetObject("text");
@@ -929,32 +928,12 @@ namespace VLeague
         }
         public void varUpdate(string text1, string text2)
         {
-            string scene = "\\DECISIONVAR.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            string scene = SDecisionVar;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
             Thread.Sleep(10);
             KAEngine.BeginTransaction();
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(text1);
-            KAObject = KAScene.GetObject("text2");
-            KAObject.SetValue(text2);
-            KAEngine.EndTransaction();
-            Thread.Sleep(10);
-            KAScenePlayer.Prepare(layerTSL, KAScene);
-            Thread.Sleep(10);
-            KAScenePlayer.Play(layerTSL);
-        }
-        public void varDecision(string text, string text2)
-        {
-            string scene = "\\decisionvar.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
-            Thread.Sleep(10);
-            KAEngine.BeginTransaction();
-            KAObject = KAScene.GetObject("text");
-            KAObject.SetValue(text);
             KAObject = KAScene.GetObject("text2");
             KAObject.SetValue(text2);
             KAEngine.EndTransaction();
@@ -1072,6 +1051,79 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalhom
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
         }
+
+        public void PlayKickOff1Line(string homeName, string awayName, string scoreHome, string scoreAway,
+string homeLogo, string awayLogo, string match, string goalhome1, string goalaway1)
+        {
+            string scene = SkickOff;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            Thread.Sleep(10);
+            KAEngine.BeginTransaction();
+            KAObject = KAScene.GetObject("home");
+            KAObject.SetValue(homeName);
+            KAObject = KAScene.GetObject("away");
+            KAObject.SetValue(awayName);
+            KAObject = KAScene.GetObject("tiso1");
+            KAObject.SetValue(scoreHome);
+            KAObject = KAScene.GetObject("tiso2");
+            KAObject.SetValue(scoreAway);
+            KAObject = KAScene.GetObject("homeghiban");
+            KAObject.SetValue(goalhome1);
+            KAObject = KAScene.GetObject("awayghiban");
+            KAObject.SetValue(goalaway1);
+            KAObject = KAScene.GetObject("logohome");
+            KAObject.SetValue(homeLogo);
+            KAObject = KAScene.GetObject("logoaway");
+            KAObject.SetValue(awayLogo);
+            KAObject = KAScene.GetObject("text");
+            KAObject.SetValue(match);
+            KAEngine.EndTransaction();
+            Thread.Sleep(10);
+            KAScenePlayer.Prepare(layerTSL, KAScene);
+            Thread.Sleep(10);
+            KAScenePlayer.Play(layerTSL);
+        }
+
+        public void PlayKickOff2Lines(string homeName, string awayName, string scoreHome, string scoreAway,
+string homeLogo, string awayLogo, string match, string goalhome1, string goalaway1, string goalhome2, string goalaway2)
+        {
+            string scene = SkickOff2;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            Thread.Sleep(10);
+            KAEngine.BeginTransaction();
+            KAObject = KAScene.GetObject("home");
+            KAObject.SetValue(homeName);
+            KAObject = KAScene.GetObject("away");
+            KAObject.SetValue(awayName);
+            KAObject = KAScene.GetObject("tiso1");
+            KAObject.SetValue(scoreHome);
+            KAObject = KAScene.GetObject("tiso2");
+            KAObject.SetValue(scoreAway);
+            KAObject = KAScene.GetObject("homeghiban");
+            KAObject.SetValue(goalhome1);
+            KAObject = KAScene.GetObject("awayghiban");
+            KAObject.SetValue(goalaway1);
+            KAObject = KAScene.GetObject("homeghiban2");
+            KAObject.SetValue(goalhome2);
+            KAObject = KAScene.GetObject("awayghiban2");
+            KAObject.SetValue(goalaway2);
+            KAObject = KAScene.GetObject("logohome");
+            KAObject.SetValue(homeLogo);
+            KAObject = KAScene.GetObject("logoaway");
+            KAObject.SetValue(awayLogo);
+            KAObject = KAScene.GetObject("text");
+            KAObject.SetValue(match);
+            KAEngine.EndTransaction();
+            Thread.Sleep(10);
+            KAScenePlayer.Prepare(layerTSL, KAScene);
+            Thread.Sleep(10);
+            KAScenePlayer.Play(layerTSL);
+        }
+
+
+
+
+
         public void loadKickOffGoal(string homeName, string awayName, string scoreHome, string scoreAway,
 string homeLogo, string awayLogo, string match, string goalhome1, string goalhome2, string goalaway1, string goalaway2)
         {
@@ -1289,6 +1341,17 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             Thread.Sleep(10);
             KAScenePlayer.Play(layerBackground);
         }
+
+        public void loadVarGrid()
+        {
+            KAScene KAScene = KAEngine.LoadScene(SVarGrid, SVarGrid);
+
+            KAScenePlayer.Prepare(0, KAScene);
+            Thread.Sleep(10);
+            KAScenePlayer.Play(0);
+        }
+
+
         public void loadScene(string scene)
         {
             KAEngine.UnloadAll();
@@ -1328,11 +1391,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
 
         public void loadStatistic(string title, string homeIndex, string awayIndex, string homeCode, string awayCode)
         {
-            string scene = "\\thongke1.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
-            Thread.Sleep(100);
+            string scene = SThongke1;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            Thread.Sleep(10);
             KAEngine.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);
@@ -1353,11 +1414,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
         public void loadStatistic2(string title, string homeIndex, string awayIndex, 
             string title2, string homeIndex2, string awayIndex2, string homeCode, string awayCode)
         {
-            string scene = "\\thongke2.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
-            Thread.Sleep(100);
+            string scene = SThongke2;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            Thread.Sleep(10);
             KAEngine.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);
@@ -1384,11 +1443,10 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
     string title2, string homeIndex2, string awayIndex2,
     string title3, string homeIndex3, string awayIndex3, string homeCode, string awayCode)
         {
-            string scene = "\\thongke3.t2s";
-            string workingPath = txtWorkingFolder.Text;
-            string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
-            Thread.Sleep(100);
+            string scene = SThongke3;
+            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+
+            Thread.Sleep(10);
             KAEngine.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);

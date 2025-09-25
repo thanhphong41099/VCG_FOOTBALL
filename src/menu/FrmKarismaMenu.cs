@@ -355,12 +355,8 @@ namespace VLeague
             btnTactical.Visible = showbutton;
             btnPreMatch.Visible = showbutton;
             btnInMatchClock.Visible = showbutton;
-            btnInMatchStatic.Visible = showbutton;
             btnSubstitution.Visible = showbutton;
-            btnVar.Visible = showbutton;
-            btnPenalty.Visible = showbutton;
-            btnLowerThird.Visible = showbutton;
-            btnSponsor.Visible = showbutton;
+            //btnLowerThird.Visible = showbutton;
             btnPostMatch.Visible = showbutton;
             //SidePanel.Visible = showbutton;
         }
@@ -386,8 +382,8 @@ namespace VLeague
 
             MoveButtons(panel1, panelHorizontal);
 
-            Button[] buttons = new Button[] {btnSetup,btnDataImport,btnTactical,btnPreMatch,btnInMatchClock,btnInMatchStatic,btnSubstitution,
-                btnVar,btnPenalty,btnLowerThird,btnSponsor,btnPostMatch};
+            Button[] buttons = new Button[] {btnSetup,btnDataImport,btnTactical,btnPreMatch,btnInMatchClock,btnSubstitution
+                ,btnPostMatch};
 
             int[] widths = new int[] {120, 155, 140, 140, 170, 160, 160, 120, 120, 170, 150, 160, 160, 160 };
 
@@ -411,8 +407,8 @@ namespace VLeague
 
             MoveButtons(panelHorizontal, panel1);
 
-            Button[] buttons = new Button[] {btnSetup,btnDataImport,btnTactical,btnPreMatch,btnInMatchClock,btnInMatchStatic,btnSubstitution,
-                btnVar,btnPenalty,btnLowerThird,btnSponsor,btnPostMatch};
+            Button[] buttons = new Button[] {btnSetup,btnDataImport,btnTactical,btnPreMatch,btnInMatchClock,btnSubstitution,
+                btnPostMatch};
 
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -429,8 +425,9 @@ namespace VLeague
         }
         private void MoveButtons(Panel a, Panel b)
         {
-            Button[] buttons = new Button[] {btnSetup, btnDataImport, btnTactical, btnPreMatch, btnInMatchClock, btnInMatchStatic,
-                btnSubstitution, btnVar, btnPenalty, btnLowerThird, btnSponsor, btnPostMatch, };
+            Button[] buttons = new Button[] {btnSetup, btnDataImport, btnTactical, btnPreMatch, btnInMatchClock, 
+                
+                btnSubstitution, btnPostMatch, };
 
             foreach (var button in buttons)
             {

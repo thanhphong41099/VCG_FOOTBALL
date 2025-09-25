@@ -1,4 +1,5 @@
-﻿using System;
+﻿using K3DAsyncEngineLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace VLeague.src.menu
 {
     public partial class FrmSubstitution : Form
     {
+        string txtCheck;
+
         public FrmSubstitution()
         {
             InitializeComponent();
@@ -30,6 +33,8 @@ namespace VLeague.src.menu
                 DBConfig.doGetAllStatistics();
 
                 fillAllcbb();
+
+                loadContentVAR();
             }
             catch
             {
@@ -445,10 +450,11 @@ namespace VLeague.src.menu
 
         private void btnStats1_Click(object sender, EventArgs e)
         {
-            //FrmKarismaMenu.FrmSetting.loadStatistic
+            FrmKarismaMenu.FrmSetting.loadStatistic(cbbStatic1.Text, home1.Text, away1.Text, 
+                TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
         }
 
-        private void UpdateTextBoxFromComboBox(ComboBox comboBox, TextBox homeTextBox, TextBox awayTextBox)
+        private void UpdateTxtStaticFromCbbStatic(ComboBox comboBox, TextBox homeTextBox, TextBox awayTextBox)
         {
             foreach (DataRow row in DBConfig.statistics.Rows)
             {
@@ -463,17 +469,147 @@ namespace VLeague.src.menu
 
         private void cbbStatic1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateTextBoxFromComboBox(cbbStatic1, home1, away1);
+            UpdateTxtStaticFromCbbStatic(cbbStatic1, home1, away1);
         }
 
         private void cbbStatic2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateTextBoxFromComboBox(cbbStatic2, home2, away2);
+            UpdateTxtStaticFromCbbStatic(cbbStatic2, home2, away2);
         }
 
         private void cbbStatic3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateTextBoxFromComboBox(cbbStatic3, home3, away3);
+            UpdateTxtStaticFromCbbStatic(cbbStatic3, home3, away3);
+        }
+
+        private void btnStats2_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.loadStatistic2(cbbStatic1.Text, home1.Text, away1.Text , cbbStatic2.Text, home2.Text, away2.Text,
+                TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
+        }
+
+        private void btnStats3_Click(object sender, EventArgs e)
+        {
+
+            FrmKarismaMenu.FrmSetting.loadStatistic3(cbbStatic1.Text, home1.Text, away1.Text, cbbStatic2.Text, home2.Text, away2.Text,
+                cbbStatic3.Text, home3.Text, away3.Text,
+                TeamInfor.homeTenNgan, TeamInfor.awayTenNgan);
+        }
+
+        private void statsOut1_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void statsOut2_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void statsOut3_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerTSL);
+        }
+
+        private void updateData_Click(object sender, EventArgs e)
+        {
+            updateStaticToAccess();
+            MessageBox.Show("Đã lưu vào bảng THONGKE");
+        }
+        private void updateStaticToAccess()
+        {
+            DBConfig.updateStatisticTieude(cbbStatic1.Text, home1.Text, away1.Text);
+            DBConfig.updateStatisticTieude(cbbStatic2.Text, home2.Text, away2.Text);
+            DBConfig.updateStatisticTieude(cbbStatic3.Text, home3.Text, away3.Text);
+        }
+
+        private void updateVar_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.varUpdate(txtCheck, cbbUpdateVar.Text.ToUpper());
+            txtCheck = cbbUpdateVar.Text.ToUpper();
+        }
+
+        private void decisionVar_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.varUpdate(txtCheck, cbbDecisionVar.Text.ToUpper());
+            txtCheck = cbbDecisionVar.Text.ToUpper();
+        }
+
+        private void checkVar_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.varChecking(cbbUpdateVar.Text.ToUpper());
+            txtCheck = cbbUpdateVar.Text.ToUpper();
+        }
+
+        private void btnPinP_Click(object sender, EventArgs e)
+        {
+            if (btnPinP.Text == "VAR PIP")
+            {
+                FrmKarismaMenu.FrmSetting.loadVarGrid();
+                btnPinP.Text = "OFF";
+            }
+            else
+            {
+                FrmKarismaMenu.FrmSetting.Stop(0);
+                btnPinP.Text = "VAR PIP";
+            }
+        }
+
+        private void listUpdate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listUpdate.SelectedItem != null)
+            {
+                cbbUpdateVar.Text = listUpdate.SelectedItem.ToString();
+            }
+        }
+
+        private void listDecision_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listDecision.SelectedItem != null)
+            {
+                cbbDecisionVar.Text = listDecision.SelectedItem.ToString();
+            }
+        }
+
+        private void loadContentVAR()
+        {
+            string[] items1 = new string[]
+            {
+            "VAR ĐANG KIỂM TRA", "KIỂM TRA BÀN THẮNG", "KIỂM TRA PHẠT ĐỀN",
+            "KIỂM TRA THẺ ĐỎ", "KIỂM TRA THẺ PHẠT CẦU THỦ", "XEM LẠI TÌNH HUỐNG", "KIỂM TRA HOÀN TẤT"
+            };
+            listUpdate.Items.AddRange(items1);
+            if (listUpdate.Items.Count > 0)
+            {
+                listUpdate.SelectedIndex = 0;
+            }
+            cbbUpdateVar.Items.AddRange(items1);
+            if (cbbUpdateVar.Items.Count > 0)
+            {
+                cbbUpdateVar.SelectedIndex = 0;
+            }
+            string[] items2 = new string[]
+            {
+            "BÀN THẮNG","KHÔNG BÀN THẮNG", "PHẠT ĐỀN", "KHÔNG PHẠT ĐỀN", "THẺ ĐỎ",
+            "THẺ VÀNG", "XÓA THẺ VÀNG" ,"XÓA THẺ ĐỎ", "KIỂM TRA HOÀN TẤT"
+            };
+
+            cbbDecisionVar.Items.AddRange(items2);
+            if (cbbDecisionVar.Items.Count > 0)
+            {
+                cbbDecisionVar.SelectedIndex = 0;
+            }
+
+            listDecision.Items.AddRange(items2);
+            if (listDecision.Items.Count > 0)
+            {
+                listDecision.SelectedIndex = 0;
+            }
+        }
+
+        private void btnOutVar_Click(object sender, EventArgs e)
+        {
+            FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
         }
     } 
 }

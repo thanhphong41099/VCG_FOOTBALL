@@ -1024,6 +1024,7 @@
             this.cbbMatch.Name = "cbbMatch";
             this.cbbMatch.Size = new System.Drawing.Size(259, 29);
             this.cbbMatch.TabIndex = 328;
+            this.cbbMatch.SelectedIndexChanged += new System.EventHandler(this.cbbMatch_SelectedIndexChanged);
             // 
             // saveListGoalPlayer
             // 

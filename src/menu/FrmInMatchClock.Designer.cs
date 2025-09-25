@@ -150,6 +150,18 @@
             this.updateData = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.stopALL = new System.Windows.Forms.Button();
+            this.txtLine2Home = new System.Windows.Forms.TextBox();
+            this.txtLine1Home = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.txtLine1Away = new System.Windows.Forms.TextBox();
+            this.txtLine2Away = new System.Windows.Forms.TextBox();
+            this.btnKickOff1Line = new System.Windows.Forms.Button();
+            this.btnFinalOut = new System.Windows.Forms.Button();
+            this.cbbMatch = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.btnKickOff2Lines = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -170,6 +182,7 @@
             this.groupAway4.SuspendLayout();
             this.groupAway1.SuspendLayout();
             this.groupHome1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -845,9 +858,9 @@
             this.groupHome3.Controls.Add(this.label7);
             this.groupHome3.Controls.Add(this.label8);
             this.groupHome3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupHome3.Location = new System.Drawing.Point(676, 255);
+            this.groupHome3.Location = new System.Drawing.Point(676, 247);
             this.groupHome3.Name = "groupHome3";
-            this.groupHome3.Size = new System.Drawing.Size(351, 219);
+            this.groupHome3.Size = new System.Drawing.Size(351, 174);
             this.groupHome3.TabIndex = 291;
             this.groupHome3.TabStop = false;
             this.groupHome3.Text = "GOAL ID - HOME PLAYER";
@@ -876,12 +889,13 @@
             this.checkSaveHomeGoal.AutoSize = true;
             this.checkSaveHomeGoal.Checked = true;
             this.checkSaveHomeGoal.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSaveHomeGoal.Location = new System.Drawing.Point(23, 180);
+            this.checkSaveHomeGoal.Location = new System.Drawing.Point(23, 162);
             this.checkSaveHomeGoal.Name = "checkSaveHomeGoal";
             this.checkSaveHomeGoal.Size = new System.Drawing.Size(216, 19);
             this.checkSaveHomeGoal.TabIndex = 296;
             this.checkSaveHomeGoal.Text = "TỰ ĐỘNG LƯU CẦU THỦ GHI BÀN";
             this.checkSaveHomeGoal.UseVisualStyleBackColor = true;
+            this.checkSaveHomeGoal.Visible = false;
             // 
             // homePlayerOG
             // 
@@ -1001,9 +1015,9 @@
             this.groupHome4.Controls.Add(this.cbbHomeCard);
             this.groupHome4.Controls.Add(this.label10);
             this.groupHome4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupHome4.Location = new System.Drawing.Point(676, 495);
+            this.groupHome4.Location = new System.Drawing.Point(676, 444);
             this.groupHome4.Name = "groupHome4";
-            this.groupHome4.Size = new System.Drawing.Size(351, 318);
+            this.groupHome4.Size = new System.Drawing.Size(351, 296);
             this.groupHome4.TabIndex = 292;
             this.groupHome4.TabStop = false;
             this.groupHome4.Text = "YELLOW/RED CARD - HOME PLAYER";
@@ -1027,7 +1041,7 @@
             this.HomeRed.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HomeRed.Image = ((System.Drawing.Image)(resources.GetObject("HomeRed.Image")));
             this.HomeRed.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.HomeRed.Location = new System.Drawing.Point(23, 239);
+            this.HomeRed.Location = new System.Drawing.Point(23, 226);
             this.HomeRed.Name = "HomeRed";
             this.HomeRed.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.HomeRed.Size = new System.Drawing.Size(240, 50);
@@ -1042,7 +1056,7 @@
             this.StopHomeRed.FlatAppearance.BorderSize = 0;
             this.StopHomeRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopHomeRed.Image = ((System.Drawing.Image)(resources.GetObject("StopHomeRed.Image")));
-            this.StopHomeRed.Location = new System.Drawing.Point(285, 236);
+            this.StopHomeRed.Location = new System.Drawing.Point(285, 223);
             this.StopHomeRed.Name = "StopHomeRed";
             this.StopHomeRed.Size = new System.Drawing.Size(60, 55);
             this.StopHomeRed.TabIndex = 296;
@@ -1058,7 +1072,7 @@
             this.Home2Yellow.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Home2Yellow.Image = ((System.Drawing.Image)(resources.GetObject("Home2Yellow.Image")));
             this.Home2Yellow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Home2Yellow.Location = new System.Drawing.Point(23, 169);
+            this.Home2Yellow.Location = new System.Drawing.Point(23, 156);
             this.Home2Yellow.Name = "Home2Yellow";
             this.Home2Yellow.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.Home2Yellow.Size = new System.Drawing.Size(240, 50);
@@ -1073,7 +1087,7 @@
             this.StopHome2Yellow.FlatAppearance.BorderSize = 0;
             this.StopHome2Yellow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopHome2Yellow.Image = ((System.Drawing.Image)(resources.GetObject("StopHome2Yellow.Image")));
-            this.StopHome2Yellow.Location = new System.Drawing.Point(285, 166);
+            this.StopHome2Yellow.Location = new System.Drawing.Point(285, 153);
             this.StopHome2Yellow.Name = "StopHome2Yellow";
             this.StopHome2Yellow.Size = new System.Drawing.Size(60, 55);
             this.StopHome2Yellow.TabIndex = 294;
@@ -1089,7 +1103,7 @@
             this.HomeYellow.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HomeYellow.Image = ((System.Drawing.Image)(resources.GetObject("HomeYellow.Image")));
             this.HomeYellow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.HomeYellow.Location = new System.Drawing.Point(23, 99);
+            this.HomeYellow.Location = new System.Drawing.Point(23, 86);
             this.HomeYellow.Name = "HomeYellow";
             this.HomeYellow.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.HomeYellow.Size = new System.Drawing.Size(240, 50);
@@ -1104,7 +1118,7 @@
             this.StopHomeYellow.FlatAppearance.BorderSize = 0;
             this.StopHomeYellow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopHomeYellow.Image = ((System.Drawing.Image)(resources.GetObject("StopHomeYellow.Image")));
-            this.StopHomeYellow.Location = new System.Drawing.Point(285, 96);
+            this.StopHomeYellow.Location = new System.Drawing.Point(285, 83);
             this.StopHomeYellow.Name = "StopHomeYellow";
             this.StopHomeYellow.Size = new System.Drawing.Size(60, 55);
             this.StopHomeYellow.TabIndex = 290;
@@ -1262,9 +1276,9 @@
             this.groupAway3.Controls.Add(this.label13);
             this.groupAway3.Controls.Add(this.label14);
             this.groupAway3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupAway3.Location = new System.Drawing.Point(1061, 255);
+            this.groupAway3.Location = new System.Drawing.Point(1061, 247);
             this.groupAway3.Name = "groupAway3";
-            this.groupAway3.Size = new System.Drawing.Size(351, 219);
+            this.groupAway3.Size = new System.Drawing.Size(351, 174);
             this.groupAway3.TabIndex = 292;
             this.groupAway3.TabStop = false;
             this.groupAway3.Text = "GOAL ID - AWAY PLAYER";
@@ -1293,12 +1307,13 @@
             this.checkSaveAwayGoal.AutoSize = true;
             this.checkSaveAwayGoal.Checked = true;
             this.checkSaveAwayGoal.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSaveAwayGoal.Location = new System.Drawing.Point(23, 182);
+            this.checkSaveAwayGoal.Location = new System.Drawing.Point(23, 161);
             this.checkSaveAwayGoal.Name = "checkSaveAwayGoal";
             this.checkSaveAwayGoal.Size = new System.Drawing.Size(216, 19);
             this.checkSaveAwayGoal.TabIndex = 297;
             this.checkSaveAwayGoal.Text = "TỰ ĐỘNG LƯU CẦU THỦ GHI BÀN";
             this.checkSaveAwayGoal.UseVisualStyleBackColor = true;
+            this.checkSaveAwayGoal.Visible = false;
             // 
             // awayPlayerOG
             // 
@@ -1419,9 +1434,9 @@
             this.groupAway4.Controls.Add(this.cbbAwayCard);
             this.groupAway4.Controls.Add(this.label16);
             this.groupAway4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupAway4.Location = new System.Drawing.Point(1061, 495);
+            this.groupAway4.Location = new System.Drawing.Point(1061, 444);
             this.groupAway4.Name = "groupAway4";
-            this.groupAway4.Size = new System.Drawing.Size(351, 318);
+            this.groupAway4.Size = new System.Drawing.Size(351, 296);
             this.groupAway4.TabIndex = 298;
             this.groupAway4.TabStop = false;
             this.groupAway4.Text = "YELLOW/RED CARD - AWAY PLAYER";
@@ -1445,7 +1460,7 @@
             this.AwayRed.ForeColor = System.Drawing.SystemColors.ControlText;
             this.AwayRed.Image = ((System.Drawing.Image)(resources.GetObject("AwayRed.Image")));
             this.AwayRed.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AwayRed.Location = new System.Drawing.Point(20, 239);
+            this.AwayRed.Location = new System.Drawing.Point(20, 225);
             this.AwayRed.Name = "AwayRed";
             this.AwayRed.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.AwayRed.Size = new System.Drawing.Size(240, 50);
@@ -1460,7 +1475,7 @@
             this.StopAwayRed.FlatAppearance.BorderSize = 0;
             this.StopAwayRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopAwayRed.Image = ((System.Drawing.Image)(resources.GetObject("StopAwayRed.Image")));
-            this.StopAwayRed.Location = new System.Drawing.Point(285, 236);
+            this.StopAwayRed.Location = new System.Drawing.Point(285, 222);
             this.StopAwayRed.Name = "StopAwayRed";
             this.StopAwayRed.Size = new System.Drawing.Size(60, 55);
             this.StopAwayRed.TabIndex = 296;
@@ -1476,7 +1491,7 @@
             this.Away2Yellow.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Away2Yellow.Image = ((System.Drawing.Image)(resources.GetObject("Away2Yellow.Image")));
             this.Away2Yellow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Away2Yellow.Location = new System.Drawing.Point(20, 169);
+            this.Away2Yellow.Location = new System.Drawing.Point(20, 155);
             this.Away2Yellow.Name = "Away2Yellow";
             this.Away2Yellow.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.Away2Yellow.Size = new System.Drawing.Size(240, 50);
@@ -1492,7 +1507,7 @@
             this.StopAway2Yellow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopAway2Yellow.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.StopAway2Yellow.Image = ((System.Drawing.Image)(resources.GetObject("StopAway2Yellow.Image")));
-            this.StopAway2Yellow.Location = new System.Drawing.Point(285, 166);
+            this.StopAway2Yellow.Location = new System.Drawing.Point(285, 152);
             this.StopAway2Yellow.Name = "StopAway2Yellow";
             this.StopAway2Yellow.Size = new System.Drawing.Size(60, 55);
             this.StopAway2Yellow.TabIndex = 294;
@@ -1508,7 +1523,7 @@
             this.AwayYellow.ForeColor = System.Drawing.SystemColors.ControlText;
             this.AwayYellow.Image = ((System.Drawing.Image)(resources.GetObject("AwayYellow.Image")));
             this.AwayYellow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AwayYellow.Location = new System.Drawing.Point(20, 99);
+            this.AwayYellow.Location = new System.Drawing.Point(20, 85);
             this.AwayYellow.Name = "AwayYellow";
             this.AwayYellow.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.AwayYellow.Size = new System.Drawing.Size(240, 50);
@@ -1524,7 +1539,7 @@
             this.StopAwayYellow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopAwayYellow.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.StopAwayYellow.Image = ((System.Drawing.Image)(resources.GetObject("StopAwayYellow.Image")));
-            this.StopAwayYellow.Location = new System.Drawing.Point(285, 96);
+            this.StopAwayYellow.Location = new System.Drawing.Point(285, 82);
             this.StopAwayYellow.Name = "StopAwayYellow";
             this.StopAwayYellow.Size = new System.Drawing.Size(60, 55);
             this.StopAwayYellow.TabIndex = 290;
@@ -1697,12 +1712,152 @@
             this.stopALL.UseVisualStyleBackColor = true;
             this.stopALL.Click += new System.EventHandler(this.stopALL_Click);
             // 
+            // txtLine2Home
+            // 
+            this.txtLine2Home.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtLine2Home.Location = new System.Drawing.Point(17, 61);
+            this.txtLine2Home.Name = "txtLine2Home";
+            this.txtLine2Home.Size = new System.Drawing.Size(312, 25);
+            this.txtLine2Home.TabIndex = 8;
+            // 
+            // txtLine1Home
+            // 
+            this.txtLine1Home.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtLine1Home.Location = new System.Drawing.Point(17, 98);
+            this.txtLine1Home.Name = "txtLine1Home";
+            this.txtLine1Home.Size = new System.Drawing.Size(312, 25);
+            this.txtLine1Home.TabIndex = 9;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.btnKickOff2Lines);
+            this.groupBox7.Controls.Add(this.label27);
+            this.groupBox7.Controls.Add(this.button2);
+            this.groupBox7.Controls.Add(this.button1);
+            this.groupBox7.Controls.Add(this.cbbMatch);
+            this.groupBox7.Controls.Add(this.btnKickOff1Line);
+            this.groupBox7.Controls.Add(this.btnFinalOut);
+            this.groupBox7.Controls.Add(this.txtLine1Away);
+            this.groupBox7.Controls.Add(this.txtLine2Away);
+            this.groupBox7.Controls.Add(this.txtLine1Home);
+            this.groupBox7.Controls.Add(this.txtLine2Home);
+            this.groupBox7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.groupBox7.Location = new System.Drawing.Point(676, 746);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(736, 200);
+            this.groupBox7.TabIndex = 288;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "LOWER HALF - FULLTIME";
+            // 
+            // txtLine1Away
+            // 
+            this.txtLine1Away.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtLine1Away.Location = new System.Drawing.Point(419, 98);
+            this.txtLine1Away.Name = "txtLine1Away";
+            this.txtLine1Away.Size = new System.Drawing.Size(300, 25);
+            this.txtLine1Away.TabIndex = 11;
+            // 
+            // txtLine2Away
+            // 
+            this.txtLine2Away.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtLine2Away.Location = new System.Drawing.Point(419, 61);
+            this.txtLine2Away.Name = "txtLine2Away";
+            this.txtLine2Away.Size = new System.Drawing.Size(300, 25);
+            this.txtLine2Away.TabIndex = 10;
+            // 
+            // btnKickOff1Line
+            // 
+            this.btnKickOff1Line.BackColor = System.Drawing.Color.Green;
+            this.btnKickOff1Line.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnKickOff1Line.ForeColor = System.Drawing.Color.White;
+            this.btnKickOff1Line.Location = new System.Drawing.Point(19, 143);
+            this.btnKickOff1Line.Name = "btnKickOff1Line";
+            this.btnKickOff1Line.Size = new System.Drawing.Size(311, 33);
+            this.btnKickOff1Line.TabIndex = 323;
+            this.btnKickOff1Line.Text = "LOWERTHIRD 1 LINE";
+            this.btnKickOff1Line.UseVisualStyleBackColor = false;
+            this.btnKickOff1Line.Click += new System.EventHandler(this.btnKickOff1Line_Click);
+            // 
+            // btnFinalOut
+            // 
+            this.btnFinalOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnFinalOut.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnFinalOut.ForeColor = System.Drawing.Color.White;
+            this.btnFinalOut.Location = new System.Drawing.Point(341, 143);
+            this.btnFinalOut.Name = "btnFinalOut";
+            this.btnFinalOut.Size = new System.Drawing.Size(69, 33);
+            this.btnFinalOut.TabIndex = 322;
+            this.btnFinalOut.Text = "OUT 1";
+            this.btnFinalOut.UseVisualStyleBackColor = false;
+            this.btnFinalOut.Click += new System.EventHandler(this.btnFinalOut_Click);
+            // 
+            // cbbMatch
+            // 
+            this.cbbMatch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.cbbMatch.FormattingEnabled = true;
+            this.cbbMatch.Location = new System.Drawing.Point(102, 24);
+            this.cbbMatch.Name = "cbbMatch";
+            this.cbbMatch.Size = new System.Drawing.Size(227, 25);
+            this.cbbMatch.TabIndex = 324;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Gray;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(340, 95);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 28);
+            this.button1.TabIndex = 325;
+            this.button1.Text = "LINE 1";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Gray;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(340, 61);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(69, 28);
+            this.button2.TabIndex = 326;
+            this.button2.Text = "LINE 2";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label27.Location = new System.Drawing.Point(20, 27);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(59, 15);
+            this.label27.TabIndex = 327;
+            this.label27.Text = "HIỆP ĐẤU";
+            // 
+            // btnKickOff2Lines
+            // 
+            this.btnKickOff2Lines.BackColor = System.Drawing.Color.Green;
+            this.btnKickOff2Lines.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnKickOff2Lines.ForeColor = System.Drawing.Color.White;
+            this.btnKickOff2Lines.Location = new System.Drawing.Point(419, 143);
+            this.btnKickOff2Lines.Name = "btnKickOff2Lines";
+            this.btnKickOff2Lines.Size = new System.Drawing.Size(303, 33);
+            this.btnKickOff2Lines.TabIndex = 328;
+            this.btnKickOff2Lines.Text = "LOWERTHIRD 2 LINES";
+            this.btnKickOff2Lines.UseVisualStyleBackColor = false;
+            this.btnKickOff2Lines.Click += new System.EventHandler(this.btnKickOff2Lines_Click);
+            // 
             // FrmInMatchClock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1670, 950);
+            this.ClientSize = new System.Drawing.Size(1705, 969);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.updateData);
             this.Controls.Add(this.stopALL);
@@ -1757,6 +1912,8 @@
             this.groupAway4.PerformLayout();
             this.groupAway1.ResumeLayout(false);
             this.groupHome1.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1884,5 +2041,17 @@
         private System.Windows.Forms.CheckBox checkPenHome;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.CheckBox checkPenAway;
+        private System.Windows.Forms.TextBox txtLine2Home;
+        private System.Windows.Forms.TextBox txtLine1Home;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TextBox txtLine1Away;
+        private System.Windows.Forms.TextBox txtLine2Away;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbbMatch;
+        private System.Windows.Forms.Button btnKickOff1Line;
+        private System.Windows.Forms.Button btnFinalOut;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button btnKickOff2Lines;
     }
 }

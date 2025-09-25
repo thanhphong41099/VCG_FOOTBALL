@@ -635,6 +635,11 @@ namespace VLeague.src.menu
             }
         }
 
+        private void cbbMatch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void numHomeGoal7_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
