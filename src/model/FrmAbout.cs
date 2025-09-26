@@ -13,6 +13,8 @@ namespace VLeague.src.model
 {
     public partial class FrmAbout : Form
     {
+        string version = "2.0.0";
+        string updateOn = "26/09/2025";
         public FrmAbout()
         {
             InitializeComponent();
@@ -27,16 +29,16 @@ namespace VLeague.src.model
 
 
                 txtAbout.Text = 
-                    $"Version 1.0.4. Expiration: ({expirationDate2})\n" +
+                    $"Version {version}. Expiration: ({expirationDate2})\n" +
                     $"Copyright © VTVBroadcom MS.\n" +
                     $"All rights reserved http://vtvms.vn.\n\n" +
-                    $"Update on: 24/06/2025.\n\n" +
+                    $"Update on: {updateOn}.\n\n" +
                     $"--------------------------------------------------";
             }
             catch 
             {
                 txtAbout.Text =
-                $"Version 1.0.4. Ex: No License Key\n" +
+                $"Version {version}. Ex: No License Key\n" +
                 $"Copyright © VTVBroadcom MS.\n" +
                 $"All rights reserved http://vtvms.vn\n\n." +
                 $"--------------------------------------------------";

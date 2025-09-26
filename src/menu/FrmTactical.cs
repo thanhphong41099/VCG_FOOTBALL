@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VLeague.src.helper;
 using VLeague.src.model;
 namespace VLeague.src.menu
 {
@@ -198,7 +199,7 @@ namespace VLeague.src.menu
                 { pictureBox.Image = Properties.Resources.Home_Player_Shirt; }
             }
             cbbTacticalHome.Text = TeamInfor.homeTactical;
-            txtTeamName.Text = TeamInfor.homeTenNgan;
+            txtTeamName.Text = TeamInfor.homeTenDai;
         }
         private void loadAwayTeam()
         {
@@ -221,7 +222,7 @@ namespace VLeague.src.menu
                 { pictureBox.Image = Properties.Resources.Home_Player_Shirt; }
             }
             cbbTacticalAway.Text = TeamInfor.awayTactical;
-            txtTeamName.Text = TeamInfor.awayTenNgan;
+            txtTeamName.Text = TeamInfor.awayTenDai;
         }
 
         private void HomeTeam_Click(object sender, EventArgs e)
@@ -350,6 +351,7 @@ namespace VLeague.src.menu
             groupBox10.Location = originalPositions[9];
             groupBox11.Location = originalPositions[10];
         }
+
     }
 }
 

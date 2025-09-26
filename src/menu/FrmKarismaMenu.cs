@@ -461,8 +461,8 @@ namespace VLeague
         }
         public static void closeTabwithFrmDataImport()
         {
-            //Đóng tất cả các form trừ FrmDataImport, FrmTactical
-            Form[] forms = { FrmPreMatch, FrmInMatchClock, FrmInMatchStatic, FrmSubstitution, FrmVar, FrmPenalty, FrmLowerThird, 
+            //Đóng tất cả các form trừ FrmDataImport, FrmTactical (bỏ Tactical)
+            Form[] forms = { FrmPreMatch, FrmTactical, FrmInMatchClock, FrmInMatchStatic, FrmSubstitution, FrmVar, FrmPenalty, FrmLowerThird, 
                 FrmSponsor, FrmPostMatch, FrmCupQG, FrmCheckLicenseKey };
 
             foreach (Form frm in forms)

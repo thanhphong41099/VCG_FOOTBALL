@@ -433,6 +433,26 @@ namespace VLeague.src.menu
             isDragging = false;
         }
 
+        private void ResetAllRowColors(DataGridView dataGridView)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+
+        private void UpdateSTTColumn(DataGridView dataGridView)
+        {
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
+            {
+                if (dataGridView.Rows[i].IsNewRow) continue; // Bỏ qua hàng mới
+
+                dataGridView.Rows[i].Cells["STT"].Value = i + 1;
+            }
+        }
+
+        #endregion
+
         private void cbbShirtHome_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbbShirtHome.SelectedIndex)
@@ -520,25 +540,6 @@ namespace VLeague.src.menu
             labelTimeUpdated.Text = DateTime.Now.ToString("hh:mm:ss tt");
             MessageBox.Show("Thiết lập thành công!");
         }
-
-        private void ResetAllRowColors(DataGridView dataGridView)
-        {
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                row.DefaultCellStyle.BackColor = Color.White;
-            }
-        }
-
-        private void UpdateSTTColumn(DataGridView dataGridView)
-        {
-            for (int i = 0; i < dataGridView.Rows.Count; i++)
-            {
-                if (dataGridView.Rows[i].IsNewRow) continue; // Bỏ qua hàng mới
-
-                dataGridView.Rows[i].Cells["STT"].Value = i + 1;
-            }
-        }
-        #endregion
 
         private void SortDataGridViewByPlayColumn(DataGridView dataGridView)
         {
@@ -725,7 +726,7 @@ namespace VLeague.src.menu
             }
             TeamInfor.PlayersAway = teamPlayers;
         }
-        //Load DS thi đấu và dự bị đội nhà
+        //Lưu DS thi đấu và dự bị đội nhà
         public void savePlayerHomeLineSub()
         {
             Player[] playersLineup = new Player[11];
