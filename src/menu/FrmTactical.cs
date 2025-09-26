@@ -18,11 +18,17 @@ namespace VLeague.src.menu
 
         private Dictionary<string, Point[]> tacticalFormations;
         
-        private List<Point> playerHomePositions = new List<Point>();
-        private List<Point> playerAwayPositions = new List<Point>();
+        private readonly List<Point> playerHomePositions = new List<Point>();
+        private readonly List<Point> playerAwayPositions = new List<Point>();
 
-        private List<Point> originalHomePositions = new List<Point>();
-        private List<Point> originalAwayPositions = new List<Point>();
+        private readonly List<Point> originalHomePositions = new List<Point>();
+        private readonly List<Point> originalAwayPositions = new List<Point>();
+
+        private GroupBox[] draggableGroupBoxes;
+        private GroupBox draggedGroupBox;
+        private Point dragOffset;
+        private Point draggedOriginalLocation;
+        private bool isDragging;
 
         int saveTeam;
 
@@ -150,16 +156,217 @@ namespace VLeague.src.menu
         }
         private void ControlDraggable()
         {
-            //// Danh sách các GroupBox
-            //System.Windows.Forms.GroupBox[] groupBoxes = { groupBox1, groupBox2, groupBox3, groupBox4, groupBox5,
-            //                   groupBox6, groupBox7, groupBox8, groupBox9, groupBox10,
-            //                   groupBox11 };
+            draggableGroupBoxes = new[]
+            {
+                groupBox1, groupBox2, groupBox3, groupBox4, groupBox5,
+                groupBox6, groupBox7, groupBox8, groupBox9, groupBox10,
+                groupBox11
+            };
 
-            //// Lặp qua từng GroupBox và gọi hàm Draggable
-            //foreach (var groupBox in groupBoxes)
-            //{
-            //    ControlExtension.Draggable(groupBox, true);
-            //}
+            for (int i = 0; i < draggableGroupBoxes.Length; i++)
+            {
+                var groupBox = draggableGroupBoxes[i];
+                groupBox.Tag = i;
+                AttachDragEvents(groupBox);
+            }
+        }
+        private void AttachDragEvents(Control control)
+        {
+            control.MouseDown += GroupBox_MouseDown;
+            control.MouseMove += GroupBox_MouseMove;
+            control.MouseUp += GroupBox_MouseUp;
+
+            foreach (Control child in control.Controls)
+            {
+                AttachDragEvents(child);
+            }
+        }
+        private void GroupBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+
+            var groupBox = GetGroupBoxFromControl(sender as Control);
+            if (groupBox == null)
+            {
+                return;
+            }
+
+            draggedGroupBox = groupBox;
+            isDragging = true;
+            draggedOriginalLocation = groupBox.Location;
+
+            var sourceControl = sender as Control;
+            if (sourceControl != null)
+            {
+                var clientPoint = groupBox.PointToClient(sourceControl.PointToScreen(e.Location));
+                dragOffset = clientPoint;
+            }
+            else
+            {
+                dragOffset = e.Location;
+            }
+
+            groupBox.BringToFront();
+        }
+        private void GroupBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!isDragging || draggedGroupBox == null || Control.MouseButtons != MouseButtons.Left)
+            {
+                return;
+            }
+
+            var mousePosition = Control.MousePosition;
+            var clientPosition = this.PointToClient(mousePosition);
+            draggedGroupBox.Location = new Point(clientPosition.X - dragOffset.X, clientPosition.Y - dragOffset.Y);
+        }
+        private void GroupBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!isDragging || draggedGroupBox == null)
+            {
+                return;
+            }
+
+            isDragging = false;
+
+            var targetGroupBox = FindDropTarget(draggedGroupBox);
+            if (targetGroupBox != null)
+            {
+                PerformSwap(draggedGroupBox, targetGroupBox);
+            }
+            else
+            {
+                draggedGroupBox.Location = draggedOriginalLocation;
+            }
+
+            draggedGroupBox = null;
+        }
+        private GroupBox GetGroupBoxFromControl(Control control)
+        {
+            while (control != null && !(control is GroupBox))
+            {
+                control = control.Parent;
+            }
+
+            return control as GroupBox;
+        }
+        private GroupBox FindDropTarget(GroupBox source)
+        {
+            if (draggableGroupBoxes == null)
+            {
+                return null;
+            }
+
+            var cursorLocation = this.PointToClient(Control.MousePosition);
+            var target = draggableGroupBoxes.FirstOrDefault(g => g != source && g.Bounds.Contains(cursorLocation));
+            if (target != null)
+            {
+                return target;
+            }
+
+            return draggableGroupBoxes.FirstOrDefault(g => g != source && g.Bounds.IntersectsWith(source.Bounds));
+        }
+        private void PerformSwap(GroupBox firstGroupBox, GroupBox secondGroupBox)
+        {
+            if (firstGroupBox.Tag is int firstIndex && secondGroupBox.Tag is int secondIndex)
+            {
+                Point secondLocation = secondGroupBox.Location;
+                secondGroupBox.Location = draggedOriginalLocation;
+                firstGroupBox.Location = secondLocation;
+
+                SwapPlayersData(firstIndex, secondIndex);
+
+                var lineup = GetActiveLineup();
+                UpdateGroupBoxDisplay(firstGroupBox, lineup);
+                UpdateGroupBoxDisplay(secondGroupBox, lineup);
+
+                if (saveTeam == 1)
+                {
+                    LoadOriginalPositions(originalHomePositions);
+                }
+                else if (saveTeam == 2)
+                {
+                    LoadOriginalPositions(originalAwayPositions);
+                }
+            }
+        }
+        private void SwapPlayersData(int firstIndex, int secondIndex)
+        {
+            if (firstIndex == secondIndex)
+            {
+                return;
+            }
+
+            var lineup = GetActiveLineup();
+            SwapPlayersInArray(lineup, firstIndex, secondIndex);
+
+            var squad = GetActiveSquad();
+            SwapPlayersInArray(squad, firstIndex, secondIndex);
+        }
+        private void SwapPlayersInArray(VLeague.Player[] players, int firstIndex, int secondIndex)
+        {
+            if (players == null)
+            {
+                return;
+            }
+
+            if (firstIndex < 0 || secondIndex < 0 || firstIndex >= players.Length || secondIndex >= players.Length)
+            {
+                return;
+            }
+
+            var temp = players[firstIndex];
+            players[firstIndex] = players[secondIndex];
+            players[secondIndex] = temp;
+        }
+        private VLeague.Player[] GetActiveLineup()
+        {
+            return saveTeam == 2 ? TeamInfor.PlayersAwayLineup : TeamInfor.PlayersHomeLineup;
+        }
+        private VLeague.Player[] GetActiveSquad()
+        {
+            return saveTeam == 2 ? TeamInfor.PlayersAway : TeamInfor.PlayersHome;
+        }
+        private void UpdateGroupBoxDisplay(GroupBox groupBox, VLeague.Player[] lineup)
+        {
+            if (!(groupBox.Tag is int index))
+            {
+                return;
+            }
+
+            VLeague.Player player = null;
+            if (lineup != null && index >= 0 && index < lineup.Length)
+            {
+                player = lineup[index];
+            }
+
+            var label = groupBox.Controls.OfType<Label>().FirstOrDefault();
+            if (label != null)
+            {
+                if (player != null && !string.IsNullOrEmpty(player.ShortName))
+                {
+                    label.Text = player.ShortName;
+                }
+                else
+                {
+                    label.Text = "Unknown Player";
+                }
+            }
+
+            var picture = groupBox.Controls.OfType<PictureBox>().FirstOrDefault();
+            if (picture != null)
+            {
+                if (player != null && !string.IsNullOrEmpty(player.Sub) && File.Exists(player.Sub))
+                {
+                    picture.Image = Image.FromFile(player.Sub);
+                }
+                else
+                {
+                    picture.Image = Properties.Resources.Home_Player_Shirt;
+                }
+            }
         }
         private void LoadOriginalPositions(List<Point> originalPositions)
         {
@@ -180,47 +387,39 @@ namespace VLeague.src.menu
 
         private void loadHomeTeam()
         {
-            for (int i = 0; i < 11; i++)
-            {
-                Label labelName = this.Controls.Find($"labelName{i + 1}", true).FirstOrDefault() as Label;
-                if (!string.IsNullOrEmpty(TeamInfor.PlayersHomeLineup[i].ShortName))
-                {
-                    labelName.Text = TeamInfor.PlayersHomeLineup[i].ShortName;
-                }
-                else
-                { labelName.Text = "Unknown Player"; }
+            saveTeam = 1;
 
-                PictureBox pictureBox = this.Controls.Find($"pic{i + 1}", true).FirstOrDefault() as PictureBox;
-                if (!string.IsNullOrEmpty(TeamInfor.PlayersHomeLineup[i].Sub) && File.Exists(TeamInfor.PlayersHomeLineup[i].Sub))
-                {
-                    pictureBox.Image = Image.FromFile(TeamInfor.PlayersHomeLineup[i].Sub);
-                }
-                else
-                { pictureBox.Image = Properties.Resources.Home_Player_Shirt; }
+            if (draggableGroupBoxes == null)
+            {
+                ControlDraggable();
             }
+
+            var lineup = TeamInfor.PlayersHomeLineup;
+            for (int i = 0; i < draggableGroupBoxes.Length; i++)
+            {
+                draggableGroupBoxes[i].Tag = i;
+                UpdateGroupBoxDisplay(draggableGroupBoxes[i], lineup);
+            }
+
             cbbTacticalHome.Text = TeamInfor.homeTactical;
             txtTeamName.Text = TeamInfor.homeTenDai;
         }
         private void loadAwayTeam()
         {
-            for (int i = 0; i < 11; i++)
-            {
-                Label labelName = this.Controls.Find($"labelName{i + 1}", true).FirstOrDefault() as Label;
-                if (!string.IsNullOrEmpty(TeamInfor.PlayersAwayLineup[i].ShortName))
-                {
-                    labelName.Text = TeamInfor.PlayersAwayLineup[i].ShortName;
-                }
-                else
-                { labelName.Text = "Unknown Player"; }
+            saveTeam = 2;
 
-                PictureBox pictureBox = this.Controls.Find($"pic{i + 1}", true).FirstOrDefault() as PictureBox;
-                if (!string.IsNullOrEmpty(TeamInfor.PlayersAwayLineup[i].Sub) && File.Exists(TeamInfor.PlayersAwayLineup[i].Sub))
-                {
-                    pictureBox.Image = Image.FromFile(TeamInfor.PlayersAwayLineup[i].Sub);
-                }
-                else
-                { pictureBox.Image = Properties.Resources.Home_Player_Shirt; }
+            if (draggableGroupBoxes == null)
+            {
+                ControlDraggable();
             }
+
+            var lineup = TeamInfor.PlayersAwayLineup;
+            for (int i = 0; i < draggableGroupBoxes.Length; i++)
+            {
+                draggableGroupBoxes[i].Tag = i;
+                UpdateGroupBoxDisplay(draggableGroupBoxes[i], lineup);
+            }
+
             cbbTacticalAway.Text = TeamInfor.awayTactical;
             txtTeamName.Text = TeamInfor.awayTenDai;
         }
