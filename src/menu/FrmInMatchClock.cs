@@ -1153,7 +1153,7 @@ namespace VLeague.src.menu
 
             string hiepdau = cbbMatch.Text;
             FrmKarismaMenu.FrmSetting.PlayKickOff2Lines(TeamInfor.homeTenDai, TeamInfor.awayTenDai, Static.numberHomeScore, Static.numberAwayScore,
-                TeamInfor.homeLogo, TeamInfor.awayLogo, hiepdau, txtLine1Home.Text, txtLine2Home.Text, txtLine1Away.Text, txtLine2Away.Text);
+                TeamInfor.homeLogo, TeamInfor.awayLogo, hiepdau, txtLine1Home.Text, txtLine1Away.Text, txtLine2Home.Text, txtLine2Away.Text);
         }
 
         private void btnFinalOut_Click(object sender, EventArgs e)
