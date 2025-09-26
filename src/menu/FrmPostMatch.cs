@@ -168,7 +168,8 @@ namespace VLeague.src.menu
 
         private void stopAll_Click(object sender, EventArgs e)
         {
-            FrmKarismaMenu.FrmSetting.StopAll();
+            clearTagButton();
+            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPostMatch);
         }
 
         private void saveTableToAccess_Click(object sender, EventArgs e)

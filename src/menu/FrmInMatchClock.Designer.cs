@@ -153,15 +153,15 @@
             this.txtLine2Home = new System.Windows.Forms.TextBox();
             this.txtLine1Home = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.txtLine1Away = new System.Windows.Forms.TextBox();
-            this.txtLine2Away = new System.Windows.Forms.TextBox();
+            this.btnKickOff2Lines = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.cbbMatch = new System.Windows.Forms.ComboBox();
             this.btnKickOff1Line = new System.Windows.Forms.Button();
             this.btnFinalOut = new System.Windows.Forms.Button();
-            this.cbbMatch = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.btnKickOff2Lines = new System.Windows.Forms.Button();
+            this.txtLine1Away = new System.Windows.Forms.TextBox();
+            this.txtLine2Away = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1217,6 +1217,7 @@
             // inforAwayPlayer
             // 
             this.inforAwayPlayer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.inforAwayPlayer.ForeColor = System.Drawing.Color.Black;
             this.inforAwayPlayer.Location = new System.Drawing.Point(69, 68);
             this.inforAwayPlayer.Name = "inforAwayPlayer";
             this.inforAwayPlayer.Size = new System.Drawing.Size(265, 23);
@@ -1225,6 +1226,7 @@
             // numAwayPlayer
             // 
             this.numAwayPlayer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numAwayPlayer.ForeColor = System.Drawing.Color.Black;
             this.numAwayPlayer.Location = new System.Drawing.Point(290, 32);
             this.numAwayPlayer.Name = "numAwayPlayer";
             this.numAwayPlayer.Size = new System.Drawing.Size(44, 23);
@@ -1377,6 +1379,7 @@
             // GoalTimeAway
             // 
             this.GoalTimeAway.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.GoalTimeAway.ForeColor = System.Drawing.Color.Black;
             this.GoalTimeAway.Location = new System.Drawing.Point(69, 68);
             this.GoalTimeAway.Name = "GoalTimeAway";
             this.GoalTimeAway.Size = new System.Drawing.Size(191, 23);
@@ -1385,6 +1388,7 @@
             // numAwayGoal
             // 
             this.numAwayGoal.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numAwayGoal.ForeColor = System.Drawing.Color.Black;
             this.numAwayGoal.Location = new System.Drawing.Point(290, 32);
             this.numAwayGoal.Name = "numAwayGoal";
             this.numAwayGoal.Size = new System.Drawing.Size(44, 23);
@@ -1549,6 +1553,7 @@
             // numAwayCard
             // 
             this.numAwayCard.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numAwayCard.ForeColor = System.Drawing.Color.Black;
             this.numAwayCard.Location = new System.Drawing.Point(290, 42);
             this.numAwayCard.Name = "numAwayCard";
             this.numAwayCard.Size = new System.Drawing.Size(44, 23);
@@ -1749,21 +1754,65 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "LOWER HALF - FULLTIME";
             // 
-            // txtLine1Away
+            // btnKickOff2Lines
             // 
-            this.txtLine1Away.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtLine1Away.Location = new System.Drawing.Point(419, 98);
-            this.txtLine1Away.Name = "txtLine1Away";
-            this.txtLine1Away.Size = new System.Drawing.Size(300, 25);
-            this.txtLine1Away.TabIndex = 11;
+            this.btnKickOff2Lines.BackColor = System.Drawing.Color.Green;
+            this.btnKickOff2Lines.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnKickOff2Lines.ForeColor = System.Drawing.Color.White;
+            this.btnKickOff2Lines.Location = new System.Drawing.Point(419, 143);
+            this.btnKickOff2Lines.Name = "btnKickOff2Lines";
+            this.btnKickOff2Lines.Size = new System.Drawing.Size(303, 33);
+            this.btnKickOff2Lines.TabIndex = 328;
+            this.btnKickOff2Lines.Text = "LOWERTHIRD 2 LINES";
+            this.btnKickOff2Lines.UseVisualStyleBackColor = false;
+            this.btnKickOff2Lines.Click += new System.EventHandler(this.btnKickOff2Lines_Click);
             // 
-            // txtLine2Away
+            // label27
             // 
-            this.txtLine2Away.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtLine2Away.Location = new System.Drawing.Point(419, 61);
-            this.txtLine2Away.Name = "txtLine2Away";
-            this.txtLine2Away.Size = new System.Drawing.Size(300, 25);
-            this.txtLine2Away.TabIndex = 10;
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label27.Location = new System.Drawing.Point(20, 27);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(59, 15);
+            this.label27.TabIndex = 327;
+            this.label27.Text = "HIỆP ĐẤU";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Gray;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(340, 61);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(69, 28);
+            this.button2.TabIndex = 326;
+            this.button2.Text = "LINE 2";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Gray;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(340, 95);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 28);
+            this.button1.TabIndex = 325;
+            this.button1.Text = "LINE 1";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // cbbMatch
+            // 
+            this.cbbMatch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.cbbMatch.FormattingEnabled = true;
+            this.cbbMatch.Location = new System.Drawing.Point(102, 24);
+            this.cbbMatch.Name = "cbbMatch";
+            this.cbbMatch.Size = new System.Drawing.Size(227, 25);
+            this.cbbMatch.TabIndex = 324;
             // 
             // btnKickOff1Line
             // 
@@ -1787,69 +1836,25 @@
             this.btnFinalOut.Name = "btnFinalOut";
             this.btnFinalOut.Size = new System.Drawing.Size(69, 33);
             this.btnFinalOut.TabIndex = 322;
-            this.btnFinalOut.Text = "OUT 1";
+            this.btnFinalOut.Text = "OUT";
             this.btnFinalOut.UseVisualStyleBackColor = false;
             this.btnFinalOut.Click += new System.EventHandler(this.btnFinalOut_Click);
             // 
-            // cbbMatch
+            // txtLine1Away
             // 
-            this.cbbMatch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.cbbMatch.FormattingEnabled = true;
-            this.cbbMatch.Location = new System.Drawing.Point(102, 24);
-            this.cbbMatch.Name = "cbbMatch";
-            this.cbbMatch.Size = new System.Drawing.Size(227, 25);
-            this.cbbMatch.TabIndex = 324;
+            this.txtLine1Away.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtLine1Away.Location = new System.Drawing.Point(419, 98);
+            this.txtLine1Away.Name = "txtLine1Away";
+            this.txtLine1Away.Size = new System.Drawing.Size(300, 25);
+            this.txtLine1Away.TabIndex = 11;
             // 
-            // button1
+            // txtLine2Away
             // 
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(340, 95);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 28);
-            this.button1.TabIndex = 325;
-            this.button1.Text = "LINE 1";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Gray;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(340, 61);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(69, 28);
-            this.button2.TabIndex = 326;
-            this.button2.Text = "LINE 2";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label27.Location = new System.Drawing.Point(20, 27);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(59, 15);
-            this.label27.TabIndex = 327;
-            this.label27.Text = "HIỆP ĐẤU";
-            // 
-            // btnKickOff2Lines
-            // 
-            this.btnKickOff2Lines.BackColor = System.Drawing.Color.Green;
-            this.btnKickOff2Lines.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.btnKickOff2Lines.ForeColor = System.Drawing.Color.White;
-            this.btnKickOff2Lines.Location = new System.Drawing.Point(419, 143);
-            this.btnKickOff2Lines.Name = "btnKickOff2Lines";
-            this.btnKickOff2Lines.Size = new System.Drawing.Size(303, 33);
-            this.btnKickOff2Lines.TabIndex = 328;
-            this.btnKickOff2Lines.Text = "LOWERTHIRD 2 LINES";
-            this.btnKickOff2Lines.UseVisualStyleBackColor = false;
-            this.btnKickOff2Lines.Click += new System.EventHandler(this.btnKickOff2Lines_Click);
+            this.txtLine2Away.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtLine2Away.Location = new System.Drawing.Point(419, 61);
+            this.txtLine2Away.Name = "txtLine2Away";
+            this.txtLine2Away.Size = new System.Drawing.Size(300, 25);
+            this.txtLine2Away.TabIndex = 10;
             // 
             // FrmInMatchClock
             // 

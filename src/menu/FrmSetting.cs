@@ -445,11 +445,15 @@ namespace VLeague
                 string imageLineup = "anhct" + index;
                 string imageSub = "aosub" + index;
 
+                // THÊM "(GK)" cho thủ môn (i == 0)
+                string playerName = i == 0 ? playersHome[i].Name + " (GK)" : playersHome[i].Name;
+                string playerShortName = i == 0 ? playersHome[i].ShortName + " (GK)" : playersHome[i].ShortName;
+
                 KAObject = KAScene.GetObject(longPlayer);
-                KAObject.SetValue(playersHome[i].Name);
+                KAObject.SetValue(playerName);
 
                 KAObject = KAScene.GetObject(shortPlayer);
-                KAObject.SetValue(playersHome[i].ShortName);
+                KAObject.SetValue(playerShortName);
 
                 KAObject = KAScene.GetObject(SoAo);
                 KAObject.SetValue(playersHome[i].Number.ToString());
@@ -464,7 +468,7 @@ namespace VLeague
                 KAObject.SetValue(playersHome[i].Sub);
             }
 
-            // Xử lý 10 cầu thủ dự bị (index 11-20 trong playersHome)
+            // Xử lý 10 cầu thủ dự bị (index 11-20 trong playersHome) - KHÔNG THAY ĐỔI
             for (int i = 0; i < 10; i++)
             {
                 int subIndex = i + 12; // bắt đầu từ cauthu12
@@ -495,6 +499,7 @@ namespace VLeague
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
         }
+
 
 
         public void loadCoachName(string coachName, string logo)
@@ -548,9 +553,9 @@ namespace VLeague
             KAEngine.EndTransaction();
 
             Thread.Sleep(10);
-            KAScenePlayer.Prepare(layerTSL, KAScene);
+            KAScenePlayer.Prepare(layerGoalItem, KAScene);
             Thread.Sleep(10);
-            KAScenePlayer.Play(layerTSL);
+            KAScenePlayer.Play(layerGoalItem);
         }
 
         public void loadTwoYellowCard(string playerName, string logo)
@@ -567,9 +572,9 @@ namespace VLeague
             KAEngine.EndTransaction();
 
             Thread.Sleep(10);
-            KAScenePlayer.Prepare(layerTSL, KAScene);
+            KAScenePlayer.Prepare(layerGoalItem, KAScene);
             Thread.Sleep(10);
-            KAScenePlayer.Play(layerTSL);
+            KAScenePlayer.Play(layerGoalItem);
         }
         public void loadRedCard(string playerName, string logo)
         {
@@ -585,9 +590,9 @@ namespace VLeague
             KAEngine.EndTransaction();
 
             Thread.Sleep(10);
-            KAScenePlayer.Prepare(layerTSL, KAScene);
+            KAScenePlayer.Prepare(layerGoalItem, KAScene);
             Thread.Sleep(10);
-            KAScenePlayer.Play(layerTSL);
+            KAScenePlayer.Play(layerGoalItem);
         }
 
         //Play scene Tysohno 

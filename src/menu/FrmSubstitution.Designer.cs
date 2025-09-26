@@ -109,6 +109,10 @@
             this.updateVar = new System.Windows.Forms.Button();
             this.checkVar = new System.Windows.Forms.Button();
             this.btnPinP = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.homeName.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupStatic.SuspendLayout();
@@ -119,6 +123,8 @@
             // 
             // homeName
             // 
+            this.homeName.Controls.Add(this.label9);
+            this.homeName.Controls.Add(this.label8);
             this.homeName.Controls.Add(this.btnHomeIn3);
             this.homeName.Controls.Add(this.btnHomeOut3);
             this.homeName.Controls.Add(this.btnHomeIn2);
@@ -140,9 +146,9 @@
             this.homeName.Controls.Add(this.numHomeLine1);
             this.homeName.Controls.Add(this.cbbHomeLineUp1);
             this.homeName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.homeName.Location = new System.Drawing.Point(39, 91);
+            this.homeName.Location = new System.Drawing.Point(39, 54);
             this.homeName.Name = "homeName";
-            this.homeName.Size = new System.Drawing.Size(929, 206);
+            this.homeName.Size = new System.Drawing.Size(915, 206);
             this.homeName.TabIndex = 293;
             this.homeName.TabStop = false;
             this.homeName.Text = "HOME Substitution";
@@ -152,7 +158,7 @@
             this.btnHomeIn3.BackColor = System.Drawing.Color.Green;
             this.btnHomeIn3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHomeIn3.ForeColor = System.Drawing.Color.White;
-            this.btnHomeIn3.Location = new System.Drawing.Point(463, 146);
+            this.btnHomeIn3.Location = new System.Drawing.Point(450, 146);
             this.btnHomeIn3.Name = "btnHomeIn3";
             this.btnHomeIn3.Size = new System.Drawing.Size(111, 33);
             this.btnHomeIn3.TabIndex = 319;
@@ -165,7 +171,7 @@
             this.btnHomeOut3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnHomeOut3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHomeOut3.ForeColor = System.Drawing.Color.White;
-            this.btnHomeOut3.Location = new System.Drawing.Point(349, 146);
+            this.btnHomeOut3.Location = new System.Drawing.Point(336, 146);
             this.btnHomeOut3.Name = "btnHomeOut3";
             this.btnHomeOut3.Size = new System.Drawing.Size(111, 33);
             this.btnHomeOut3.TabIndex = 318;
@@ -178,7 +184,7 @@
             this.btnHomeIn2.BackColor = System.Drawing.Color.Green;
             this.btnHomeIn2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHomeIn2.ForeColor = System.Drawing.Color.White;
-            this.btnHomeIn2.Location = new System.Drawing.Point(463, 103);
+            this.btnHomeIn2.Location = new System.Drawing.Point(450, 103);
             this.btnHomeIn2.Name = "btnHomeIn2";
             this.btnHomeIn2.Size = new System.Drawing.Size(111, 33);
             this.btnHomeIn2.TabIndex = 317;
@@ -191,7 +197,7 @@
             this.btnHomeOut2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnHomeOut2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHomeOut2.ForeColor = System.Drawing.Color.White;
-            this.btnHomeOut2.Location = new System.Drawing.Point(349, 103);
+            this.btnHomeOut2.Location = new System.Drawing.Point(336, 103);
             this.btnHomeOut2.Name = "btnHomeOut2";
             this.btnHomeOut2.Size = new System.Drawing.Size(111, 33);
             this.btnHomeOut2.TabIndex = 316;
@@ -204,7 +210,7 @@
             this.btnHomeIn1.BackColor = System.Drawing.Color.Green;
             this.btnHomeIn1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHomeIn1.ForeColor = System.Drawing.Color.White;
-            this.btnHomeIn1.Location = new System.Drawing.Point(463, 61);
+            this.btnHomeIn1.Location = new System.Drawing.Point(450, 61);
             this.btnHomeIn1.Name = "btnHomeIn1";
             this.btnHomeIn1.Size = new System.Drawing.Size(111, 33);
             this.btnHomeIn1.TabIndex = 315;
@@ -217,7 +223,7 @@
             this.btnHomeOut1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnHomeOut1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHomeOut1.ForeColor = System.Drawing.Color.White;
-            this.btnHomeOut1.Location = new System.Drawing.Point(349, 61);
+            this.btnHomeOut1.Location = new System.Drawing.Point(336, 61);
             this.btnHomeOut1.Name = "btnHomeOut1";
             this.btnHomeOut1.Size = new System.Drawing.Size(111, 33);
             this.btnHomeOut1.TabIndex = 314;
@@ -228,7 +234,7 @@
             // numHomeSub3
             // 
             this.numHomeSub3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHomeSub3.Location = new System.Drawing.Point(849, 148);
+            this.numHomeSub3.Location = new System.Drawing.Point(836, 148);
             this.numHomeSub3.Name = "numHomeSub3";
             this.numHomeSub3.Size = new System.Drawing.Size(44, 29);
             this.numHomeSub3.TabIndex = 313;
@@ -239,7 +245,7 @@
             // 
             this.cbbHomeSub3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbHomeSub3.FormattingEnabled = true;
-            this.cbbHomeSub3.Location = new System.Drawing.Point(597, 148);
+            this.cbbHomeSub3.Location = new System.Drawing.Point(584, 148);
             this.cbbHomeSub3.Name = "cbbHomeSub3";
             this.cbbHomeSub3.Size = new System.Drawing.Size(236, 29);
             this.cbbHomeSub3.TabIndex = 312;
@@ -248,7 +254,7 @@
             // numHomeSub2
             // 
             this.numHomeSub2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHomeSub2.Location = new System.Drawing.Point(849, 105);
+            this.numHomeSub2.Location = new System.Drawing.Point(836, 105);
             this.numHomeSub2.Name = "numHomeSub2";
             this.numHomeSub2.Size = new System.Drawing.Size(44, 29);
             this.numHomeSub2.TabIndex = 310;
@@ -259,7 +265,7 @@
             // 
             this.cbbHomeSub2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbHomeSub2.FormattingEnabled = true;
-            this.cbbHomeSub2.Location = new System.Drawing.Point(597, 105);
+            this.cbbHomeSub2.Location = new System.Drawing.Point(584, 105);
             this.cbbHomeSub2.Name = "cbbHomeSub2";
             this.cbbHomeSub2.Size = new System.Drawing.Size(236, 29);
             this.cbbHomeSub2.TabIndex = 309;
@@ -269,7 +275,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(834, 31);
+            this.label6.Location = new System.Drawing.Point(821, 31);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 21);
             this.label6.TabIndex = 307;
@@ -278,7 +284,7 @@
             // numHomeSub1
             // 
             this.numHomeSub1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHomeSub1.Location = new System.Drawing.Point(849, 63);
+            this.numHomeSub1.Location = new System.Drawing.Point(836, 63);
             this.numHomeSub1.Name = "numHomeSub1";
             this.numHomeSub1.Size = new System.Drawing.Size(44, 29);
             this.numHomeSub1.TabIndex = 306;
@@ -289,7 +295,7 @@
             // 
             this.cbbHomeSub1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbHomeSub1.FormattingEnabled = true;
-            this.cbbHomeSub1.Location = new System.Drawing.Point(597, 63);
+            this.cbbHomeSub1.Location = new System.Drawing.Point(584, 63);
             this.cbbHomeSub1.Name = "cbbHomeSub1";
             this.cbbHomeSub1.Size = new System.Drawing.Size(236, 29);
             this.cbbHomeSub1.TabIndex = 305;
@@ -298,7 +304,7 @@
             // numHomeLine3
             // 
             this.numHomeLine3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHomeLine3.Location = new System.Drawing.Point(284, 148);
+            this.numHomeLine3.Location = new System.Drawing.Point(271, 148);
             this.numHomeLine3.Name = "numHomeLine3";
             this.numHomeLine3.Size = new System.Drawing.Size(44, 29);
             this.numHomeLine3.TabIndex = 303;
@@ -309,7 +315,7 @@
             // 
             this.cbbHomeLineUp3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbHomeLineUp3.FormattingEnabled = true;
-            this.cbbHomeLineUp3.Location = new System.Drawing.Point(32, 148);
+            this.cbbHomeLineUp3.Location = new System.Drawing.Point(19, 148);
             this.cbbHomeLineUp3.Name = "cbbHomeLineUp3";
             this.cbbHomeLineUp3.Size = new System.Drawing.Size(236, 29);
             this.cbbHomeLineUp3.TabIndex = 302;
@@ -318,7 +324,7 @@
             // numHomeLine2
             // 
             this.numHomeLine2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHomeLine2.Location = new System.Drawing.Point(284, 105);
+            this.numHomeLine2.Location = new System.Drawing.Point(271, 105);
             this.numHomeLine2.Name = "numHomeLine2";
             this.numHomeLine2.Size = new System.Drawing.Size(44, 29);
             this.numHomeLine2.TabIndex = 300;
@@ -329,7 +335,7 @@
             // 
             this.cbbHomeLineUp2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbHomeLineUp2.FormattingEnabled = true;
-            this.cbbHomeLineUp2.Location = new System.Drawing.Point(32, 105);
+            this.cbbHomeLineUp2.Location = new System.Drawing.Point(19, 105);
             this.cbbHomeLineUp2.Name = "cbbHomeLineUp2";
             this.cbbHomeLineUp2.Size = new System.Drawing.Size(236, 29);
             this.cbbHomeLineUp2.TabIndex = 299;
@@ -339,7 +345,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(274, 31);
+            this.label18.Location = new System.Drawing.Point(261, 31);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(70, 21);
             this.label18.TabIndex = 293;
@@ -348,7 +354,7 @@
             // numHomeLine1
             // 
             this.numHomeLine1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHomeLine1.Location = new System.Drawing.Point(284, 63);
+            this.numHomeLine1.Location = new System.Drawing.Point(271, 63);
             this.numHomeLine1.Name = "numHomeLine1";
             this.numHomeLine1.Size = new System.Drawing.Size(44, 29);
             this.numHomeLine1.TabIndex = 3;
@@ -359,7 +365,7 @@
             // 
             this.cbbHomeLineUp1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbHomeLineUp1.FormattingEnabled = true;
-            this.cbbHomeLineUp1.Location = new System.Drawing.Point(32, 63);
+            this.cbbHomeLineUp1.Location = new System.Drawing.Point(19, 63);
             this.cbbHomeLineUp1.Name = "cbbHomeLineUp1";
             this.cbbHomeLineUp1.Size = new System.Drawing.Size(236, 29);
             this.cbbHomeLineUp1.TabIndex = 2;
@@ -367,6 +373,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.btnAwayIn3);
             this.groupBox1.Controls.Add(this.btnAwayOut3);
             this.groupBox1.Controls.Add(this.btnAwayIn2);
@@ -388,9 +396,9 @@
             this.groupBox1.Controls.Add(this.numAwayLine1);
             this.groupBox1.Controls.Add(this.cbbAwayLineUp1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(39, 303);
+            this.groupBox1.Location = new System.Drawing.Point(39, 266);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(929, 210);
+            this.groupBox1.Size = new System.Drawing.Size(915, 210);
             this.groupBox1.TabIndex = 294;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AWAY Substitution";
@@ -400,7 +408,7 @@
             this.btnAwayIn3.BackColor = System.Drawing.Color.Green;
             this.btnAwayIn3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnAwayIn3.ForeColor = System.Drawing.Color.White;
-            this.btnAwayIn3.Location = new System.Drawing.Point(463, 147);
+            this.btnAwayIn3.Location = new System.Drawing.Point(446, 147);
             this.btnAwayIn3.Name = "btnAwayIn3";
             this.btnAwayIn3.Size = new System.Drawing.Size(111, 33);
             this.btnAwayIn3.TabIndex = 325;
@@ -413,7 +421,7 @@
             this.btnAwayOut3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAwayOut3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnAwayOut3.ForeColor = System.Drawing.Color.White;
-            this.btnAwayOut3.Location = new System.Drawing.Point(349, 147);
+            this.btnAwayOut3.Location = new System.Drawing.Point(332, 147);
             this.btnAwayOut3.Name = "btnAwayOut3";
             this.btnAwayOut3.Size = new System.Drawing.Size(111, 33);
             this.btnAwayOut3.TabIndex = 324;
@@ -426,7 +434,7 @@
             this.btnAwayIn2.BackColor = System.Drawing.Color.Green;
             this.btnAwayIn2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnAwayIn2.ForeColor = System.Drawing.Color.White;
-            this.btnAwayIn2.Location = new System.Drawing.Point(463, 104);
+            this.btnAwayIn2.Location = new System.Drawing.Point(446, 104);
             this.btnAwayIn2.Name = "btnAwayIn2";
             this.btnAwayIn2.Size = new System.Drawing.Size(111, 33);
             this.btnAwayIn2.TabIndex = 323;
@@ -439,7 +447,7 @@
             this.btnAwayOut2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAwayOut2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnAwayOut2.ForeColor = System.Drawing.Color.White;
-            this.btnAwayOut2.Location = new System.Drawing.Point(349, 104);
+            this.btnAwayOut2.Location = new System.Drawing.Point(332, 104);
             this.btnAwayOut2.Name = "btnAwayOut2";
             this.btnAwayOut2.Size = new System.Drawing.Size(111, 33);
             this.btnAwayOut2.TabIndex = 322;
@@ -452,7 +460,7 @@
             this.btnAwayIn1.BackColor = System.Drawing.Color.Green;
             this.btnAwayIn1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnAwayIn1.ForeColor = System.Drawing.Color.White;
-            this.btnAwayIn1.Location = new System.Drawing.Point(463, 62);
+            this.btnAwayIn1.Location = new System.Drawing.Point(446, 62);
             this.btnAwayIn1.Name = "btnAwayIn1";
             this.btnAwayIn1.Size = new System.Drawing.Size(111, 33);
             this.btnAwayIn1.TabIndex = 321;
@@ -465,7 +473,7 @@
             this.btnAwayOut1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAwayOut1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnAwayOut1.ForeColor = System.Drawing.Color.White;
-            this.btnAwayOut1.Location = new System.Drawing.Point(349, 62);
+            this.btnAwayOut1.Location = new System.Drawing.Point(332, 62);
             this.btnAwayOut1.Name = "btnAwayOut1";
             this.btnAwayOut1.Size = new System.Drawing.Size(111, 33);
             this.btnAwayOut1.TabIndex = 320;
@@ -476,7 +484,7 @@
             // numAwaySub3
             // 
             this.numAwaySub3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAwaySub3.Location = new System.Drawing.Point(852, 151);
+            this.numAwaySub3.Location = new System.Drawing.Point(835, 151);
             this.numAwaySub3.Name = "numAwaySub3";
             this.numAwaySub3.Size = new System.Drawing.Size(44, 29);
             this.numAwaySub3.TabIndex = 313;
@@ -487,7 +495,7 @@
             // 
             this.cbbAwaySub3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbAwaySub3.FormattingEnabled = true;
-            this.cbbAwaySub3.Location = new System.Drawing.Point(597, 151);
+            this.cbbAwaySub3.Location = new System.Drawing.Point(580, 151);
             this.cbbAwaySub3.Name = "cbbAwaySub3";
             this.cbbAwaySub3.Size = new System.Drawing.Size(236, 29);
             this.cbbAwaySub3.TabIndex = 312;
@@ -496,7 +504,7 @@
             // numAwaySub2
             // 
             this.numAwaySub2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAwaySub2.Location = new System.Drawing.Point(852, 107);
+            this.numAwaySub2.Location = new System.Drawing.Point(835, 107);
             this.numAwaySub2.Name = "numAwaySub2";
             this.numAwaySub2.Size = new System.Drawing.Size(44, 29);
             this.numAwaySub2.TabIndex = 310;
@@ -507,7 +515,7 @@
             // 
             this.cbbAwaySub2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbAwaySub2.FormattingEnabled = true;
-            this.cbbAwaySub2.Location = new System.Drawing.Point(597, 107);
+            this.cbbAwaySub2.Location = new System.Drawing.Point(580, 107);
             this.cbbAwaySub2.Name = "cbbAwaySub2";
             this.cbbAwaySub2.Size = new System.Drawing.Size(236, 29);
             this.cbbAwaySub2.TabIndex = 309;
@@ -517,7 +525,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(844, 38);
+            this.label10.Location = new System.Drawing.Point(827, 38);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(70, 21);
             this.label10.TabIndex = 307;
@@ -526,7 +534,7 @@
             // numAwaySub1
             // 
             this.numAwaySub1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAwaySub1.Location = new System.Drawing.Point(852, 65);
+            this.numAwaySub1.Location = new System.Drawing.Point(835, 65);
             this.numAwaySub1.Name = "numAwaySub1";
             this.numAwaySub1.Size = new System.Drawing.Size(44, 29);
             this.numAwaySub1.TabIndex = 306;
@@ -537,7 +545,7 @@
             // 
             this.cbbAwaySub1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbAwaySub1.FormattingEnabled = true;
-            this.cbbAwaySub1.Location = new System.Drawing.Point(597, 65);
+            this.cbbAwaySub1.Location = new System.Drawing.Point(580, 65);
             this.cbbAwaySub1.Name = "cbbAwaySub1";
             this.cbbAwaySub1.Size = new System.Drawing.Size(236, 29);
             this.cbbAwaySub1.TabIndex = 305;
@@ -546,7 +554,7 @@
             // numAwayLine3
             // 
             this.numAwayLine3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAwayLine3.Location = new System.Drawing.Point(287, 150);
+            this.numAwayLine3.Location = new System.Drawing.Point(270, 150);
             this.numAwayLine3.Name = "numAwayLine3";
             this.numAwayLine3.Size = new System.Drawing.Size(44, 29);
             this.numAwayLine3.TabIndex = 303;
@@ -557,7 +565,7 @@
             // 
             this.cbbAwayLineUp3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbAwayLineUp3.FormattingEnabled = true;
-            this.cbbAwayLineUp3.Location = new System.Drawing.Point(32, 150);
+            this.cbbAwayLineUp3.Location = new System.Drawing.Point(15, 150);
             this.cbbAwayLineUp3.Name = "cbbAwayLineUp3";
             this.cbbAwayLineUp3.Size = new System.Drawing.Size(236, 29);
             this.cbbAwayLineUp3.TabIndex = 302;
@@ -566,7 +574,7 @@
             // numAwayLine2
             // 
             this.numAwayLine2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAwayLine2.Location = new System.Drawing.Point(287, 106);
+            this.numAwayLine2.Location = new System.Drawing.Point(270, 106);
             this.numAwayLine2.Name = "numAwayLine2";
             this.numAwayLine2.Size = new System.Drawing.Size(44, 29);
             this.numAwayLine2.TabIndex = 300;
@@ -577,7 +585,7 @@
             // 
             this.cbbAwayLineUp2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbAwayLineUp2.FormattingEnabled = true;
-            this.cbbAwayLineUp2.Location = new System.Drawing.Point(32, 106);
+            this.cbbAwayLineUp2.Location = new System.Drawing.Point(15, 106);
             this.cbbAwayLineUp2.Name = "cbbAwayLineUp2";
             this.cbbAwayLineUp2.Size = new System.Drawing.Size(236, 29);
             this.cbbAwayLineUp2.TabIndex = 299;
@@ -587,7 +595,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(279, 35);
+            this.label14.Location = new System.Drawing.Point(262, 35);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(70, 21);
             this.label14.TabIndex = 293;
@@ -596,7 +604,7 @@
             // numAwayLine1
             // 
             this.numAwayLine1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAwayLine1.Location = new System.Drawing.Point(287, 64);
+            this.numAwayLine1.Location = new System.Drawing.Point(270, 64);
             this.numAwayLine1.Name = "numAwayLine1";
             this.numAwayLine1.Size = new System.Drawing.Size(44, 29);
             this.numAwayLine1.TabIndex = 3;
@@ -607,7 +615,7 @@
             // 
             this.cbbAwayLineUp1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbAwayLineUp1.FormattingEnabled = true;
-            this.cbbAwayLineUp1.Location = new System.Drawing.Point(32, 64);
+            this.cbbAwayLineUp1.Location = new System.Drawing.Point(15, 64);
             this.cbbAwayLineUp1.Name = "cbbAwayLineUp1";
             this.cbbAwayLineUp1.Size = new System.Drawing.Size(236, 29);
             this.cbbAwayLineUp1.TabIndex = 2;
@@ -617,7 +625,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label16.Location = new System.Drawing.Point(1555, 76);
+            this.label16.Location = new System.Drawing.Point(1455, 48);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(80, 21);
             this.label16.TabIndex = 299;
@@ -626,7 +634,7 @@
             // stopAll
             // 
             this.stopAll.Image = ((System.Drawing.Image)(resources.GetObject("stopAll.Image")));
-            this.stopAll.Location = new System.Drawing.Point(1559, 100);
+            this.stopAll.Location = new System.Drawing.Point(1459, 72);
             this.stopAll.Name = "stopAll";
             this.stopAll.Size = new System.Drawing.Size(73, 68);
             this.stopAll.TabIndex = 298;
@@ -640,7 +648,7 @@
             this.clearCbb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearCbb.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.clearCbb.ForeColor = System.Drawing.Color.White;
-            this.clearCbb.Location = new System.Drawing.Point(1309, 94);
+            this.clearCbb.Location = new System.Drawing.Point(1227, 91);
             this.clearCbb.Name = "clearCbb";
             this.clearCbb.Size = new System.Drawing.Size(118, 34);
             this.clearCbb.TabIndex = 301;
@@ -668,7 +676,7 @@
             this.groupStatic.Controls.Add(this.away1);
             this.groupStatic.Controls.Add(this.cbbStatic1);
             this.groupStatic.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.groupStatic.Location = new System.Drawing.Point(999, 276);
+            this.groupStatic.Location = new System.Drawing.Point(974, 239);
             this.groupStatic.Name = "groupStatic";
             this.groupStatic.Size = new System.Drawing.Size(649, 237);
             this.groupStatic.TabIndex = 321;
@@ -682,11 +690,11 @@
             this.updateData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.updateData.ForeColor = System.Drawing.Color.White;
-            this.updateData.Location = new System.Drawing.Point(188, 182);
+            this.updateData.Location = new System.Drawing.Point(155, 182);
             this.updateData.Name = "updateData";
-            this.updateData.Size = new System.Drawing.Size(81, 29);
+            this.updateData.Size = new System.Drawing.Size(103, 29);
             this.updateData.TabIndex = 328;
-            this.updateData.Text = "SAVE";
+            this.updateData.Text = "SAVE DB";
             this.updateData.UseVisualStyleBackColor = false;
             this.updateData.Click += new System.EventHandler(this.updateData_Click);
             // 
@@ -695,7 +703,7 @@
             this.btnStats3.BackColor = System.Drawing.Color.Green;
             this.btnStats3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnStats3.ForeColor = System.Drawing.Color.White;
-            this.btnStats3.Location = new System.Drawing.Point(428, 136);
+            this.btnStats3.Location = new System.Drawing.Point(415, 136);
             this.btnStats3.Name = "btnStats3";
             this.btnStats3.Size = new System.Drawing.Size(99, 33);
             this.btnStats3.TabIndex = 327;
@@ -708,9 +716,9 @@
             this.statsOut3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.statsOut3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.statsOut3.ForeColor = System.Drawing.Color.White;
-            this.statsOut3.Location = new System.Drawing.Point(534, 136);
+            this.statsOut3.Location = new System.Drawing.Point(521, 136);
             this.statsOut3.Name = "statsOut3";
-            this.statsOut3.Size = new System.Drawing.Size(99, 33);
+            this.statsOut3.Size = new System.Drawing.Size(79, 33);
             this.statsOut3.TabIndex = 326;
             this.statsOut3.Text = "OUT";
             this.statsOut3.UseVisualStyleBackColor = false;
@@ -721,7 +729,7 @@
             this.btnStats2.BackColor = System.Drawing.Color.Green;
             this.btnStats2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnStats2.ForeColor = System.Drawing.Color.White;
-            this.btnStats2.Location = new System.Drawing.Point(428, 87);
+            this.btnStats2.Location = new System.Drawing.Point(415, 87);
             this.btnStats2.Name = "btnStats2";
             this.btnStats2.Size = new System.Drawing.Size(99, 33);
             this.btnStats2.TabIndex = 325;
@@ -734,9 +742,9 @@
             this.statsOut2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.statsOut2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.statsOut2.ForeColor = System.Drawing.Color.White;
-            this.statsOut2.Location = new System.Drawing.Point(534, 87);
+            this.statsOut2.Location = new System.Drawing.Point(521, 87);
             this.statsOut2.Name = "statsOut2";
-            this.statsOut2.Size = new System.Drawing.Size(99, 33);
+            this.statsOut2.Size = new System.Drawing.Size(79, 33);
             this.statsOut2.TabIndex = 324;
             this.statsOut2.Text = "OUT";
             this.statsOut2.UseVisualStyleBackColor = false;
@@ -747,7 +755,7 @@
             this.btnStats1.BackColor = System.Drawing.Color.Green;
             this.btnStats1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnStats1.ForeColor = System.Drawing.Color.White;
-            this.btnStats1.Location = new System.Drawing.Point(428, 40);
+            this.btnStats1.Location = new System.Drawing.Point(415, 40);
             this.btnStats1.Name = "btnStats1";
             this.btnStats1.Size = new System.Drawing.Size(99, 33);
             this.btnStats1.TabIndex = 323;
@@ -760,9 +768,9 @@
             this.statsOut1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.statsOut1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.statsOut1.ForeColor = System.Drawing.Color.White;
-            this.statsOut1.Location = new System.Drawing.Point(534, 40);
+            this.statsOut1.Location = new System.Drawing.Point(521, 40);
             this.statsOut1.Name = "statsOut1";
-            this.statsOut1.Size = new System.Drawing.Size(99, 33);
+            this.statsOut1.Size = new System.Drawing.Size(79, 33);
             this.statsOut1.TabIndex = 322;
             this.statsOut1.Text = "OUT";
             this.statsOut1.UseVisualStyleBackColor = false;
@@ -771,7 +779,7 @@
             // home3
             // 
             this.home3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.home3.Location = new System.Drawing.Point(31, 138);
+            this.home3.Location = new System.Drawing.Point(18, 138);
             this.home3.Name = "home3";
             this.home3.Size = new System.Drawing.Size(58, 29);
             this.home3.TabIndex = 12;
@@ -780,7 +788,7 @@
             // away3
             // 
             this.away3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.away3.Location = new System.Drawing.Point(349, 138);
+            this.away3.Location = new System.Drawing.Point(336, 138);
             this.away3.Name = "away3";
             this.away3.Size = new System.Drawing.Size(58, 29);
             this.away3.TabIndex = 11;
@@ -790,7 +798,7 @@
             // 
             this.cbbStatic3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbStatic3.FormattingEnabled = true;
-            this.cbbStatic3.Location = new System.Drawing.Point(101, 138);
+            this.cbbStatic3.Location = new System.Drawing.Point(88, 138);
             this.cbbStatic3.Name = "cbbStatic3";
             this.cbbStatic3.Size = new System.Drawing.Size(236, 29);
             this.cbbStatic3.TabIndex = 10;
@@ -799,7 +807,7 @@
             // home2
             // 
             this.home2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.home2.Location = new System.Drawing.Point(31, 89);
+            this.home2.Location = new System.Drawing.Point(18, 89);
             this.home2.Name = "home2";
             this.home2.Size = new System.Drawing.Size(58, 29);
             this.home2.TabIndex = 9;
@@ -808,7 +816,7 @@
             // away2
             // 
             this.away2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.away2.Location = new System.Drawing.Point(349, 89);
+            this.away2.Location = new System.Drawing.Point(336, 89);
             this.away2.Name = "away2";
             this.away2.Size = new System.Drawing.Size(58, 29);
             this.away2.TabIndex = 8;
@@ -818,7 +826,7 @@
             // 
             this.cbbStatic2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbStatic2.FormattingEnabled = true;
-            this.cbbStatic2.Location = new System.Drawing.Point(101, 89);
+            this.cbbStatic2.Location = new System.Drawing.Point(88, 89);
             this.cbbStatic2.Name = "cbbStatic2";
             this.cbbStatic2.Size = new System.Drawing.Size(236, 29);
             this.cbbStatic2.TabIndex = 7;
@@ -827,7 +835,7 @@
             // home1
             // 
             this.home1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.home1.Location = new System.Drawing.Point(31, 42);
+            this.home1.Location = new System.Drawing.Point(18, 42);
             this.home1.Name = "home1";
             this.home1.Size = new System.Drawing.Size(58, 29);
             this.home1.TabIndex = 6;
@@ -836,7 +844,7 @@
             // away1
             // 
             this.away1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.away1.Location = new System.Drawing.Point(349, 42);
+            this.away1.Location = new System.Drawing.Point(336, 42);
             this.away1.Name = "away1";
             this.away1.Size = new System.Drawing.Size(58, 29);
             this.away1.TabIndex = 5;
@@ -846,7 +854,7 @@
             // 
             this.cbbStatic1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbStatic1.FormattingEnabled = true;
-            this.cbbStatic1.Location = new System.Drawing.Point(101, 42);
+            this.cbbStatic1.Location = new System.Drawing.Point(88, 42);
             this.cbbStatic1.Name = "cbbStatic1";
             this.cbbStatic1.Size = new System.Drawing.Size(236, 29);
             this.cbbStatic1.TabIndex = 4;
@@ -870,9 +878,9 @@
             this.groupBox2.Controls.Add(this.checkVar);
             this.groupBox2.Controls.Add(this.btnPinP);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(39, 539);
+            this.groupBox2.Location = new System.Drawing.Point(39, 498);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1609, 382);
+            this.groupBox2.Size = new System.Drawing.Size(1598, 382);
             this.groupBox2.TabIndex = 327;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHECK VAR";
@@ -882,42 +890,42 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(406, 171);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 21);
+            this.label7.Size = new System.Drawing.Size(232, 21);
             this.label7.TabIndex = 335;
-            this.label7.Text = "Thay TEXT [2]";
+            this.label7.Text = "Thay TEXT [cột DECISION] [3]";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(42, 171);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 21);
+            this.label5.Size = new System.Drawing.Size(219, 21);
             this.label5.TabIndex = 334;
-            this.label5.Text = "Thay TEXT [1]";
+            this.label5.Text = "Thay TEXT [cột UPDATE] [2]";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(270, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 21);
+            this.label4.Size = new System.Drawing.Size(131, 21);
             this.label4.TabIndex = 333;
-            this.label4.Text = "Out Effect";
+            this.label4.Text = "Out Effect [End]";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(42, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 21);
+            this.label2.Size = new System.Drawing.Size(178, 21);
             this.label2.TabIndex = 332;
-            this.label2.Text = "Var đang kiểm tra...";
+            this.label2.Text = "Var đang kiểm tra...[1]";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.MidnightBlue;
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(1215, 42);
+            this.panel2.Location = new System.Drawing.Point(1178, 42);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(378, 28);
             this.panel2.TabIndex = 331;
@@ -936,7 +944,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Green;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(810, 42);
+            this.panel1.Location = new System.Drawing.Point(773, 42);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(378, 28);
             this.panel1.TabIndex = 330;
@@ -987,7 +995,7 @@
             this.listDecision.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listDecision.FormattingEnabled = true;
             this.listDecision.ItemHeight = 21;
-            this.listDecision.Location = new System.Drawing.Point(1216, 70);
+            this.listDecision.Location = new System.Drawing.Point(1179, 70);
             this.listDecision.Name = "listDecision";
             this.listDecision.Size = new System.Drawing.Size(377, 298);
             this.listDecision.TabIndex = 321;
@@ -998,7 +1006,7 @@
             this.listUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listUpdate.FormattingEnabled = true;
             this.listUpdate.ItemHeight = 21;
-            this.listUpdate.Location = new System.Drawing.Point(811, 69);
+            this.listUpdate.Location = new System.Drawing.Point(774, 69);
             this.listUpdate.Name = "listUpdate";
             this.listUpdate.Size = new System.Drawing.Size(377, 298);
             this.listUpdate.TabIndex = 320;
@@ -1055,6 +1063,42 @@
             this.btnPinP.Text = "VAR PIP";
             this.btnPinP.UseVisualStyleBackColor = false;
             this.btnPinP.Click += new System.EventHandler(this.btnPinP_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(376, 37);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(31, 21);
+            this.label8.TabIndex = 335;
+            this.label8.Text = "[1]";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(466, 37);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 21);
+            this.label9.TabIndex = 336;
+            this.label9.Text = "[2] -> [3]";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(462, 40);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 21);
+            this.label11.TabIndex = 338;
+            this.label11.Text = "[2] -> [3]";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(372, 40);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(31, 21);
+            this.label12.TabIndex = 337;
+            this.label12.Text = "[1]";
             // 
             // FrmSubstitution
             // 
@@ -1171,5 +1215,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }

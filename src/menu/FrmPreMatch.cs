@@ -89,7 +89,7 @@ namespace VLeague.src.menu
         private void btnStopMatchID_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
 
         private void btnWeather_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace VLeague.src.menu
         private void btnStopWeather_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
 
         private void btnGroupSTD_Click(object sender, EventArgs e)
@@ -174,7 +174,7 @@ namespace VLeague.src.menu
         private void btnStopGroupSTD_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
 
 
@@ -212,7 +212,7 @@ namespace VLeague.src.menu
         private void btnStopReferee_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
         private void btnVar_Click(object sender, EventArgs e)
         {
@@ -242,13 +242,13 @@ namespace VLeague.src.menu
         private void btnStopVar_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerPreMatch);
         }
 
         private void stopAll_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.StopAll();
+            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
         }
 
         private void btnPlayHomeLinup_Click(object sender, EventArgs e)

@@ -102,7 +102,7 @@ namespace VLeague.src.menu
                     group.ForeColor = homeTextColor; // Đổi màu chữ tiêu đề GroupBox
                     foreach (Control ctrl in group.Controls)
                     {
-                        if (ctrl is Label || ctrl is TextBox)
+                        if (ctrl is Label)
                         {
                             ctrl.ForeColor = homeTextColor;
                         }
@@ -115,7 +115,7 @@ namespace VLeague.src.menu
                     group.ForeColor = awayTextColor; // Đổi màu chữ tiêu đề GroupBox
                     foreach (Control ctrl in group.Controls)
                     {
-                        if (ctrl is Label || ctrl is TextBox)
+                        if (ctrl is Label)
                         {
                             ctrl.ForeColor = awayTextColor;
                         }
@@ -517,6 +517,9 @@ namespace VLeague.src.menu
             Static.numberHomeScore = HomeScore.Value.ToString();
             Static.numberAwayScore = AwayScore.Value.ToString();
             //UpdateMatchTime();
+            string tiso1 = Static.numberHomeScore;
+            string tiso2 = Static.numberAwayScore;
+            FrmKarismaMenu.FrmSetting.updatePermClock(tiso1, tiso2);
 
         }
 
@@ -525,6 +528,9 @@ namespace VLeague.src.menu
             Static.numberHomeScore = HomeScore.Value.ToString();
             Static.numberAwayScore = AwayScore.Value.ToString();
             //UpdateMatchTime();
+            string tiso1 = Static.numberHomeScore;
+            string tiso2 = Static.numberAwayScore;
+            FrmKarismaMenu.FrmSetting.updatePermClock(tiso1, tiso2);
 
         }
         private void LTHomePlayer_Click(object sender, EventArgs e)
@@ -747,7 +753,7 @@ namespace VLeague.src.menu
             switch (HomeYellow.Tag)
             {
                 case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
+                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerGoalItem);
                     break;
                 case 1:
                     FrmKarismaMenu.FrmSetting.loadYellowCard(cbbHomeCard.Text, TeamInfor.homeLogo);
@@ -768,7 +774,7 @@ namespace VLeague.src.menu
             switch (AwayYellow.Tag)
             {
                 case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
+                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerGoalItem);
                     break;
                 case 1:
                     FrmKarismaMenu.FrmSetting.loadYellowCard(cbbAwayCard.Text, TeamInfor.awayLogo);
@@ -789,7 +795,7 @@ namespace VLeague.src.menu
             switch (Home2Yellow.Tag)
             {
                 case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
+                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerGoalItem);
                     break;
                 case 1:
                     FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbHomeCard.Text, TeamInfor.homeLogo);
@@ -810,7 +816,7 @@ namespace VLeague.src.menu
             switch (Away2Yellow.Tag)
             {
                 case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
+                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerGoalItem);
                     break;
                 case 1:
                     FrmKarismaMenu.FrmSetting.loadTwoYellowCard(cbbAwayCard.Text, TeamInfor.awayLogo);
@@ -831,7 +837,7 @@ namespace VLeague.src.menu
             switch (HomeRed.Tag)
             {
                 case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
+                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerGoalItem);
                     break;
                 case 1:
                     FrmKarismaMenu.FrmSetting.loadRedCard(cbbHomeCard.Text, TeamInfor.homeLogo);
@@ -852,7 +858,7 @@ namespace VLeague.src.menu
             switch (AwayRed.Tag)
             {
                 case 0:
-                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerTSL);
+                    FrmKarismaMenu.FrmSetting.Resume(FrmSetting.layerGoalItem);
                     break;
                 case 1:
                     FrmKarismaMenu.FrmSetting.loadRedCard(cbbAwayCard.Text, TeamInfor.homeLogo);
@@ -864,42 +870,42 @@ namespace VLeague.src.menu
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerGoalItem);
         }
 
         private void StopAwayYellow_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerGoalItem);
         }
 
         private void StopHome2Yellow_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerGoalItem);
         }
 
         private void StopAway2Yellow_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerGoalItem);
         }
 
         private void StopHomeRed_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerGoalItem);
         }
 
         private void StopAwayRed_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             clearTagButtonTSL(clickedButton);
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerTSL);
+            FrmKarismaMenu.FrmSetting.Play(FrmSetting.layerGoalItem);
         }
 
         private void showHomeCoach_Click(object sender, EventArgs e)
@@ -1041,6 +1047,7 @@ namespace VLeague.src.menu
 
         private void homeGoalEffect_Click(object sender, EventArgs e)
         {
+            HomeScore.Value += 1;
             UpdateMatchScore();
             string tiso1 = Static.numberHomeScore;
             string tiso2 = Static.numberAwayScore;
@@ -1049,6 +1056,7 @@ namespace VLeague.src.menu
         }
         private void awayGoalEffect_Click(object sender, EventArgs e)
         {
+            AwayScore.Value += 1;
             UpdateMatchScore();
             string tiso1 = Static.numberHomeScore;
             string tiso2 = Static.numberAwayScore;
