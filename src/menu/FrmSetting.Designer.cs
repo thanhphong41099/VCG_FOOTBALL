@@ -119,29 +119,29 @@
             this.groupSetting.TabIndex = 199;
             this.groupSetting.TabStop = false;
             this.groupSetting.Text = "CONNECTION";
-            //
+            // 
             // cboSDKType
-            //
+            // 
             this.cboSDKType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSDKType.FormattingEnabled = true;
             this.cboSDKType.Items.AddRange(new object[] {
             "K3D AsyncEngine",
             "Karisma SDK"});
-            this.cboSDKType.Location = new System.Drawing.Point(212, 38);
+            this.cboSDKType.Location = new System.Drawing.Point(152, 146);
             this.cboSDKType.Name = "cboSDKType";
             this.cboSDKType.Size = new System.Drawing.Size(279, 29);
             this.cboSDKType.TabIndex = 180;
             this.cboSDKType.SelectedIndexChanged += new System.EventHandler(this.cboSDKType_SelectedIndexChanged);
-            //
+            // 
             // labelSDKType
-            //
+            // 
             this.labelSDKType.AutoSize = true;
-            this.labelSDKType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.labelSDKType.Location = new System.Drawing.Point(43, 41);
+            this.labelSDKType.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.labelSDKType.Location = new System.Drawing.Point(19, 150);
             this.labelSDKType.Name = "labelSDKType";
-            this.labelSDKType.Size = new System.Drawing.Size(146, 21);
+            this.labelSDKType.Size = new System.Drawing.Size(83, 21);
             this.labelSDKType.TabIndex = 0;
-            this.labelSDKType.Text = "Chọn Visual SDK";
+            this.labelSDKType.Text = "CG Server:";
             // 
             // btnConnectDB
             // 
@@ -150,7 +150,7 @@
             this.btnConnectDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnectDB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnConnectDB.ForeColor = System.Drawing.Color.White;
-            this.btnConnectDB.Location = new System.Drawing.Point(717, 152);
+            this.btnConnectDB.Location = new System.Drawing.Point(717, 190);
             this.btnConnectDB.Name = "btnConnectDB";
             this.btnConnectDB.Size = new System.Drawing.Size(141, 41);
             this.btnConnectDB.TabIndex = 201;
@@ -246,6 +246,7 @@
             this.btnWorkingFolderBrowse.TabIndex = 16;
             this.btnWorkingFolderBrowse.Text = "...";
             this.btnWorkingFolderBrowse.UseVisualStyleBackColor = false;
+            this.btnWorkingFolderBrowse.Visible = false;
             this.btnWorkingFolderBrowse.Click += new System.EventHandler(this.btnWorkingFolderBrowse_Click);
             // 
             // txtData
@@ -312,6 +313,7 @@
             this.label88.Size = new System.Drawing.Size(120, 21);
             this.label88.TabIndex = 6;
             this.label88.Text = "Working Folder:";
+            this.label88.Visible = false;
             // 
             // txtWorkingFolder
             // 
@@ -320,6 +322,7 @@
             this.txtWorkingFolder.Name = "txtWorkingFolder";
             this.txtWorkingFolder.Size = new System.Drawing.Size(479, 29);
             this.txtWorkingFolder.TabIndex = 7;
+            this.txtWorkingFolder.Visible = false;
             // 
             // groupBox1
             // 

@@ -99,11 +99,11 @@ namespace VLeague.Services.Visual
             return 0;
         }
 
-        private static IKAEventHandler ExtractEventHandler(Dictionary<string, object> connectionParams)
+        private static KAEventHandler ExtractEventHandler(Dictionary<string, object> connectionParams)
         {
             if (connectionParams != null && connectionParams.ContainsKey("EventHandler"))
             {
-                return connectionParams["EventHandler"] as IKAEventHandler;
+                return connectionParams["EventHandler"] as KAEventHandler;
             }
 
             return null;
@@ -132,7 +132,7 @@ namespace VLeague.Services.Visual
 
             public void DeletePause(int animationType, int frameNo, int applyToAll)
             {
-                _scene?.DeletePause(animationType, frameNo, applyToAll != 0);
+                _scene?.DeletePause(animationType, frameNo, applyToAll);
             }
 
             public KAScene InnerScene => _scene;
@@ -206,7 +206,7 @@ namespace VLeague.Services.Visual
 
             public void SetValue(object value)
             {
-                _object?.SetValue(value);
+                _object?.SetValue(value?.ToString());
             }
 
             public void SetCounterRange(double startTime, double endTime)

@@ -248,7 +248,7 @@ namespace VLeague.src.menu
         private void stopAll_Click(object sender, EventArgs e)
         {
             clearTagButton();
-            FrmKarismaMenu.FrmSetting.Stop(FrmSetting.layerPreMatch);
+            FrmKarismaMenu.FrmSetting.StopAll();
         }
 
         private void btnPlayHomeLinup_Click(object sender, EventArgs e)
