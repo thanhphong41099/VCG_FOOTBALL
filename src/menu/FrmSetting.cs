@@ -1,6 +1,6 @@
-﻿using K3DAsyncEngineLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -10,9 +10,11 @@ using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Xml.Linq;
+using VLeague.Services.Visual;
 using VLeague.src.helper;
 using VLeague.src.menu;
 using VLeague.src.model;
@@ -33,17 +35,21 @@ namespace VLeague
     {
         private MyEventHandler MyEventHandler;
 
+        private IVisualCGService _visualCGService;
+
+        private VisualSDKType _currentSdkType = VisualSDKType.K3DAsyncEngine;
+
+        private bool _initializingSdkSelection;
+
         public int m_SceneIndex = -1;
 
         public int m_LogIndex = 0;
 
-        public KAEngine KAEngine;
+        public IVisualScenePlayer KAScenePlayer;
 
-        public KAScenePlayer KAScenePlayer;
+        public IVisualObject KAObject;
 
-        public KAObject KAObject;
-
-        public KAScene KAScene;
+        public IVisualScene KAScene;
 
         public static int layerTSN;
 
@@ -92,7 +98,7 @@ namespace VLeague
             InitializeComponent();
         }
 
-        private void FrmSetting_Load(object sender, EventArgs e)
+        private async void FrmSetting_Load(object sender, EventArgs e)
         {
             try
             {
@@ -104,7 +110,8 @@ namespace VLeague
                 MyEventHandler = new MyEventHandler(this);
                 DBConfig.Connection(txtData.Text);
 
-                connectCG();
+                LoadSdkConfiguration();
+                await ConnectCGAsync();
 
                 LoadLayerScene("VLEAGUE1");
 
@@ -115,6 +122,147 @@ namespace VLeague
             {
                 MessageBox.Show("Có lỗi xảy ra khi load dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void LoadSdkConfiguration()
+        {
+            _initializingSdkSelection = true;
+            var sdkSetting = ConfigurationManager.AppSettings["VisualSDKType"];
+            if (!Enum.TryParse(sdkSetting, out _currentSdkType))
+            {
+                _currentSdkType = VisualSDKType.K3DAsyncEngine;
+            }
+
+            InitializeVisualService(_currentSdkType);
+            SetSdkComboSelection(_currentSdkType);
+            _initializingSdkSelection = false;
+        }
+
+        private void InitializeVisualService(VisualSDKType sdkType)
+        {
+            if (_visualCGService != null)
+            {
+                _visualCGService.ConnectionChanged -= VisualCGService_ConnectionChanged;
+                try
+                {
+                    _visualCGService.Disconnect();
+                }
+                catch
+                {
+                    // Ignore disconnect exceptions during initialization
+                }
+            }
+
+            _visualCGService = VisualCGServiceFactory.Create(sdkType);
+            if (_visualCGService != null)
+            {
+                _visualCGService.ConnectionChanged += VisualCGService_ConnectionChanged;
+            }
+
+            KAScenePlayer = null;
+            KAScene = null;
+            KAObject = null;
+        }
+
+        private void SetSdkComboSelection(VisualSDKType sdkType)
+        {
+            if (cboSDKType == null)
+            {
+                return;
+            }
+
+            switch (sdkType)
+            {
+                case VisualSDKType.KarismaSDK:
+                    cboSDKType.SelectedIndex = 1;
+                    break;
+                default:
+                    cboSDKType.SelectedIndex = 0;
+                    break;
+            }
+        }
+
+        private async Task ConnectCGAsync()
+        {
+            if (_visualCGService == null)
+            {
+                return;
+            }
+
+            if (_currentSdkType == VisualSDKType.KarismaSDK)
+            {
+                OnLogMessage("Karisma SDK chưa được hỗ trợ.");
+                return;
+            }
+
+            var connectionParams = new Dictionary<string, object>();
+            if (int.TryParse(txtPort.Text, out var portValue))
+            {
+                connectionParams["Port"] = portValue;
+            }
+            connectionParams["EventHandler"] = MyEventHandler;
+
+            var endpoint = txtIpAddress.Text;
+            var connected = await _visualCGService.ConnectAsync(endpoint, connectionParams);
+            if (connected)
+            {
+                KAScenePlayer = _visualCGService.ScenePlayer;
+            }
+        }
+
+        private void SaveSelectedSdk(VisualSDKType sdkType)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (config.AppSettings.Settings["VisualSDKType"] == null)
+            {
+                config.AppSettings.Settings.Add("VisualSDKType", sdkType.ToString());
+            }
+            else
+            {
+                config.AppSettings.Settings["VisualSDKType"].Value = sdkType.ToString();
+            }
+
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void VisualCGService_ConnectionChanged(object sender, ConnectionEventArgs e)
+        {
+            Action action = () =>
+            {
+                if (!string.IsNullOrWhiteSpace(e.Message))
+                {
+                    OnLogMessage(e.Message);
+                }
+            };
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+
+        private async void cboSDKType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_initializingSdkSelection)
+            {
+                return;
+            }
+
+            var selectedType = cboSDKType.SelectedIndex == 1 ? VisualSDKType.KarismaSDK : VisualSDKType.K3DAsyncEngine;
+            if (_currentSdkType == selectedType)
+            {
+                return;
+            }
+
+            _currentSdkType = selectedType;
+            SaveSelectedSdk(_currentSdkType);
+            InitializeVisualService(_currentSdkType);
+            await ConnectCGAsync();
         }
         private void LoadLayerScene(string keyCG)
         {
@@ -219,49 +367,49 @@ namespace VLeague
         #region Play, Pause, Stop, StopEff, StopAll, Resume, DeletePause
         public void Play(int layer)
         {
-            if (KAEngine != null && KAScenePlayer != null)
+            if (_visualCGService != null && KAScenePlayer != null)
             {
                 KAScenePlayer.Play(layer);
             }
         }
         public void Pause(int layer)
         {
-            if (KAEngine != null && KAScenePlayer != null)
+            if (_visualCGService != null && KAScenePlayer != null)
             {
                 KAScenePlayer.Pause(layer);
             }
         }
         public void Stop(int layer)
         {
-            if (KAEngine != null && KAScenePlayer != null)
+            if (_visualCGService != null && KAScenePlayer != null)
             {
                 KAScenePlayer.Stop(layer);
             }
         }
         public void StopEff(int layer)
         {
-            if (KAEngine != null && KAScenePlayer != null)
+            if (_visualCGService != null && KAScenePlayer != null)
             {
                 KAScenePlayer.PlayOut(layer);
             }
         }
         public void StopAll()
         {
-            if (KAEngine != null && KAScenePlayer != null)
+            if (_visualCGService != null && KAScenePlayer != null)
             {
                 KAScenePlayer.StopAll();
             }
         }
         public void Resume(int layer)
         {
-            if (KAEngine != null && KAScenePlayer != null)
+            if (_visualCGService != null && KAScenePlayer != null)
             {
                 KAScenePlayer.Resume(layer);
             }
         }
         public void DeletePause(int AnimationType, int FrameNo, int bAll)
         {
-            if (KAEngine != null && KAScene != null)
+            if (_visualCGService != null && KAScene != null)
             {
                 KAScene.DeletePause(AnimationType, FrameNo, bAll);
             }
@@ -272,24 +420,13 @@ namespace VLeague
         }
         #endregion
 
-        private void btnConnectKarisma_Click(object sender, EventArgs e)
+        private async void btnConnectKarisma_Click(object sender, EventArgs e)
         {
-            string ip = txtIpAddress.Text;
-            int port = Convert.ToInt32(txtPort.Text);
-            if (KAEngine != null && ip != null && port > 0)
-            {
-                KAEngine.KTAPConnect(1, ip, port, 0, MyEventHandler);
-                KAScenePlayer = KAEngine.GetScenePlayer();
-            }
-            else
-            {
-                MessageBox.Show("KAEngine does not exits, Please open KarismaCG");
-                OnLogMessage("Disconnected Karisma");
-            }
+            await ConnectCGAsync();
         }
         private void btnDisconnectKarisma_Click(object sender, EventArgs e)
         {
-            KAEngine.Disconnect();
+            _visualCGService?.Disconnect();
             OnLogMessage("Disconnected Karisma");
         }
         private void btnWorkingFolderBrowse_Click(object sender, EventArgs e)
@@ -356,20 +493,6 @@ namespace VLeague
             AppConfig.ConfigReader.Write(key, workingPath, txtWorkingFolder.Text);
             AppConfig.ConfigReader.Write(key, dataFilePath, txtData.Text);
         }
-        public void connectCG()
-        {
-            KAEngine = new KAEngine();
-
-            if (KAEngine != null)
-            {
-                KAEngine.KTAPConnect(1, txtIpAddress.Text, Convert.ToInt32(txtPort.Text), 0, MyEventHandler);
-                KAScenePlayer = KAEngine.GetScenePlayer();
-            }
-            else
-            {
-                FrmKarismaMenu.FrmSetting.OnLogMessage("KAEngine does not exits!");
-            }
-        }
         private void btnOpenConfig_Click(object sender, EventArgs e)
         {
             Process process = new Process();
@@ -383,9 +506,9 @@ namespace VLeague
             string scene = "\\teamlineup.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             for (int i = 0; i < playersLineUp.Length; i++)
             {
                 int index = i + 1;
@@ -417,7 +540,7 @@ namespace VLeague
             KAObject.SetValue(txtTeamLongName);
             KAObject = KAScene.GetObject("hlv");
             KAObject.SetValue(txtCoachName);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
             Thread.Sleep(10);
@@ -427,10 +550,10 @@ namespace VLeague
         public void loadSceneLineup(string tactical, string logo, string hlv, Player[] playersHome)
         {
             string scene = Stactical + tactical + ".t2s";
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
 
             // Xử lý 11 cầu thủ chính (index 0-10)
             for (int i = 0; i < 11; i++)
@@ -495,7 +618,7 @@ namespace VLeague
             KAObject = KAScene.GetObject("tactical");
             KAObject.SetValue("SƠ ĐỒ CHIẾN THUẬT " + tactical);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
         }
@@ -505,16 +628,16 @@ namespace VLeague
         public void loadCoachName(string coachName, string logo)
         {
             string scene = Stitle;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(coachName);
             KAObject = KAScene.GetObject("title");
             KAObject.SetValue("HUẤN LUYỆN VIÊN TRƯỞNG");
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -524,15 +647,15 @@ namespace VLeague
         public void PlayGoalClock(string name, string item, int layer)
         {
             string scene = SGoalClock;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(name);
 
             KAObject = KAScene.GetObject("item");
             KAObject.SetValue(item);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layer, KAScene);
             Thread.Sleep(10);
@@ -542,15 +665,15 @@ namespace VLeague
         public void loadYellowCard(string playerName, string logo)
         {
             string scene = SYellowCard;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
 
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(playerName);
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
 
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerGoalItem, KAScene);
@@ -561,15 +684,15 @@ namespace VLeague
         public void loadTwoYellowCard(string playerName, string logo)
         {
             string scene = SSecondYellowCard;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(playerName);
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
 
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerGoalItem, KAScene);
@@ -579,15 +702,15 @@ namespace VLeague
         public void loadRedCard(string playerName, string logo)
         {
             string scene = SRedCard;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(playerName);
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
 
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerGoalItem, KAScene);
@@ -599,9 +722,9 @@ namespace VLeague
         public void loadTSN(string homeCode, string awayCode, string homeScore, string awayScore, int startTime, int endTime)
         {
             string scene = SpermClock;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetCounterRange(startTime, endTime);
             KAObject = KAScene.GetObject("home");
@@ -616,7 +739,7 @@ namespace VLeague
             KAObject.SetFaceColor(TeamInfor.Player_HomeColor.R, TeamInfor.Player_HomeColor.G, TeamInfor.Player_HomeColor.B, 255);
             KAObject = KAScene.GetObject("coloraway");
             KAObject.SetFaceColor(TeamInfor.Player_AwayColor.R, TeamInfor.Player_AwayColor.G, TeamInfor.Player_AwayColor.B, 255);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSN, KAScene);
             //Thread.Sleep(10);
@@ -625,9 +748,9 @@ namespace VLeague
         public void loadTSNOut(string homeCode, string awayCode, string homeScore, string awayScore, int startTime, int endTime)
         {
             string scene = SpermClockOut;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             //KAObject = KAScene.GetObject("Counter");
             //KAObject.SetCounterRange(startTime, endTime);
             KAObject = KAScene.GetObject("home");
@@ -642,7 +765,7 @@ namespace VLeague
             KAObject.SetFaceColor(TeamInfor.Player_HomeColor.R, TeamInfor.Player_HomeColor.G, TeamInfor.Player_HomeColor.B, 255);
             KAObject = KAScene.GetObject("coloraway");
             KAObject.SetFaceColor(TeamInfor.Player_AwayColor.R, TeamInfor.Player_AwayColor.G, TeamInfor.Player_AwayColor.B, 255);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSN, KAScene);
             //Thread.Sleep(10);
@@ -653,9 +776,9 @@ namespace VLeague
             Static.UpdateScores(homeScore, awayScore);
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetCounterRange(startTime, endTime);
             KAObject = KAScene.GetObject("home");
@@ -670,7 +793,7 @@ namespace VLeague
             KAObject.SetValue(awayCode);
             KAObject = KAScene.GetObject("tiso2");
             KAObject.SetValue(awayScore);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSN, KAScene);
             //Thread.Sleep(10);
@@ -681,9 +804,9 @@ namespace VLeague
             Static.UpdateScores(homeScore, awayScore);
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetCounterRange(startTime, endTime);
             KAObject = KAScene.GetObject("checkghiban");
@@ -696,7 +819,7 @@ namespace VLeague
             KAObject.SetValue(awayCode);
             KAObject = KAScene.GetObject("tiso2");
             KAObject.SetValue(awayScore);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSN, KAScene);
             //Thread.Sleep(10);
@@ -706,16 +829,16 @@ namespace VLeague
         public void loadGoalInfo(string playerName, string logo, string minutes)
         {
             string scene = SGhiBan;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(playerName + " " + minutes + "'");
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -724,17 +847,17 @@ namespace VLeague
         public void loadGoalPenInfo(string playerName, string logo, string minutes)
         {
             string scene = SGhiBan;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(playerName + " " + minutes + "' (P)");
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
 
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -743,15 +866,15 @@ namespace VLeague
         public void loadOGInfo(string playerName, string logo, string minutes)
         {
             string scene = SGhiBan;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(playerName + " " + minutes + "' (OG)");
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -761,10 +884,10 @@ namespace VLeague
                 string lineIMG, string subIMG, string logo)
         {
             string scene = SSub1;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
 
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("nameout1");
             KAObject.SetValue(lineName);
             KAObject = KAScene.GetObject("namein1");
@@ -779,7 +902,7 @@ namespace VLeague
             KAObject.SetValue(subIMG);
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -791,9 +914,9 @@ namespace VLeague
             string lineIMG2, string subIMG2, string logo)
         {
             string scene = SSub2;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("nameout1");
             KAObject.SetValue(lineName);
             KAObject = KAScene.GetObject("namein1");
@@ -820,7 +943,7 @@ namespace VLeague
             KAObject.SetValue(subIMG2);
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -832,9 +955,9 @@ namespace VLeague
             string lineIMG3, string subIMG3, string logo)
         {
             string scene = SSub3;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("nameout1");
             KAObject.SetValue(lineName);
             KAObject = KAScene.GetObject("namein1");
@@ -873,7 +996,7 @@ namespace VLeague
             KAObject.SetValue(subIMG3);
             KAObject = KAScene.GetObject("logo");
             KAObject.SetValue(logo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -882,9 +1005,9 @@ namespace VLeague
         public void loadReferre(string mainReferee, string referreOne, string refereeTwo, string referreThree)
         {
             string scene = SmatchOff;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             Thread.Sleep(10);
             KAObject = KAScene.GetObject("tt1");
             KAObject.SetValue(mainReferee);
@@ -894,7 +1017,7 @@ namespace VLeague
             KAObject.SetValue(refereeTwo);
             KAObject = KAScene.GetObject("tt4");
             KAObject.SetValue(referreThree);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
             Thread.Sleep(10);
@@ -903,15 +1026,15 @@ namespace VLeague
         public void loadVarReferee(string varRefereeOne, string varRefereeTwo)
         {
             string scene = SvarOff;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             Thread.Sleep(10);
             KAObject = KAScene.GetObject("tt1");
             KAObject.SetValue(varRefereeOne);
             KAObject = KAScene.GetObject("tt2");
             KAObject.SetValue(varRefereeTwo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
             Thread.Sleep(10);
@@ -920,12 +1043,12 @@ namespace VLeague
         public void varChecking(string text)
         {
             string scene = SBarVar;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(text);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -934,14 +1057,14 @@ namespace VLeague
         public void varUpdate(string text1, string text2)
         {
             string scene = SDecisionVar;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(text1);
             KAObject = KAScene.GetObject("text2");
             KAObject.SetValue(text2);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -952,12 +1075,12 @@ namespace VLeague
         {
 
             string scene = SaddTime;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("bugio");
             KAObject.SetValue("+" + time);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerBuGio, KAScene);
             Thread.Sleep(10);
@@ -968,9 +1091,9 @@ namespace VLeague
     string homeLogo, string awayLogo, int startTime, int endTime)
         {
             string scene = SkickoffTime;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -986,7 +1109,7 @@ namespace VLeague
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetOpacity(255);
             KAObject.SetCounterRange(startTime, endTime);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -996,9 +1119,9 @@ namespace VLeague
 string homeLogo, string awayLogo, float startTime, int endTime)
         {
             string scene = SkickoffTimeOut;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1013,7 +1136,7 @@ string homeLogo, string awayLogo, float startTime, int endTime)
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetCounterRange(startTime, endTime);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1025,9 +1148,9 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalhom
             string scene = "\\ltpenalty.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1050,7 +1173,7 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalhom
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(match);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1061,9 +1184,9 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalhom
 string homeLogo, string awayLogo, string match, string goalhome1, string goalaway1)
         {
             string scene = SkickOff;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1082,7 +1205,7 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalawa
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(match);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1093,9 +1216,9 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalawa
 string homeLogo, string awayLogo, string match, string goalhome1, string goalaway1, string goalhome2, string goalaway2)
         {
             string scene = SkickOff2;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1118,7 +1241,7 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalawa
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(match);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1135,9 +1258,9 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalhom
             string scene = "\\kickoff.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1160,7 +1283,7 @@ string homeLogo, string awayLogo, string match, string goalhome1, string goalhom
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("text");
             KAObject.SetValue(match);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1172,9 +1295,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalhome2, string goa
             string scene = "\\kickofftime.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1197,7 +1320,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalhome2, string goa
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetOpacity(0);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             //Thread.Sleep(10);
@@ -1209,9 +1332,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalhome2, string goa
             string scene = "\\kickofftimeout.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1234,7 +1357,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalhome2, string goa
             KAObject.SetValue(awayLogo);
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetOpacity(0);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             //Thread.Sleep(10);
@@ -1246,9 +1369,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             string scene = "tysoout.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             //Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1267,7 +1390,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             KAObject.SetValue(workingPath + awayLogo);
             KAObject = KAScene.GetObject("Counter");
             KAObject.SetCounterRange(startTime, endTime);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             //Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             //Thread.Sleep(10);
@@ -1277,15 +1400,15 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
         public void loadBarScene(string name, string title)
         {
             string scene = SBar;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(name);
             KAObject = KAScene.GetObject("title");
             KAObject.SetValue(title);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1294,15 +1417,15 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
         public void loadTitleScene(string name, string title)
         {
             string scene = SBar;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("name");
             KAObject.SetValue(name);
             KAObject = KAScene.GetObject("title");
             KAObject.SetValue(title);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1314,9 +1437,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             string scene = "kickoffout.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(100);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeName);
             KAObject = KAScene.GetObject("away");
@@ -1331,7 +1454,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             KAObject.SetValue(workingPath + awayLogo);
             KAObject = KAScene.GetObject("hiepdau");
             KAObject.SetValue(match);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(100);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(100);
@@ -1340,7 +1463,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
 
         public void loadBackGround()
         {
-            KAScene KAScene = KAEngine.LoadScene(Sbackground, Sbackground);
+            var KAScene = _visualCGService.LoadScene(Sbackground, Sbackground);
 
             KAScenePlayer.Prepare(layerBackground, KAScene);
             Thread.Sleep(10);
@@ -1349,7 +1472,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
 
         public void loadVarGrid()
         {
-            KAScene KAScene = KAEngine.LoadScene(SVarGrid, SVarGrid);
+            var KAScene = _visualCGService.LoadScene(SVarGrid, SVarGrid);
 
             KAScenePlayer.Prepare(0, KAScene);
             Thread.Sleep(10);
@@ -1359,10 +1482,10 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
 
         public void loadScene(string scene)
         {
-            KAEngine.UnloadAll();
+            _visualCGService.UnloadAll();
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
 
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
             KAScenePlayer.Play(layerPreMatch);
@@ -1372,7 +1495,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             string scene = sponsor;
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
@@ -1383,12 +1506,12 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             string scene = "\\KQCupQG.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("link");
             KAObject.SetValue(link);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerPreMatch);
@@ -1397,9 +1520,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
         public void loadStatistic(string title, string homeIndex, string awayIndex, string homeCode, string awayCode)
         {
             string scene = SThongke1;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);
             KAObject = KAScene.GetObject("home1");
@@ -1410,7 +1533,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             KAObject.SetValue(homeCode);
             KAObject = KAScene.GetObject("away");
             KAObject.SetValue(awayCode);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -1420,9 +1543,9 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             string title2, string homeIndex2, string awayIndex2, string homeCode, string awayCode)
         {
             string scene = SThongke2;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);
             KAObject = KAScene.GetObject("home1");
@@ -1439,7 +1562,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             KAObject.SetValue(homeCode);
             KAObject = KAScene.GetObject("away");
             KAObject.SetValue(awayCode);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -1449,10 +1572,10 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
     string title3, string homeIndex3, string awayIndex3, string homeCode, string awayCode)
         {
             string scene = SThongke3;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);
             KAObject = KAScene.GetObject("home1");
@@ -1475,7 +1598,7 @@ string homeLogo, string awayLogo, string goalhome1, string goalaway1, int startT
             KAObject.SetValue(homeCode);
             KAObject = KAScene.GetObject("away");
             KAObject.SetValue(awayCode);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -1489,9 +1612,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             string scene = "\\thongke5.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(100);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("thongke1");
             KAObject.SetValue(title);
             KAObject = KAScene.GetObject("home1");
@@ -1526,7 +1649,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAObject.SetValue(homeCode);
             KAObject = KAScene.GetObject("away");
             KAObject.SetValue(awayCode);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -1537,9 +1660,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             DBConfig.goGetMatchInfoDetail();
             int index = 0;
             string scene = Sthongke;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             foreach (DataRow dt in DBConfig.matchDetail.Tables[0].Rows)
             {
                 index++;
@@ -1570,7 +1693,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAObject = KAScene.GetObject("awayname");
             KAObject.SetValue(awayName);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerPostMatch, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerPostMatch);
@@ -1583,9 +1706,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             string scene = "thongkechung.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             foreach (DataRow dt in DBConfig.matchDetail.Tables[0].Rows)
             {
                 index++;
@@ -1621,7 +1744,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAObject = KAScene.GetObject("tysopen");
             KAObject.SetValue(penalty);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerTSL);
@@ -1632,9 +1755,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             string scene = "BXH1.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes"+ scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(50);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
 
             // Arrays of prefixes and data arrays to iterate over
             string[] prefixes = {"team", "t0", "t1", "t2", "t3", "t4", "t5" };
@@ -1654,7 +1777,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
                 }
             }
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerTSL, KAScene);
             Thread.Sleep(50);
             KAScenePlayer.Play(layerTSL);
@@ -1662,9 +1785,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
         public void loadFullRanking(string[] team, string[] diem, string[] tran, string[] thang, string[] bai, string[] hoa, string[] heso)
         {
             string scene = SgroupStanding;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
 
             string[] prefixes = {"team", "t0", "t1", "t2", "t3", "t4", "t5" };
             string[][] data = {team, diem, tran, thang, bai, hoa, heso };
@@ -1693,7 +1816,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
                 }
             }
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerPostMatch, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerPostMatch);
@@ -1703,10 +1826,10 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             string homeLongName, string awayLongName,string round, string date, string svd)
         {
             string scene = SmatchID;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
 
             Thread.Sleep(10);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("logo1");
             KAObject.SetValue(homeLogo);
             KAObject = KAScene.GetObject("logo2");
@@ -1729,7 +1852,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAObject = KAScene.GetObject("svd");
             KAObject.SetValue(svd);
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
             Thread.Sleep(10);
@@ -1739,10 +1862,10 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             string homeName, string awayName, string homeLogo, string awayLogo)
         {
             string scene = Sweather;
-            KAScene KAScene = KAEngine.LoadScene(scene, scene);
+            var KAScene = _visualCGService.LoadScene(scene, scene);
             Thread.Sleep(10);
 
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("icon1");
             KAObject.SetValue(Icons);
             KAObject = KAScene.GetObject("thoitiet");
@@ -1761,7 +1884,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             KAObject.SetValue(homeLogo);
             KAObject = KAScene.GetObject("logo2");
             KAObject.SetValue(awayLogo);
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
 
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerPreMatch, KAScene);
@@ -1773,23 +1896,23 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
         public void showRedCard(int RedCardHome, int RedCardAway)
         {
             string scene = SredClock;
-            KAScene kAScene = KAEngine.LoadScene(scene, scene);
+            var kAScene = _visualCGService.LoadScene(scene, scene);
 
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
 
             for (int i = 1; i <= 4; i++)
             {
-                KAObject obj = kAScene.GetObject($"homered{i}");
+                var obj = kAScene.GetObject($"homered{i}");
                 obj.SetOpacity(i <= RedCardHome ? 255 : 0);
             }
 
             for (int i = 1; i <= 4; i++)
             {
-                KAObject obj = kAScene.GetObject($"awayred{i}");
+                var obj = kAScene.GetObject($"awayred{i}");
                 obj.SetOpacity((i) <= RedCardAway ? 255 : 0);
             }
 
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             Thread.Sleep(10);
             KAScenePlayer.Prepare(layerTheDo, kAScene);
             Thread.Sleep(10);
@@ -1802,9 +1925,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
             string scene = "\\PENALTY.t2s";
             string workingPath = txtWorkingFolder.Text;
             string path = workingPath + "\\Scenes" + scene;
-            KAScene KAScene = KAEngine.LoadScene(path, scene);
+            var KAScene = _visualCGService.LoadScene(path, scene);
             Thread.Sleep(100);
-            KAEngine.BeginTransaction();
+            _visualCGService.BeginTransaction();
             KAObject = KAScene.GetObject("home");
             KAObject.SetValue(homeLongName);
             KAObject = KAScene.GetObject("away");
@@ -1831,16 +1954,16 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
                 KAObject = KAScene.GetObject(awayVar);
                 KAObject.SetValue(awayValue);
             }
-            KAEngine.EndTransaction();
+            _visualCGService.EndTransaction();
             KAScenePlayer.Prepare(layerPenalty, KAScene);
             Thread.Sleep(10);
             KAScenePlayer.Play(layerPenalty);
         }
         public void updatePenalty(string homeScore, string awayScore, string[] home, string[] away)
         {
-            if (KAEngine == null || KAScenePlayer == null)
+            if (_visualCGService == null || KAScenePlayer == null)
                 return;
-            KAScene KAScene = KAScenePlayer.GetPlayingScene(layerPenalty);
+            var KAScene = KAScenePlayer.GetPlayingScene(layerPenalty);
             if (KAScene != null)
             {
                 KAObject = KAScene.GetObject("tiso1");
@@ -1863,9 +1986,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
         }
         public void updatePermClock(string tiso1, string tiso2)
         {
-            if (KAEngine == null || KAScenePlayer == null)
+            if (_visualCGService == null || KAScenePlayer == null)
                 return;
-            KAScene KAScene = KAScenePlayer.GetPlayingScene(layerTSN);
+            var KAScene = KAScenePlayer.GetPlayingScene(layerTSN);
             if (KAScene != null)
             {
                 KAObject = KAScene.GetObject("tiso1");
@@ -1908,7 +2031,7 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
         {
             try
             {
-                if (KAEngine == null)
+                if (_visualCGService == null)
                     return;
                 KAScenePlayer.Prepare(layer, KAScene);
                 Thread.Sleep(10);
@@ -1920,9 +2043,9 @@ string title5, string homeIndex5, string awayIndex5, string homeCode, string awa
         {
             try
             {
-                if (KAEngine == null)
+                if (_visualCGService == null)
                     return;
-                KAScene = KAEngine.LoadScene(FileName, SceneName);
+                KAScene = _visualCGService.LoadScene(FileName, SceneName);
             }
             catch { MessageBox.Show("Chưa chọn Scene"); }
         }
