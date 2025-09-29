@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupSetting = new System.Windows.Forms.GroupBox();
+            this.cboSDKType = new System.Windows.Forms.ComboBox();
+            this.labelSDKType = new System.Windows.Forms.Label();
             this.btnConnectDB = new System.Windows.Forms.Button();
             this.btnOpenConfig = new System.Windows.Forms.Button();
             this.btnDataBrowser = new System.Windows.Forms.Button();
@@ -92,6 +94,8 @@
             // groupSetting
             // 
             this.groupSetting.BackColor = System.Drawing.Color.White;
+            this.groupSetting.Controls.Add(this.cboSDKType);
+            this.groupSetting.Controls.Add(this.labelSDKType);
             this.groupSetting.Controls.Add(this.btnConnectDB);
             this.groupSetting.Controls.Add(this.btnOpenConfig);
             this.groupSetting.Controls.Add(this.btnDataBrowser);
@@ -115,6 +119,29 @@
             this.groupSetting.TabIndex = 199;
             this.groupSetting.TabStop = false;
             this.groupSetting.Text = "CONNECTION";
+            //
+            // cboSDKType
+            //
+            this.cboSDKType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSDKType.FormattingEnabled = true;
+            this.cboSDKType.Items.AddRange(new object[] {
+            "K3D AsyncEngine",
+            "Karisma SDK"});
+            this.cboSDKType.Location = new System.Drawing.Point(212, 38);
+            this.cboSDKType.Name = "cboSDKType";
+            this.cboSDKType.Size = new System.Drawing.Size(279, 29);
+            this.cboSDKType.TabIndex = 180;
+            this.cboSDKType.SelectedIndexChanged += new System.EventHandler(this.cboSDKType_SelectedIndexChanged);
+            //
+            // labelSDKType
+            //
+            this.labelSDKType.AutoSize = true;
+            this.labelSDKType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelSDKType.Location = new System.Drawing.Point(43, 41);
+            this.labelSDKType.Name = "labelSDKType";
+            this.labelSDKType.Size = new System.Drawing.Size(146, 21);
+            this.labelSDKType.TabIndex = 0;
+            this.labelSDKType.Text = "Chọn Visual SDK";
             // 
             // btnConnectDB
             // 
@@ -738,6 +765,8 @@
         #endregion
         private System.Windows.Forms.GroupBox groupSetting;
         private System.Windows.Forms.Button btnConnectDB;
+        private System.Windows.Forms.ComboBox cboSDKType;
+        private System.Windows.Forms.Label labelSDKType;
         private System.Windows.Forms.Button btnOpenConfig;
         private System.Windows.Forms.Button btnDataBrowser;
         private System.Windows.Forms.Button btnSaveConfig;

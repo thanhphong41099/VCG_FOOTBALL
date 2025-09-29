@@ -68,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -231,6 +232,16 @@
     <Compile Include="src\model\Player.cs" />
     <Compile Include="src\config\DBConfig.cs" />
     <Compile Include="src\config\AppConfig.cs" />
+    <Compile Include="src\services\visual\ConnectionEventArgs.cs" />
+    <Compile Include="src\services\visual\IVisualCGService.cs" />
+    <Compile Include="src\services\visual\IVisualEngine.cs" />
+    <Compile Include="src\services\visual\IVisualObject.cs" />
+    <Compile Include="src\services\visual\IVisualScene.cs" />
+    <Compile Include="src\services\visual\IVisualScenePlayer.cs" />
+    <Compile Include="src\services\visual\K3DVisualCGService.cs" />
+    <Compile Include="src\services\visual\KarismaVisualCGService.cs" />
+    <Compile Include="src\services\visual\VisualCGServiceFactory.cs" />
+    <Compile Include="src\services\visual\VisualSDKType.cs" />
     <Compile Include="src\helper\DataGridViewCompare.cs" />
     <Compile Include="src\helper\EventHandler.cs" />
     <Compile Include="src\helper\Handler.cs" />
